@@ -1,0 +1,18 @@
+{
+  "token": { "id_token": "mock_token" },
+  "account": {
+    "id": 1,
+    "login": "admin",
+    "nickName": null,
+    "firstName": null,
+    "lastName": null,
+    "mobile": "11111111111",
+    "email": null,
+    "imageUrl": null,
+    "activated": true,
+    "langKey": null,
+    "authorities": [
+      "ROLE_ADMIN"
+    ]
+  }
+}
