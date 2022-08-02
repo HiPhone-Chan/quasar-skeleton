@@ -13,6 +13,10 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 const { viteMockServe } = require('vite-plugin-mock');
 const appConfig = require('./config');
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
+const Icons = require('unplugin-icons/vite');
+const IconsResolver = require('unplugin-icons/resolver');
+const { createSvgIconsPlugin } = require('vite-plugin-svg-icons');
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -35,7 +39,9 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
-      'error-log'
+      'error-log',
+      { path: 'element-ui', server: false },
+      'svg-icon'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -100,7 +106,26 @@ module.exports = configure(function (/* ctx */) {
           localEnabled: process.env.APP_ENV === 'development',
           prodEnabled: process.env.APP_ENV === 'production',
           injectFile: [path.resolve(process.cwd(), 'src/boot/axios.js')]
-        }) : null
+        }) : null,
+        ['unplugin-auto-import/vite', {
+          resolvers: [
+            ElementPlusResolver(),
+            IconsResolver({ prefix: 'Icon' })
+          ],
+        }],
+        ['unplugin-vue-components/vite', {
+          resolvers: [
+            ElementPlusResolver(),
+            IconsResolver({ enabledCollections: ['ep'] })
+          ]
+        }],
+        createSvgIconsPlugin({
+          iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
+          symbolId: 'icon-[dir]-[name]'
+        }),
+        Icons({
+          autoInstall: true,
+        })
       ]
     },
 
