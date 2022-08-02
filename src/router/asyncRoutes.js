@@ -36,7 +36,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/HiPhone-Chan/vue3-admin',
+        path: 'https://github.com/HiPhone-Chan/quasar-skeleton',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]

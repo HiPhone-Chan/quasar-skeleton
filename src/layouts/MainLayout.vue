@@ -26,7 +26,7 @@ import { useAppStore } from '@/stores/app-store'
 import { useSettingsStore } from '@/stores/settings-store'
 
 export default {
-  name: 'LayoutIndex',
+  name: 'MainLayout',
   components: {
     AppMain,
     Navbar,

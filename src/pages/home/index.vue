@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: 'HomeIndex'
+  name: 'HomeIndex',
+  mounted() {
+    this.$router.replace({ path: '/dashboard' })
+  }
 }
 </script>
 

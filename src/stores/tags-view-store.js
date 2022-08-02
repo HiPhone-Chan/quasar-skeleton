@@ -12,7 +12,8 @@ export const useTagsViewStore = defineStore('tagsView', {
       this.addCachedView(view)
     },
     addVisitedView(view) {
-      if (this.visitedViews.some(v => v.path === view.path)) return
+      if (this.visitedViews.some(v => v.path === view.path)) { return }
+      if (view?.meta?.affix == false) { return } // 只有设置了false才不显示，默认显示
       this.visitedViews.push(
         Object.assign({}, view, {
           title: generateTitle(view?.meta?.title) || 'no-name'
@@ -20,7 +21,8 @@ export const useTagsViewStore = defineStore('tagsView', {
       )
     },
     addCachedView(view) {
-      if (this.cachedViews.includes(view.name)) return
+      if (this.cachedViews.includes(view.name)) { return }
+      if (view?.meta?.affix == false) { return } // 只有设置了false才不显示，默认显示
       if (!view.meta.noCache) {
         this.cachedViews.push(view.name)
       }
