@@ -15,10 +15,6 @@ import TabbarItem from './TabbarItem.vue'
 export default {
   name: "TabbarIndex",
   components: { TabbarItem },
-  setup() {
-    const active = ref(0);
-    return { active };
-  },
   computed: {
     ...mapState(usePermissionStore, { permission_routes: 'routes' }),
   }

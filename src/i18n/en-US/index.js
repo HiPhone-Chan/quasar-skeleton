@@ -2,6 +2,15 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  route: {
+    home: 'Home',
+    profile: 'Profile'
+  },
+  login: {
+    title: 'Login Form',
+    logIn: 'Log in',
+    username: 'Username',
+    password: 'Password',
+    mobile: 'Mobile'
+  }
 }
