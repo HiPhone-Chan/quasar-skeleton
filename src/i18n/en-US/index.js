@@ -1,5 +1,7 @@
 export default {
   route: {
+    home: 'Home',
+    profile: 'Profile',
     dashboard: 'Dashboard',
     introduction: 'Introduction',
     documentation: 'Documentation',
@@ -44,6 +46,7 @@ export default {
     profile: 'profile',
     theme: 'Theme',
     size: 'Global Size'
+
   },
   login: {
     title: 'Login Form',
@@ -113,6 +116,7 @@ export default {
   },
   user: {
     adminPassword: 'admin password',
-    nickname: 'Nickname'
+    nickname: 'Nickname',
+    mobile: 'Mobile'
   }
 }

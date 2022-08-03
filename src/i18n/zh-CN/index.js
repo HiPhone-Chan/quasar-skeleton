@@ -1,5 +1,7 @@
 export default {
   route: {
+    home: '首页',
+    profile: '我的中心',
     dashboard: '首页',
     introduction: '简述',
     documentation: '文档',
@@ -146,6 +148,7 @@ export default {
   //
   user: {
     adminPassword: '管理员密码',
-    nickname: '昵称'
+    nickname: '昵称',
+    mobile: '手机'
   }
 }
