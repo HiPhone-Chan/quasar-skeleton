@@ -34,6 +34,7 @@ export const asyncRoutes = [
   {
     path: '/external-link',
     component: Layout,
+    hidden: true,
     children: [
       {
         path: 'https://github.com/HiPhone-Chan/quasar-skeleton',

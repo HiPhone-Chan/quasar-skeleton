@@ -13,6 +13,7 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 const { viteMockServe } = require('vite-plugin-mock');
 const appConfig = require('./config');
+const { VantResolver } = require('unplugin-vue-components/resolvers');
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -35,7 +36,8 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
-      'error-log'
+      'error-log',
+      { path: 'vant-ui', server: false }
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -100,7 +102,12 @@ module.exports = configure(function (/* ctx */) {
           localEnabled: process.env.APP_ENV === 'development',
           prodEnabled: process.env.APP_ENV === 'production',
           injectFile: [path.resolve(process.cwd(), 'src/boot/axios.js')]
-        }) : null
+        }) : null,
+        ['unplugin-vue-components/vite', {
+          resolvers: [
+            VantResolver()
+          ]
+        }]
       ]
     },
 

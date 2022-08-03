@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <van-config-provider style="height: 100%">
+    <router-view />
+  </van-config-provider>
 </template>
 
 <script>
