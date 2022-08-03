@@ -38,6 +38,7 @@
     "autoprefixer": "^10.4.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
+    "electron": "^20.0.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
@@ -49,13 +50,13 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-mock-server": "^1.0.4",
     "vite-plugin-svg-icons": "^2.0.1",
-    "workbox-build": "^6.5.3",
-    "workbox-cacheable-response": "^6.5.3",
-    "workbox-core": "^6.5.3",
-    "workbox-expiration": "^6.5.3",
-    "workbox-precaching": "^6.5.3",
-    "workbox-routing": "^6.5.3",
-    "workbox-strategies": "^6.5.3"
+    "workbox-build": "^6.5.4",
+    "workbox-cacheable-response": "^6.5.4",
+    "workbox-core": "^6.5.4",
+    "workbox-expiration": "^6.5.4",
+    "workbox-precaching": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",

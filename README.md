@@ -41,4 +41,3 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 # reference
 
 [quasar](https://quasar.dev/)
-[my project vue-admin](https://github.com/HiPhone-Chan/vue-admin)
