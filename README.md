@@ -4,8 +4,6 @@ A Quasar Project
 
 ## Install the dependencies
 
-if you dont't need desk mode, remove electron dependencies
-
 ```bash
 npm install
 ```
@@ -41,4 +39,3 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 # reference
 
 [quasar](https://quasar.dev/)
-[my project vue-admin](https://github.com/HiPhone-Chan/vue-admin)

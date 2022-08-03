@@ -41,7 +41,7 @@ const routes = [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'dashboard', affix: true }
+        meta: { title: 'home', icon: 'dashboard' }
       }
     ]
   },
@@ -63,6 +63,7 @@ const routes = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
+    hidden: true,
     component: () => import('pages/error-page/404.vue')
   }
 ]
