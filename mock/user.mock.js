@@ -22,8 +22,10 @@ module.exports = [
   {
     url: `${process.env.VUE_APP_BASE_API}/api/admin/users`,
     method: 'GET',
-    response: () => {
-      return data.users
+    rawResponse: (req, resp) => {
+      const userData = data.users
+      resp.setHeader('x-total-count', userData.length);
+      resp.end(JSON.stringify(userData))
     }
   },
   {

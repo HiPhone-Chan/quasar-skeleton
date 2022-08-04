@@ -1,12 +1,16 @@
 import enUS from './en-US'
 import zhCN from './zh-CN'
+import elementEnLocale from 'element-plus/es/locale/lang/en'
+import elementZhLocale from 'element-plus/es/locale/lang/zh-cn'
 
 const messages = {
   'en-US': {
-    ...enUS
+    ...enUS,
+    ...elementEnLocale
   },
   'zh-CN': {
-    ...zhCN
+    ...zhCN,
+    ...elementZhLocale
   }
 }
 
