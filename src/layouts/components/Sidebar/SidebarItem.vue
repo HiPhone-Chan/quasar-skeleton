@@ -17,10 +17,10 @@
 
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)"
       popper-append-to-body>
-      <svg-icon v-if="item.meta" :icon-class="item.meta && item.meta.icon">
-      </svg-icon>
       <template #title v-if="item.meta">
-        <span v-if="item.meta">{{ generateTitle(item.meta.title) }}</span>
+        <svg-icon :icon-class="item.meta.icon">
+        </svg-icon>
+        <span>{{ generateTitle(item.meta.title) }}</span>
       </template>
       <sidebar-item v-for="child in item.children" :key="child.path"
         :is-nest="true" :item="child" :base-path="resolvePath(child.path)"
