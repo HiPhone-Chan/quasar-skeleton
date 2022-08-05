@@ -1,6 +1,5 @@
 const data = require("./data/user.data.json");
 const accountData = require("./data/account.data.json");
-const fs = require("fs");
 
 module.exports = [
   {
