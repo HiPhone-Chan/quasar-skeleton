@@ -1,4 +1,6 @@
 <script>
+import { h } from 'vue';
+
 export default {
   name: 'AuthRedirect',
   created() {
@@ -8,8 +10,11 @@ export default {
       window.close()
     }
   },
-  render: function(h) {
+  render() {
     return h() // avoid warning message
   }
 }
 </script>
+
+<style>
+</style>

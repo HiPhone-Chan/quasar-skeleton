@@ -13,7 +13,7 @@ export default boot(async ({ app, router }) => {
     useAppStore().setLoading(true)
 
     // set page title
-    document.title = getPageTitle(to.meta.title)
+    document.title = getPageTitle(to?.meta?.title)
 
     // determine whether the user has logged in
     const hasToken = useUserStore().token
