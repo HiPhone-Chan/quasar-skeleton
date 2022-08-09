@@ -1,10 +1,10 @@
 <template>
-  <div>401</div>
+  <div>Profile</div>
 </template>
 
 <script>
 export default {
-  name: 'ErrorPage401'
+  name: 'ProfileIndex'
 }
 </script>
 

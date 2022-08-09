@@ -8,6 +8,7 @@ let i18nGlobal;
 export default boot(({ app }) => {
   const i18n = createI18n({
     locale: useAppStore().language,
+    fallbackLocale: 'zh-CN',
     globalInjection: true,
     messages
   })
