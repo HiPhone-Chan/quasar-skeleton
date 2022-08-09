@@ -2,65 +2,66 @@
   <div class="app-container">
     <div class="filter-container">
       <el-select v-model="listQuery.authority" class="filter-item"
-        :placeholder="$t('permission.role')" clearable @change="handleFilter">
+        :placeholder="$tm('permission.role')" clearable @change="handleFilter">
         <el-option v-for="item in roleOptions" :key="item.value"
           :label="item.label" :value="item.value" />
       </el-select>
-      <el-input v-model="listQuery.search" :placeholder="$t('table.search')"
+      <el-input v-model="listQuery.search" :placeholder="$tm('table.search')"
         style="width: 200px;" class="filter-item" @keyup.enter="handleFilter" />
       <el-button class="filter-item" type="primary" @click="handleFilter">
         <el-icon style="margin-right: 10px;">
           <Search />
-        </el-icon>{{ $t('table.search') }}
+        </el-icon>{{ $tm('table.search') }}
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary"
         @click="handleCreate">
         <el-icon style="margin-right: 10px;">
           <Edit />
-        </el-icon>{{ $t('table.add') }}
+        </el-icon>{{ $tm('table.add') }}
       </el-button>
     </div>
 
     <el-table v-loading="listLoading" :data="list" element-loading-text="给我一点时间"
       border fit highlight-current-row style="width: 100%">
-      <el-table-column align="center" :label="$t('table.id')" width="65">
+      <el-table-column align="center" :label="$tm('table.id')" width="65">
         <template v-slot="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
       <el-table-column width="110px" align="center"
-        :label="$t('login.username')">
+        :label="$tm('login.username')">
         <template v-slot="scope">
           <span>{{ scope.row.login }}</span>
         </template>
       </el-table-column>
       <el-table-column width="110px" align="center"
-        :label="$t('user.nickname')">
+        :label="$tm('user.nickname')">
         <template v-slot="scope">
           <span>{{ scope.row.nickName }}</span>
         </template>
       </el-table-column>
-      <el-table-column width="120px" align="center" :label="$t('login.mobile')">
+      <el-table-column width="120px" align="center"
+        :label="$tm('login.mobile')">
         <template v-slot="scope">
           <span>{{ scope.row.mobile }}</span>
         </template>
       </el-table-column>
       <el-table-column width="150px" align="center"
-        :label="$t('permission.role')">
+        :label="$tm('permission.role')">
         <template v-slot="scope">
           <span>{{ formatAuthorities(scope.row.authorities) }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" :label="$t('table.actions')"
+      <el-table-column align="center" :label="$tm('table.actions')"
         class-name="small-padding fixed-width">
         <template v-slot="scope">
           <el-button type="primary" @click="handleUpdate(scope.row)">
-            {{ $t('table.edit') }}</el-button>
+            {{ $tm('table.edit') }}</el-button>
           <el-button type="warning" @click="handlePassword(scope.row)">
-            {{ $t('login.password') }}
+            {{ $tm('login.password') }}
           </el-button>
           <el-button type="danger" @click="handleDelete(scope.row, 'deleted')">
-            {{ $t('table.delete') }}
+            {{ $tm('table.delete') }}
           </el-button>
         </template>
       </el-table-column>
@@ -74,40 +75,40 @@
         label-width="70px" style="width: 400px; margin-left:50px;">
         <!-- 编辑 -->
         <template v-if="dialog.status == 'update'">
-          <el-form-item :label="$t('table.id')">
+          <el-form-item :label="$tm('table.id')">
             <el-input v-model="temp.id" type="text" placeholder="id" disabled />
           </el-form-item>
         </template>
 
         <template v-if="dialog.status == 'update' || dialog.status == 'create'">
-          <el-form-item :label="$t('login.username')" prop="login"
+          <el-form-item :label="$tm('login.username')" prop="login"
             label-width="90px">
             <el-input v-model="temp.login" type="text" placeholder="登录名"
               :disabled="dialog.status !== 'create'" />
           </el-form-item>
-          <el-form-item :label="$t('permission.role')" prop="authorities"
+          <el-form-item :label="$tm('permission.role')" prop="authorities"
             label-width="90px">
             <el-select v-model="temp.authorities"
-              :placeholder="$t('permission.role')" clearable multiple>
+              :placeholder="$tm('permission.role')" clearable multiple>
               <el-option v-for="item in createRoleOptions" :key="item.value"
                 :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('user.nickname')" label-width="90px">
+          <el-form-item :label="$tm('user.nickname')" label-width="90px">
             <el-input v-model="temp.nickName" type="text" placeholder="昵称" />
           </el-form-item>
-          <el-form-item :label="$t('login.mobile')" prop="mobile"
+          <el-form-item :label="$tm('login.mobile')" prop="mobile"
             label-width="90px">
             <el-input v-model="temp.mobile" type="text" placeholder="电话号码" />
           </el-form-item>
         </template>
 
         <template v-if="dialog.status == 'password'">
-          <el-form-item :label="$t('user.adminPassword')" label-width="110px">
+          <el-form-item :label="$tm('user.adminPassword')" label-width="110px">
             <el-input v-model="temp.currentPassword" type="password"
               placeholder="当前管理员密码" />
           </el-form-item>
-          <el-form-item :label="$t('login.password')" prop="newPassword"
+          <el-form-item :label="$tm('login.password')" prop="newPassword"
             label-width="110px">
             <el-input v-model="temp.newPassword" type="password"
               placeholder="需要改的密码" />
@@ -117,14 +118,14 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="dialog.visible = false">{{ $t('table.cancel') }}
+          <el-button @click="dialog.visible = false">{{ $tm('table.cancel') }}
           </el-button>
           <el-button v-if="dialog.status == 'create'" type="primary"
-            @click="createData(getData)">{{ $t('table.confirm') }}</el-button>
+            @click="createData(getData)">{{ $tm('table.confirm') }}</el-button>
           <el-button v-if="dialog.status == 'update'" type="primary"
-            @click="updateData(getData)">{{ $t('table.confirm') }}</el-button>
+            @click="updateData(getData)">{{ $tm('table.confirm') }}</el-button>
           <el-button v-if="dialog.status == 'password'" type="primary"
-            @click="changePwd(getData)">{{ $t('table.confirm') }}</el-button>
+            @click="changePwd(getData)">{{ $tm('table.confirm') }}</el-button>
         </div>
       </template>
     </el-dialog>

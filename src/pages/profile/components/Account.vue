@@ -1,9 +1,9 @@
 <template>
   <el-form>
-    <el-form-item :label="$t('login.nickname')">
+    <el-form-item :label="$tm('login.nickname')">
       <el-input v-model.trim="user.nickname" />
     </el-form-item>
-    <el-form-item :label="$t('login.mobile')">
+    <el-form-item :label="$tm('login.mobile')">
       <el-input v-model.trim="user.mobile" />
     </el-form-item>
     <el-form-item>
