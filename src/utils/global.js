@@ -30,14 +30,20 @@ export function getStorage(name) {
 }
 
 export function getLocalLanguage() {
-  if (process.env.SERVER) {
-  } else {
+  if (process.env.CLIENT) {
     if (navigator) {
       return (navigator.language || navigator.browserLanguage);
     }
   }
 
   return 'zh-CN'
+}
+
+
+export function setTitle(title) {
+  if (process.env.CLIENT) {
+    document.title = title
+  }
 }
 
 export function getGlobal() {

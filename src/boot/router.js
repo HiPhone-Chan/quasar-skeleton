@@ -3,6 +3,7 @@ import getPageTitle from '@/utils/get-page-title'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore } from '@/stores/permission-store'
+import { setTitle } from '@/utils/global'
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
@@ -13,7 +14,7 @@ export default boot(async ({ app, router }) => {
     useAppStore().setLoading(true)
 
     // set page title
-    document.title = getPageTitle(to?.meta?.title)
+    setTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in
     const hasToken = useUserStore().token
 
