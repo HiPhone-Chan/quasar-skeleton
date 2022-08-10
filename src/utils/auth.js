@@ -1,13 +1,14 @@
+import { getStorage } from './global'
 const TokenKey = 'Admin-Token'
 
 export function getToken() {
-  return sessionStorage?.getItem(TokenKey)
+  return getStorage('sessionStorage').getItem(TokenKey)
 }
 
 export function setToken(token) {
-  sessionStorage?.setItem(TokenKey, token)
+  getStorage('sessionStorage').setItem(TokenKey, token)
 }
 
 export function removeToken() {
-  sessionStorage?.removeItem(TokenKey)
+  getStorage('sessionStorage').removeItem(TokenKey)
 }
