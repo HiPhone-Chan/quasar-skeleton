@@ -159,7 +159,9 @@ module.exports = configure(function (/* ctx */) {
       // will mess up SSR
 
       // extendSSRWebserverConf (esbuildConf) {},
-      // extendPackageJson (json) {},
+      extendPackageJson(json) {
+        json.scripts["start"] = "pm2 start index.js";
+      },
 
       pwa: false,
 

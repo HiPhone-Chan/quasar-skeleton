@@ -7,7 +7,9 @@
   "private": true,
   "scripts": {
     "dev": "cross-env APP_ENV=development quasar dev",
+    "dev:ssr": "cross-env APP_ENV=development quasar dev -m ssr",
     "build": "cross-env APP_ENV=production quasar build",
+    "build:ssr": "cross-env APP_ENV=production quasar build -m ssr",
     "lint": "eslint --ext .js,.vue ./",
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0"

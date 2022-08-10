@@ -1,12 +1,4 @@
 
-const defaultGetStorage = (key) => {
-  return localStorage.getItem(key);
-}
-
-const defaultSetStorage = (key, value) => {
-  localStorage.setItem(key, value);
-}
-
 export function persistPlugin({ options, store }) {
   const persistOj = options.persist;
   if (!persistOj) {

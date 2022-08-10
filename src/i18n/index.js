@@ -1,5 +1,6 @@
 import enUS from './en-US'
 import zhCN from './zh-CN'
+import { getLocalLanguage } from '@/utils/global'
 
 const messages = {
   'en-US': {
@@ -11,8 +12,7 @@ const messages = {
 }
 
 export function getLanguage() {
-  const language = (navigator.language || navigator.browserLanguage)
-  // .toLowerCase()
+  const language = getLocalLanguage()
 
   const locales = Object.keys(messages)
   for (const locale of locales) {
