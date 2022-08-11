@@ -41,7 +41,7 @@ const routes = [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'dashboard' }
+        meta: { title: 'home', icon: 'home' }
       }
     ]
   },
@@ -49,13 +49,12 @@ const routes = [
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
-    hidden: true,
     children: [
       {
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user', noCache: true }
+        meta: { title: '个人中心', icon: 'my', noCache: true }
       }
     ]
   },

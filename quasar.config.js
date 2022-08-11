@@ -35,12 +35,14 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
-      'error-log'
+      'error-log',
+      { path: 'nut-ui', server: false }
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
-      'app.scss'
+      'app.scss',
+      '~@nutui/nutui/dist/style.css'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
