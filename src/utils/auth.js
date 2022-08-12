@@ -1,13 +1,20 @@
+import { getStorage } from './global'
 const TokenKey = 'Admin-Token'
 
+const storageType = 'cookies';
+// const storageType = 'sessionStorage';
+
 export function getToken() {
-  return sessionStorage?.getItem(TokenKey)
+  const storage = getStorage(storageType)
+  // console.log('getToken', storage)
+  return storage.getItem(TokenKey)
 }
 
 export function setToken(token) {
-  sessionStorage?.setItem(TokenKey, token)
+  const storage = getStorage(storageType)
+  storage.setItem(TokenKey, token)
 }
 
 export function removeToken() {
-  sessionStorage?.removeItem(TokenKey)
+  getStorage(storageType).removeItem(TokenKey)
 }

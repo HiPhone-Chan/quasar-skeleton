@@ -2,6 +2,7 @@ import enUS from './en-US'
 import zhCN from './zh-CN'
 import elementEnLocale from 'element-plus/es/locale/lang/en'
 import elementZhLocale from 'element-plus/es/locale/lang/zh-cn'
+import { getLocalLanguage } from '@/utils/global'
 
 const messages = {
   'en-US': {
@@ -15,8 +16,7 @@ const messages = {
 }
 
 export function getLanguage() {
-  const language = (navigator.language || navigator.browserLanguage)
-  // .toLowerCase()
+  const language = getLocalLanguage()
 
   const locales = Object.keys(messages)
   for (const locale of locales) {
