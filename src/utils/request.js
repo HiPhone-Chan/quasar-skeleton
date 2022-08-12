@@ -10,7 +10,7 @@ api.interceptors.request.use(
   },
   error => {
     // do something with request error
-    console.log('resp err :' + JSON.stringify(error)) // for debug
+    console.warn('request err :' + JSON.stringify(error)) // for debug
     return Promise.reject(error)
   }
 )
@@ -28,12 +28,12 @@ api.interceptors.response.use(
   response => {
     const status = response.status
     if (status / 100 === 5) {
-      console.log('server err :' + response.data)
+      console.warn('server err :' + response.data)
     }
     return response
   },
   error => {
-    console.log('resp err :' + JSON.stringify(error)) // for debug
+    console.warn('resp err :' + JSON.stringify(error)) // for debug
     useAppStore().setMessage({
       message: error.message,
       type: 'error'

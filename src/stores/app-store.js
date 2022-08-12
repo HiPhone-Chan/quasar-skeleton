@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 import { getLanguage } from '@/i18n/index'
 import { getStorage } from '@/utils/global'
 
+const storageType = 'localStorage';
+
 export const useAppStore = defineStore('app', {
   state: () => ({
     loading: false,
@@ -29,18 +31,18 @@ export const useAppStore = defineStore('app', {
   persist: {
     language: {
       save(value) {
-        getStorage('localStorage').setItem('language', value)
+        getStorage(storageType).setItem('language', value)
       },
       get() {
-        return getStorage('localStorage').getItem('language')
+        return getStorage(storageType)?.getItem('language')
       }
     },
     size: {
       save(value) {
-        getStorage('localStorage').setItem('size', `${value}`)
+        getStorage(storageType).setItem('size', `${value}`)
       },
       get() {
-        return getStorage('localStorage').getItem('size')
+        return getStorage(storageType)?.getItem('size')
       }
     }
   }

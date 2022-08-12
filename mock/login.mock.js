@@ -2,7 +2,7 @@ const data = require('./data/account.data.json')
 
 module.exports = [
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/authenticate`,
+    url: `${process.env.API_CONTEXT}/api/authenticate`,
     method: 'POST',
     response: () => {
       return data.token

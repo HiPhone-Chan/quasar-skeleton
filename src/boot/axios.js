@@ -7,7 +7,11 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: process.env.VUE_APP_BASE_API, timeout: 5000 })
+let baseUrl = process.env.API_CONTEXT;
+if (process.env.SERVER) {
+  baseUrl = process.env.API_HOST + baseUrl
+}
+const api = axios.create({ baseURL: baseUrl, timeout: 5000 })
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
