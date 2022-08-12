@@ -51,7 +51,6 @@
     "unplugin-icons": "^0.14.7",
     "unplugin-vue-components": "^0.21.2",
     "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-mock-server": "^1.0.4",
     "vite-plugin-svg-icons": "^2.0.1",
     "workbox-build": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
