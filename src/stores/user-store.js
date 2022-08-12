@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import Router, { resetRouter } from '@/router'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -56,7 +56,7 @@ export const useUserStore = defineStore('user', {
     async logout() {
       await logout(this.token)
       await this.resetToken()
-      resetRouter()
+      resetRouter(Router)
     },
 
     // remove token

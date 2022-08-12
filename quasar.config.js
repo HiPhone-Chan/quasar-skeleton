@@ -35,7 +35,8 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
-      'error-log'
+      'error-log',
+      'storage'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -109,11 +110,11 @@ module.exports = configure(function (/* ctx */) {
       // https: true
       open: true, // opens browser window automatically,
       proxy: {
-        [appConfig.VUE_APP_BASE_API]: {
-          target: appConfig.SETUP_MOCK ? `http://localhost:9000` : `http://localhost:8083`,
+        [appConfig.API_CONTEXT]: {
+          target: appConfig.SETUP_MOCK ? `/` : appConfig.API_HOST,
           changeOrigin: true,
           pathRewrite: {
-            ['^']: appConfig.VUE_APP_BASE_API
+            ['^']: appConfig.API_CONTEXT
           }
         }
       }
@@ -134,7 +135,11 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'LocalStorage',
+        'SessionStorage',
+        'Cookies'
+      ]
     },
 
     // animations: 'all', // --- includes all animations

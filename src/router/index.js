@@ -18,10 +18,8 @@ const createMyRouter = () => {
   })
 }
 
-const Router = createMyRouter()
-
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter(Router) {
   const newRouter = createMyRouter()
   Router.matcher = newRouter.matcher // reset router
 }
@@ -35,5 +33,6 @@ export function resetRouter() {
  * with the Router instance.
  */
 export default route(function (/* { store, ssrContext } */) {
+  const Router = createMyRouter()
   return Router
 })
