@@ -3,15 +3,15 @@ const accountData = require("./data/account.data.json");
 
 module.exports = [
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/user`,
+    url: `${process.env.API_CONTEXT}/api/admin/user`,
     method: "POST",
     response: (req) => {
       const body = req.body;
       const token = req.headers.authorization.replace("Bearer ", "");
       let createdBy = "";
-      for (let i = 0; i < accountData.length; i++) {
-        if (token === accountData[i].token.id_token) {
-          createdBy = accountData[i].account.login;
+      for (const item of accountData) {
+        if (token === item.token.id_token) {
+          createdBy = item.account.login;
         }
       }
       const object = {
@@ -23,31 +23,31 @@ module.exports = [
     },
   },
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/user`,
+    url: `${process.env.API_CONTEXT}/api/admin/user`,
     method: "PUT",
     response: ({ body }) => {
-      for (let i = 0; i < data.users.length; i++) {
-        const id = data.users[i].id;
-        if (body.id === id) {
-          data.users[i] = body;
+      for (const user of data.users) {
+        if (body.id === user.id) {
+          user = body;
         }
       }
     },
   },
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/user/:login`,
+    url: `${process.env.API_CONTEXT}/api/admin/user/:login`,
     method: "DELETE",
     response: ({ query }) => {
       for (let i = 0; i < data.users.length; i++) {
         const login = data.users[i].login;
         if (query.login === login) {
           data.users.splice(i);
+          break;
         }
       }
     },
   },
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/users`,
+    url: `${process.env.API_CONTEXT}/api/admin/users`,
     method: "GET",
     rawResponse: (req, resp) => {
       const userData = data.users;
@@ -56,12 +56,11 @@ module.exports = [
     },
   },
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/user/check/:login`,
+    url: `${process.env.API_CONTEXT}/api/admin/user/check/:login`,
     method: "GET",
     response: ({ query }) => {
-      for (let i = 0; i < data.users.length; i++) {
-        const login = data.users[i].login;
-        if (query.login === login) {
+      for (const user of data.users) {
+        if (query.login === user.login) {
           return true;
         }
       }
@@ -69,7 +68,7 @@ module.exports = [
     },
   },
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/admin/user/change-password/:login`,
+    url: `${process.env.API_CONTEXT}/api/admin/user/change-password/:login`,
     method: "POST",
     response: () => { },
   }

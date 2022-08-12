@@ -2,13 +2,12 @@ const data = require("./data/account.data.json");
 
 module.exports = [
   {
-    url: `${process.env.VUE_APP_BASE_API}/api/authenticate`,
+    url: `${process.env.API_CONTEXT}/api/authenticate`,
     method: "POST",
     response: ({ body }) => {
-      for (let i = 0; i < data.length; i++) {
-        const login = data[i].account.login;
-        if (body.username === login) {
-          return data[i].token;
+      for (const item of data) {
+        if (body.username === item.account.login) {
+          return item.token;
         }
       }
       return null;
