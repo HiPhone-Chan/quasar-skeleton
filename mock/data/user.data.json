@@ -1,5 +1,6 @@
 {
-  "users": [{
+  "users": [
+    {
       "id": 1,
       "login": "admin",
       "nickName": null,
@@ -14,9 +15,7 @@
       "createdDate": null,
       "lastModifiedBy": null,
       "lastModifiedDate": null,
-      "authorities": [
-        "ROLE_ADMIN"
-      ]
+      "authorities": ["ROLE_ADMIN"]
     },
     {
       "id": 2,
@@ -33,9 +32,7 @@
       "createdDate": null,
       "lastModifiedBy": null,
       "lastModifiedDate": null,
-      "authorities": [
-        "ROLE_MANAGER"
-      ]
+      "authorities": ["ROLE_MANAGER"]
     }
   ]
 }
