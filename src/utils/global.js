@@ -1,37 +1,7 @@
-
-
-const defaultStorage = {
-  cache: {},
-
-  getItem(key) {
-    return this.cache[key]
-  },
-  setItem(key, value) {
-    this.cache[key] = value
-  }
-}
-
-export function getStorage(name) {
-  let storage;
-  switch (name) {
-    case 'localStorage':
-      storage = getGlobal().localStorage;
-      break;
-    case 'sessionStorage':
-      storage = getGlobal().sessionStorage;
-      break;
-    default:
-  }
-
-  if (!storage) {
-    storage = defaultStorage;
-  }
-  return storage;
-}
+export { getStorage } from 'boot/storage'
 
 export function getLocalLanguage() {
-  if (process.env.SERVER) {
-  } else {
+  if (process.env.CLIENT) {
     if (navigator) {
       return (navigator.language || navigator.browserLanguage);
     }
@@ -40,10 +10,9 @@ export function getLocalLanguage() {
   return 'zh-CN'
 }
 
-export function getGlobal() {
-  if (globalThis) {
-    return globalThis;
+
+export function setTitle(title) {
+  if (process.env.CLIENT) {
+    document.title = title
   }
-  return window
-  // return process.env.SERVER ? global : window
 }
