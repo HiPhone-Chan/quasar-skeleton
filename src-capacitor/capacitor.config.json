@@ -1,0 +1,7 @@
+{
+  "appId": "com.chf.app",
+  "appName": "Quasar App",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
