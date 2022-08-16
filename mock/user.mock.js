@@ -26,7 +26,7 @@ module.exports = [
     url: `${process.env.API_CONTEXT}/api/admin/user`,
     method: "PUT",
     response: ({ body }) => {
-      for (const user of data.users) {
+      for (let user of data.users) {
         if (body.id === user.id) {
           user = body;
         }

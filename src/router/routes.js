@@ -42,7 +42,7 @@ const routes = [
         component: () => import('pages/home/index.vue'),
         name: 'home',
         hidden: true,
-        meta: { title: 'home', icon: 'dashboard', affix: false }
+        meta: { title: 'home', icon: 'dashboard', roles: [], affix: false }
       },
       {
         path: 'dashboard',
