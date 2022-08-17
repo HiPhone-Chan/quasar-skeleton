@@ -1,0 +1,23 @@
+{
+  "title": "Title",
+  "importance": "Imp",
+  "type": "Type",
+  "remark": "Remark",
+  "search": "Search",
+  "add": "Add",
+  "export": "Export",
+  "reviewer": "reviewer",
+  "id": "ID",
+  "date": "Date",
+  "author": "Author",
+  "readings": "Readings",
+  "status": "Status",
+  "actions": "Actions",
+  "edit": "Edit",
+  "publish": "Publish",
+  "draft": "Draft",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "name": "Name"
+}

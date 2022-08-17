@@ -5,7 +5,7 @@
 
       <div class="title-container">
         <h3 class="title">
-          {{ $tm('login.title') }}
+          {{ $t('login.title') }}
         </h3>
         <lang-select class="set-language" />
       </div>
@@ -14,7 +14,7 @@
           <svg-icon icon-class="user" />
         </span>
         <el-input ref="username" v-model="loginForm.username"
-          :placeholder="$tm('login.username')" name="username" type="text"
+          :placeholder="$t('login.username')" name="username" type="text"
           tabindex="1" auto-complete="on" />
       </el-form-item>
 
@@ -26,7 +26,7 @@
           </span>
           <el-input :key="passwordType" ref="password"
             v-model="loginForm.password" :type="passwordType"
-            :placeholder="$tm('login.password')" name="password" tabindex="2"
+            :placeholder="$t('login.password')" name="password" tabindex="2"
             autocomplete="on" @keyup="checkCapslock" @blur="capsTooltip = false"
             @keyup.enter="handleLogin" />
           <span class="show-pwd" @click="showPwd">
@@ -38,11 +38,10 @@
 
       <el-button :loading="loading" type="primary"
         style="width:100%;margin-bottom:30px;" @click.prevent="handleLogin">
-        {{ $tm('login.logIn') }}
+        {{ $t('login.logIn') }}
       </el-button>
 
     </el-form>
-
   </div>
 </template>
 

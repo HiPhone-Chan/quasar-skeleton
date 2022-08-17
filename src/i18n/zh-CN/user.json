@@ -1,0 +1,8 @@
+{
+  "adminPassword": "管理员密码",
+  "username": "用户名",
+  "password": "密码",
+  "nickname": "昵称",
+  "mobile": "手机",
+  "role": "角色"
+}
