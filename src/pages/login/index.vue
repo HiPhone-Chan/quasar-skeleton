@@ -3,7 +3,7 @@
     <div class="col">
     </div>
     <div class="col self-center">
-      <q-btn color="primary" label="login" @click="handleLogin" />
+      <q-btn color="primary" :label="$t('login.logIn')" @click="handleLogin" />
     </div>
     <div class="col">
     </div>
