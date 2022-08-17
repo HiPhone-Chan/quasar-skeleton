@@ -1,6 +1,6 @@
-{
-  "users": [
-    {
+[{
+    "token": { "id_token": "mock_admin_token" },
+    "info": {
       "id": 1,
       "login": "admin",
       "nickName": null,
@@ -11,14 +11,13 @@
       "imageUrl": null,
       "activated": true,
       "langKey": null,
-      "createdBy": "system",
-      "createdDate": null,
-      "lastModifiedBy": null,
-      "lastModifiedDate": null,
       "authorities": ["ROLE_ADMIN"]
-    },
-    {
-      "id": 2,
+    }
+  },
+  {
+    "token": { "id_token": "mock_manager_token" },
+    "info": {
+      "id": 1,
       "login": "manager",
       "nickName": null,
       "firstName": null,
@@ -28,11 +27,7 @@
       "imageUrl": null,
       "activated": true,
       "langKey": null,
-      "createdBy": "system",
-      "createdDate": null,
-      "lastModifiedBy": null,
-      "lastModifiedDate": null,
       "authorities": ["ROLE_MANAGER"]
     }
-  ]
-}
+  }
+]

@@ -9,6 +9,15 @@ export const createRoleOptions = [
   }
 ]
 
+export const updateRoleOptions = [
+  {
+    value: 'ROLE_ADMIN',
+    label: '超级管理员',
+    disabled: true
+  },
+  ...createRoleOptions
+]
+
 // all roles
 export const roleOptions = [
   {
@@ -17,8 +26,6 @@ export const roleOptions = [
   },
   ...createRoleOptions
 ]
-
-
 
 export function formatAuthorities(arr) {
   return formatArrayOption(roleOptions, arr)

@@ -35,9 +35,11 @@ export default function () {
       }
     ],
     mobile: [{ pattern: /^[0-9]{7,16}$/, message: '请输入正确的电话号码' }],
+    currentPassword: [
+      { required: true, message: 'Current password is required' }
+    ],
     newPassword: [
-      { required: true, message: 'password is required' },
-      LOGIN_VALID_CHARACTER
+      { required: true, message: 'New password is required' }
     ]
   })
 

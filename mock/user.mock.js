@@ -1,5 +1,5 @@
 const data = require("./data/user.data.json");
-const accountData = require("./data/account.data.json");
+const { getToken } = require("./utils/user.js");
 
 module.exports = [
   {
@@ -7,40 +7,43 @@ module.exports = [
     method: "POST",
     response: (req) => {
       const body = req.body;
-      const token = req.headers.authorization.replace("Bearer ", "");
+      const token = getToken(req.headers);
       let createdBy = "";
-      for (const item of accountData) {
+      for (const item of data) {
         if (token === item.token.id_token) {
-          createdBy = item.account.login;
+          createdBy = item.info.login;
         }
       }
-      const object = {
-        id: data.users.length + 1,
+      const user = Object.assign(body, {
+        id: data.length + 1,
         createdBy: createdBy,
-      };
-      const user = Object.assign(body, object);
-      data.users.push(user);
-    },
+      });
+      data.push({
+        "id_token": `mock_${body.login}_token`,
+        info: user
+      });
+    }
   },
   {
     url: `${process.env.API_CONTEXT}/api/admin/user`,
     method: "PUT",
     response: ({ body }) => {
-      for (let user of data.users) {
+      for (const { info: user } of data) {
         if (body.id === user.id) {
-          user = body;
+          user.nickName = body.nickName;
+          user.mobile = body.mobile;
         }
       }
-    },
+    }
   },
   {
     url: `${process.env.API_CONTEXT}/api/admin/user/:login`,
     method: "DELETE",
     response: ({ query }) => {
-      for (let i = 0; i < data.users.length; i++) {
-        const login = data.users[i].login;
+      for (let i = 0; i < data.length; i++) {
+        const login = data[i].info.login;
         if (query.login === login) {
-          data.users.splice(i);
+          data.splice(i);
           break;
         }
       }
@@ -50,26 +53,25 @@ module.exports = [
     url: `${process.env.API_CONTEXT}/api/admin/users`,
     method: "GET",
     rawResponse: (req, resp) => {
-      const userData = data.users;
-      resp.setHeader("x-total-count", userData.length);
-      resp.end(JSON.stringify(userData));
-    },
+      resp.setHeader("x-total-count", data.length);
+      resp.end(JSON.stringify(data.map(item => item.info)));
+    }
   },
   {
     url: `${process.env.API_CONTEXT}/api/admin/user/check/:login`,
     method: "GET",
     response: ({ query }) => {
-      for (const user of data.users) {
-        if (query.login === user.login) {
+      for (const user of data) {
+        if (query.login === user.info.login) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   {
     url: `${process.env.API_CONTEXT}/api/admin/user/change-password/:login`,
     method: "POST",
-    response: () => { },
+    response: () => { }
   }
 ];

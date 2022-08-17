@@ -1,9 +1,9 @@
 <template>
   <el-form>
-    <el-form-item :label="$t('login.nickname')">
+    <el-form-item :label="$t('user.nickname')">
       <el-input v-model.trim="user.nickname" />
     </el-form-item>
-    <el-form-item :label="$t('login.mobile')">
+    <el-form-item :label="$t('user.mobile')">
       <el-input v-model.trim="user.mobile" />
     </el-form-item>
     <el-form-item>
@@ -43,11 +43,6 @@ export default {
   methods: {
     submit() {
       this.$emit('on-change', this.user)
-      this.$message({
-        message: 'User information has been updated successfully',
-        type: 'success',
-        duration: 5 * 1000
-      })
     }
   }
 }

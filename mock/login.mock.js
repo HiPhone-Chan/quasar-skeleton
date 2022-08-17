@@ -1,4 +1,4 @@
-const data = require("./data/account.data.json");
+const data = require("./data/user.data.json");
 
 module.exports = [
   {
@@ -6,7 +6,7 @@ module.exports = [
     method: "POST",
     response: ({ body }) => {
       for (const item of data) {
-        if (body.username === item.account.login) {
+        if (body.username === item.info.login) {
           return item.token;
         }
       }

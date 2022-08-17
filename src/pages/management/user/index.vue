@@ -88,8 +88,9 @@
             label-width="100px">
             <el-select v-model="temp.authorities" :placeholder="$t('user.role')"
               clearable multiple>
-              <el-option v-for="item in createRoleOptions" :key="item.value"
-                :label="item.label" :value="item.value" />
+              <el-option v-for="item in updateRoleOptions" :key="item.value"
+                :label="item.label" :value="item.value"
+                :disabled="item.disabled" />
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('user.nickname')" label-width="100px">
@@ -102,7 +103,8 @@
         </template>
 
         <template v-if="dialog.status == 'password'">
-          <el-form-item :label="$t('user.adminPassword')" label-width="130px">
+          <el-form-item :label="$t('user.adminPassword')" prop="currentPassword"
+            label-width="130px">
             <el-input v-model="temp.currentPassword" type="password"
               placeholder="当前管理员密码" />
           </el-form-item>
@@ -136,7 +138,7 @@
 <script setup>
 import Pagination from '@/components/Pagination/index.vue'
 import { Search, Edit } from '@element-plus/icons-vue'
-import { formatAuthorities, roleOptions, createRoleOptions } from '@/utils/app-option'
+import { formatAuthorities, roleOptions, createRoleOptions, updateRoleOptions } from '@/utils/app-option'
 import useUserData from './composables/useUserData'
 import useUserDialog from './composables/useUserDialog'
 

@@ -1,17 +1,23 @@
-const data = require("./data/account.data.json");
+const data = require("./data/user.data.json");
+const { getAccount } = require("./utils/user.js");
 
 module.exports = [
   {
     url: `${process.env.API_CONTEXT}/api/account`,
     method: "GET",
     response: ({ headers }) => {
-      const token = headers.authorization.replace("Bearer ", "");
-      for (const item of data) {
-        if (token === item.token.id_token) {
-          return item.account;
-        }
+      return getAccount(headers);
+    }
+  },
+  {
+    url: `${process.env.API_CONTEXT}/api/account`,
+    method: "POST",
+    response: ({ body, headers }) => {
+      const account = getAccount(headers);
+      if (account) {
+        account.nickName = body.nickName
+        account.mobile = body.mobile
       }
-      return null;
     }
   }
 ];
