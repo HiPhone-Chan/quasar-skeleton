@@ -18,7 +18,7 @@
 
         <nut-cell>
           <nut-button block type="info" @click="handleLogin">
-            提交
+            {{ $t('login.logIn') }}
           </nut-button>
         </nut-cell>
       </nut-form>

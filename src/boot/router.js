@@ -5,8 +5,6 @@ import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore } from '@/stores/permission-store'
 import { setTitle } from '@/utils/global'
 
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
-
 export default boot(async ({ app, router, store }) => {
   const appStore = process.env ? useAppStore(store) : useAppStore();
 
@@ -60,9 +58,8 @@ export default boot(async ({ app, router, store }) => {
       }
     } else {
       /* has no token*/
-
-      if (whiteList.indexOf(to.path) !== -1) {
-        // in the free login whitelist, go directly
+      if (!to?.meta?.roles) {
+        // not need roles, go directly
         next()
       } else {
         // other pages that do not have permission to access are redirected to the login page.
