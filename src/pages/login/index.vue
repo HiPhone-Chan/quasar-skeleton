@@ -11,12 +11,11 @@
         </van-cell-group>
         <div style="margin: 16px;">
           <van-button round block type="primary" @click="handleLogin">
-            提交
+            {{ $t('login.logIn') }}
           </van-button>
         </div>
       </van-form>
     </van-row>
-
   </van-col>
 </template>
 

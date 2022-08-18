@@ -41,7 +41,7 @@ const routes = [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'home-o' }
+        meta: { title: 'home', icon: 'home-o', roles: [] }
       }
     ]
   },
