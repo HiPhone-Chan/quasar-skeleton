@@ -53,10 +53,12 @@ export const useAppStore = defineStore('app', {
       storage: getStorage(storageType)
     },
     language: {
-      storage: getStorage(storageType)
+      storage: getStorage(storageType),
+      default: getLanguage()
     },
     size: {
-      storage: getStorage(storageType)
+      storage: getStorage(storageType),
+      default: 'medium'
     }
   }
 })
