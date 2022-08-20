@@ -1,5 +1,6 @@
 
-// wrap persist storage object with function setItem and getItem for object(not string only)
+// wrap persist storage object with function setItem and getItem, removeItem for object(not string only)
+// undefined to removeItem
 export function persistPlugin({ options, store }) {
   const persistOj = options.persist;
   if (!persistOj) {
@@ -11,7 +12,11 @@ export function persistPlugin({ options, store }) {
     Object.keys(persistOj).forEach((key) => {
       const storeKey = `${storeId}-${key}`
       const storage = persistOj[key]?.storage;
-      state[key] = storage?.getItem(storeKey);
+      let value = storage?.getItem(storeKey);
+      if (undefined == value) {
+        value = persistOj[key]?.default;
+      }
+      state[key] = value;
     })
   })
 
@@ -20,7 +25,12 @@ export function persistPlugin({ options, store }) {
     Object.keys(persistOj).forEach((key) => {
       const storeKey = `${storeId}-${key}`
       const storage = persistOj[key]?.storage;
-      storage?.setItem(storeKey, state[key]);
+      const value = state[key];
+      if (undefined == value) {
+        storage?.removeItem(storeKey);
+      } else {
+        storage?.setItem(storeKey, state[key]);
+      }
     })
   })
 

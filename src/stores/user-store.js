@@ -63,7 +63,7 @@ export const useUserStore = defineStore('user', {
 
     // remove token
     async resetToken() {
-      this.token = ''
+      this.token = undefined
       this.roles = []
     }
 
