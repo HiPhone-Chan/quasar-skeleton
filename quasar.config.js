@@ -12,7 +12,7 @@
 const { configure } = require('quasar/wrappers');
 const path = require('path');
 const { viteMockServe } = require('vite-plugin-mock');
-const appConfig = require('./config');
+const { config, vueAppConfig } = require('./config');
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -76,9 +76,9 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: appConfig.PUBLIC_PATH,
+      publicPath: config.PUBLIC_PATH,
       // analyze: true,
-      env: appConfig,
+      env: vueAppConfig,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -96,7 +96,7 @@ module.exports = configure(function (/* ctx */) {
           // you need to set i18n resource including paths !
           include: path.resolve(__dirname, './src/i18n/**')
         }],
-        appConfig.SETUP_MOCK ? viteMockServe({
+        config.SETUP_MOCK ? viteMockServe({
           mockPath: 'mock',
           localEnabled: process.env.APP_ENV === 'development',
           prodEnabled: process.env.APP_ENV === 'production',
@@ -110,11 +110,11 @@ module.exports = configure(function (/* ctx */) {
       // https: true
       open: true, // opens browser window automatically,
       proxy: {
-        [appConfig.API_CONTEXT]: {
-          target: appConfig.SETUP_MOCK ? `/` : appConfig.API_HOST,
+        [config.VUE_APP_API_BASE]: {
+          target: config.SETUP_MOCK ? `/` : config.VUE_APP_API_SERVER,
           changeOrigin: true,
           pathRewrite: {
-            ['^']: appConfig.API_CONTEXT
+            ['^']: config.VUE_APP_API_BASE
           }
         }
       }
