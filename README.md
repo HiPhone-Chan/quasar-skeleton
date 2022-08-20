@@ -46,7 +46,9 @@ set true to hide in the bar(side bar / bottom bar / ...)
 
 ## mete.roles
 
-set this value(even empty array []) to require authorization to access page，or you can access directly
+- set non-empty array means to require authorization and you have the role to access page
+- set empty array [] means to require authorization to access page
+- set null or net set means to you can access directly without authorization
 
 # reference
 

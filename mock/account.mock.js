@@ -3,14 +3,14 @@ const { getAccount } = require("./utils/user.js");
 
 module.exports = [
   {
-    url: `${process.env.API_CONTEXT}/api/account`,
+    url: `${process.env.VUE_APP_API_BASE}/api/account`,
     method: "GET",
     response: ({ headers }) => {
       return getAccount(headers);
     }
   },
   {
-    url: `${process.env.API_CONTEXT}/api/account`,
+    url: `${process.env.VUE_APP_API_BASE}/api/account`,
     method: "POST",
     response: ({ body, headers }) => {
       const account = getAccount(headers);
