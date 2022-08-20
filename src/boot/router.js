@@ -6,7 +6,7 @@ import { usePermissionStore } from '@/stores/permission-store'
 import { setTitle } from '@/utils/global'
 
 export default boot(async ({ app, router, store }) => {
-  const appStore = process.env ? useAppStore(store) : useAppStore();
+  const appStore = process.env.SERVER ? useAppStore(store) : useAppStore();
 
   router.beforeEach(async (to, from, next) => {
     const userStore = process.env.SERVER ? useUserStore(store) : useUserStore();

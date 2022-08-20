@@ -5,7 +5,10 @@ import { useAppStore } from '@/stores/app-store';
 // request interceptor
 api.interceptors.request.use(
   config => {
-    config.headers['Authorization'] = 'Bearer ' + useUserStore().token
+    const token = useUserStore().token
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + useUserStore().token
+    }
     return config
   },
   error => {

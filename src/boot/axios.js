@@ -7,9 +7,9 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-let baseUrl = process.env.API_CONTEXT;
+let baseUrl = process.env.VUE_APP_API_BASE;
 if (process.env.SERVER) {
-  baseUrl = process.env.API_HOST + baseUrl
+  baseUrl = process.env.VUE_APP_API_SERVER + baseUrl
 }
 const api = axios.create({ baseURL: baseUrl, timeout: 5000 })
 

@@ -54,7 +54,7 @@ const routes = [
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'my', noCache: true }
+        meta: { title: 'profile', icon: 'my', roles: [], noCache: true }
       }
     ]
   },

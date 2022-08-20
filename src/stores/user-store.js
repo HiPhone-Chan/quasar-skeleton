@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
 import Router, { resetRouter } from '@/router'
+import { getStorage } from '@/utils/global'
+
+const storageType = 'cookies';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -61,20 +63,14 @@ export const useUserStore = defineStore('user', {
 
     // remove token
     async resetToken() {
-      this.token = ''
+      this.token = undefined
       this.roles = []
-      removeToken()
     }
 
   },
   persist: {
     token: {
-      save(value) {
-        setToken(value)
-      },
-      get() {
-        return getToken()
-      }
+      storage: getStorage(storageType)
     }
   }
 });

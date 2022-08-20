@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 const config = dotenv.config({ path: path.join(__dirname, `.env.${process.env.APP_ENV}`) }).parsed
+const vueAppConfig = {}
 
 function isNumber(value) {
   return !isNaN(parseFloat(value)) && isFinite(value)
@@ -19,7 +20,15 @@ function transfer(value) {
 }
 
 Object.keys(config).map(key => {
-  config[key] = transfer(config[key])
+  const value = transfer(config[key]);
+  config[key] = value
+  if (key.startsWith('VUE_APP_')) {
+    vueAppConfig[key] = value;
+  }
+
 })
 
-module.exports = config
+module.exports = {
+  config,
+  vueAppConfig
+}

@@ -9,6 +9,9 @@ const defaultStorage = {
   },
   setItem(key, value) {
     this.cache[key] = value
+  },
+  removeItem(key) {
+    delete this.cache[key]
   }
 }
 
