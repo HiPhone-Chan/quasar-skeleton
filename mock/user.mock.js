@@ -3,7 +3,7 @@ const { getToken } = require("./utils/user.js");
 
 module.exports = [
   {
-    url: `${process.env.API_CONTEXT}/api/admin/user`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/user`,
     method: "POST",
     response: (req) => {
       const body = req.body;
@@ -25,7 +25,7 @@ module.exports = [
     }
   },
   {
-    url: `${process.env.API_CONTEXT}/api/admin/user`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/user`,
     method: "PUT",
     response: ({ body }) => {
       for (const { info: user } of data) {
@@ -37,7 +37,7 @@ module.exports = [
     }
   },
   {
-    url: `${process.env.API_CONTEXT}/api/admin/user/:login`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/user/:login`,
     method: "DELETE",
     response: ({ query }) => {
       for (let i = 0; i < data.length; i++) {
@@ -50,7 +50,7 @@ module.exports = [
     },
   },
   {
-    url: `${process.env.API_CONTEXT}/api/admin/users`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/users`,
     method: "GET",
     rawResponse: (req, resp) => {
       resp.setHeader("x-total-count", data.length);
@@ -58,7 +58,7 @@ module.exports = [
     }
   },
   {
-    url: `${process.env.API_CONTEXT}/api/admin/user/check/:login`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/user/check/:login`,
     method: "GET",
     response: ({ query }) => {
       for (const user of data) {
@@ -70,7 +70,7 @@ module.exports = [
     }
   },
   {
-    url: `${process.env.API_CONTEXT}/api/admin/user/change-password/:login`,
+    url: `${process.env.VUE_APP_API_BASE}/api/admin/user/change-password/:login`,
     method: "POST",
     response: () => { }
   }

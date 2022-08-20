@@ -50,7 +50,11 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     sidebar: {
-      storage: getStorage(storageType)
+      storage: getStorage(storageType),
+      default: {
+        opened: true,
+        withoutAnimation: false
+      }
     },
     language: {
       storage: getStorage(storageType),
