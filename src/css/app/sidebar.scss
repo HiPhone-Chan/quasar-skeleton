@@ -140,8 +140,8 @@
     }
 
     .el-menu--collapse {
-      .el-submenu {
-        & > .el-submenu__title {
+      .el-sub-menu {
+        & > .el-sub-menu__title {
           & > span {
             height: 0;
             width: 0;

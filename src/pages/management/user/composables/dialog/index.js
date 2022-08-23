@@ -1,12 +1,9 @@
-import { getCurrentInstance, ref, reactive, nextTick } from 'vue';
-import { checkUserLogin } from '@/api/user'
-import { roleOptions } from '@/utils/app-option'
+import { getCurrentInstance, ref, reactive } from 'vue';
 import { LOGIN_VALID_CHARACTER } from '@/utils/validate'
+import { checkUserLogin } from '@/api/user'
 
 export default function () {
-
   const instance = getCurrentInstance();
-  const app = instance.appContext.config.globalProperties;
 
   const validateLogin = async (rule, value, callback) => {
     if (dialog.status === 'create') {
@@ -43,59 +40,14 @@ export default function () {
     ]
   })
 
-  let temp = ref({
-    login: "",
-    nickName: "",
-    mobile: "",
-    authorities: [roleOptions[1].value]
-  })
+  let temp = ref({})
 
   const dialog = reactive({
     visible: false,
     status: ''
   })
 
-  const handleCreate = () => {
-    dialog.status = 'create'
-    dialog.visible = true
-    temp.value = {
-      login: "",
-      nickName: "",
-      mobile: "",
-      authorities: [roleOptions[1].value]
-    }
-
-    nextTick(() => {
-      instance.refs['dataForm'].clearValidate()
-    })
-  }
-
-  const handleUpdate = (row) => {
-    dialog.status = 'update'
-    dialog.visible = true
-    temp.value = Object.assign({}, row)
-
-    nextTick(() => {
-      instance.refs['dataForm'].clearValidate()
-    })
-  }
-
-  const handlePassword = (row) => {
-    dialog.status = 'password'
-    dialog.visible = true
-    temp.value = {
-      login: row.login,
-      currentPassword: '',
-      newPassword: ''
-    }
-
-    nextTick(() => {
-      instance.refs['dataForm'].clearValidate()
-    })
-  }
-
   return {
-    temp, dialog, rules,
-    handleCreate, handleUpdate, handlePassword
+    temp, dialog, rules
   }
 }

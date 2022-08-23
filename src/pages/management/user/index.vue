@@ -58,7 +58,7 @@
           <el-button type="warning" @click="handlePassword(scope.row)">
             {{ $t('login.password') }}
           </el-button>
-          <el-button type="danger" @click="handleDelete(scope.row)">
+          <el-button type="danger" @click="handleDelete(scope.row, getData)">
             {{ $t('table.delete') }}
           </el-button>
         </template>
@@ -138,43 +138,30 @@
 <script setup>
 import Pagination from '@/components/Pagination/index.vue'
 import { Search, Edit } from '@element-plus/icons-vue'
-import { formatAuthorities, roleOptions, createRoleOptions, updateRoleOptions } from '@/utils/app-option'
+import { formatAuthorities, roleOptions, updateRoleOptions } from '@/utils/app-option'
 import useUserData from './composables/useUserData'
-import useUserDialog from './composables/useUserDialog'
+import useDialog from './composables/dialog'
+import useCreateData from './composables/dialog/useCreateData'
+import useUpdateData from './composables/dialog/useUpdateData'
+import usePassword from './composables/dialog/usePassword'
 
 const { list, total, listLoading, listQuery,
   getData, handleFilter } = useUserData()
 
-const { temp, dialog, rules,
-  handleCreate, handleUpdate, handlePassword } = useUserDialog()
+const { temp, dialog, rules } = useDialog()
+const { handleCreate, createData } = useCreateData(temp, dialog, getData)
+const { handleUpdate, updateData } = useUpdateData(temp, dialog, getData)
+const { handlePassword, changePwd } = usePassword(temp, dialog)
 
 </script>
 
 <script>
-import { createUser, updateUser, changePassword, deleteUser } from '@/api/user'
+import { deleteUser } from '@/api/user'
 
 export default {
   name: 'UserManagement',
   methods: {
-    createData() {
-      this.$refs['dataForm'].validate(async valid => {
-        if (valid) {
-          await createUser(this.temp)
-          this.getData()
-          this.dialog.visible = false
-        }
-      })
-    },
-    updateData() {
-      this.$refs['dataForm'].validate(async valid => {
-        if (valid) {
-          await updateUser(this.temp)
-          this.getData()
-          this.dialog.visible = false
-        }
-      })
-    },
-    async handleDelete(row) {
+    async handleDelete(row, getData) {
       try {
         await this.$confirm('该操作比较危险', '确认删除吗？', {
           confirmButtonText: '确定',
@@ -183,34 +170,10 @@ export default {
         })
 
         await deleteUser(row.login)
-        this.getData()
+        getData()
       } catch (err) {
         console.log(err)
       }
-    },
-    changePwd() {
-      this.$refs['dataForm'].validate(async valid => {
-        if (valid) {
-          const changePwdVM = {
-            currentPassword: this.temp.currentPassword,
-            newPassword: this.temp.newPassword
-          }
-
-          try {
-            await changePassword(this.temp.login, changePwdVM)
-            this.$notify({
-              title: '修改成功',
-              type: 'success'
-            })
-          } catch (err) {
-            this.$notify({
-              title: '修改失败',
-              type: 'warning'
-            })
-          }
-          this.dialog.visible = false
-        }
-      })
     }
   }
 }
