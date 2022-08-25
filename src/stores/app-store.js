@@ -7,8 +7,8 @@ const storageType = 'cookies';
 export const useAppStore = defineStore('app', {
   state: () => ({
     loading: false,
-    message: { // 消息提醒
-      text: "",
+    notification: { // 消息提醒
+      message: "",
       type: "" // 消息提醒类型
     },
     sidebar: {
@@ -23,8 +23,8 @@ export const useAppStore = defineStore('app', {
     setLoading(loading) {
       this.loading = loading
     },
-    setMessage({ type, message }) {
-      this.message = { type, text: message }
+    setNotification(notification) {
+      this.notification = notification
     },
     toggleSideBar() {
       this.sidebar = {

@@ -32,13 +32,10 @@ export default defineComponent({
         NProgress.done()
       }
     },
-    message: {
+    notification: {
       deep: true,
       handler: function (val, oldVal) {
-        ElMessage({
-          message: val.text,
-          type: val.type,
-        })
+        ElMessage(val)
       }
     }
   }
