@@ -37,7 +37,7 @@ api.interceptors.response.use(
   },
   error => {
     console.warn('resp err :' + JSON.stringify(error)) // for debug
-    useAppStore().setMessage({
+    useAppStore().setNotification({
       message: error.message,
       type: 'error'
     })
