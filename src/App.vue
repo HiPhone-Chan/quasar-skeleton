@@ -21,14 +21,17 @@ export default defineComponent({
     loading(loading) {
       if (loading) {
         // start global loading
+        this.$q.loading.show()
       } else {
         // finish global loading
+        this.$q.loading.hide()
       }
     },
-    message: {
+    notification: {
       deep: true,
       handler: function (val, oldVal) {
-        // receive global message
+        // receive global notification message
+        this.$q.notify(val)
       }
     }
   }

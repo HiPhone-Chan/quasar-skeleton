@@ -47,7 +47,7 @@ export default boot(async ({ app, router, store }) => {
             // remove token and go to login page to re-login
             console.error('Get roles', error)
             await userStore.resetToken()
-            appStore.setMessage({
+            appStore.setNotification({
               text: error || 'Has Error',
               type: 'error'
             })
