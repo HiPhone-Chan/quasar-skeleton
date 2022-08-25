@@ -23,22 +23,17 @@ export default defineComponent({
     loading(loading) {
       if (loading) {
         // start global loading
-        this.$toast.loading({
-          duration: 0
-        })
+        this.$q.loading.show()
       } else {
         // finish global loading
-        this.$toast.clear()
+        this.$q.loading.hide()
       }
     },
-    message: {
+    notification: {
       deep: true,
       handler: function (val, oldVal) {
         // receive global message
-        this.$notify({
-          message: val.text,
-          type: val.type
-        })
+        this.$notify(val)
       }
     }
   }
