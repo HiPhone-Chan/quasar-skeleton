@@ -6,41 +6,10 @@ const storageType = 'cookies';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    loading: false,
-    notification: { // 消息提醒
-      message: "",
-      type: "" // 消息提醒类型
-    },
-    sidebar: {
-      opened: true,
-      withoutAnimation: false
-    },
-    device: 'desktop',
     language: getLanguage(),
     size: 'medium'
   }),
   actions: {
-    setLoading(loading) {
-      this.loading = loading
-    },
-    setNotification(notification) {
-      this.notification = notification
-    },
-    toggleSideBar() {
-      this.sidebar = {
-        opened: !this.sidebar.opened,
-        withoutAnimation: false
-      }
-    },
-    closeSideBar(withoutAnimation) {
-      this.sidebar = {
-        opened: false,
-        withoutAnimation: withoutAnimation
-      }
-    },
-    toggleDevice(device) {
-      this.device = device
-    },
     setLanguage(language) {
       this.language = language
     },
