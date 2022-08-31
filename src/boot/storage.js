@@ -25,10 +25,10 @@ class MyCookies {
     return this.cookies.get(key)
   }
   setItem(key, value) {
-    this.cookies.set(key, value)
+    this.cookies.set(key, value, { path: '/' })
   }
   removeItem(key) {
-    this.cookies.remove(key)
+    this.cookies.remove(key, { path: '/' })
   }
 }
 
