@@ -12,12 +12,8 @@
 const { configure } = require('quasar/wrappers');
 const path = require('path');
 const { viteMockServe } = require('vite-plugin-mock');
-<<<<<<< HEAD
-const appConfig = require('./config');
 const { VantResolver } = require('unplugin-vue-components/resolvers');
-=======
 const { config, vueAppConfig } = require('./config');
->>>>>>> master
 
 module.exports = configure(function (/* ctx */) {
   return {
