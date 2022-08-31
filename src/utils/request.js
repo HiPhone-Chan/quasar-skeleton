@@ -1,6 +1,6 @@
 import { api } from '@/boot/axios'
 import { useUserStore } from '@/stores/user-store';
-import { useAppStore } from '@/stores/app-store';
+import { useEventStore } from '@/stores/event-store';
 
 // request interceptor
 api.interceptors.request.use(
@@ -37,7 +37,7 @@ api.interceptors.response.use(
   },
   error => {
     console.warn('resp err :' + JSON.stringify(error)) // for debug
-    useAppStore().setNotification({
+    useEventStore().setNotification({
       message: error.message,
       type: 'error'
     })
