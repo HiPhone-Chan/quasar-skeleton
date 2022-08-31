@@ -22,7 +22,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "default-passive-events": "^2.0.0",
-    "element-plus": "^2.2.13",
+    "element-plus": "^2.2.15",
     "fuse.js": "^6.6.2",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",

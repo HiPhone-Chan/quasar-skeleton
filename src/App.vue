@@ -11,7 +11,6 @@ import 'default-passive-events' // 消除浏览器passive-events警告
 import { mapState } from 'pinia'
 import { useEventStore } from '@/stores/event-store'
 import { useAppStore } from '@/stores/app-store'
-import { ElMessage } from 'element-plus'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 
@@ -37,7 +36,7 @@ export default defineComponent({
     notification: {
       deep: true,
       handler: function (val, oldVal) {
-        ElMessage(val)
+        this.$message(val)
       }
     }
   }
