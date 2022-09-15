@@ -1,5 +1,5 @@
 <template>
-  <nut-tabbar v-model:visible="activeName" :bottom="true"
+  <nut-tabbar v-model:visible="$route.name" :bottom="true"
     :safeAreaInsetBottom="true">
     <tabbar-item ref="tabbarItems" v-for="route in permission_routes"
       :key="route.path" :item="route" :base-path="route.path">
@@ -15,14 +15,6 @@ import TabbarItem from './TabbarItem.vue'
 export default {
   name: "TabbarIndex",
   components: { TabbarItem },
-  data() {
-    return {
-      activeName: ''
-    }
-  },
-  created() {
-    this.activeName = this.$route.name
-  },
   computed: {
     ...mapState(usePermissionStore, { permission_routes: 'routes' })
   }
@@ -30,4 +22,5 @@ export default {
 </script>
 
 <style>
+
 </style>
