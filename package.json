@@ -15,20 +15,20 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.15.3",
     "axios": "^0.21.1",
     "default-passive-events": "^2.0.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.11",
-    "quasar": "^2.6.0",
-    "vant": "^3.6.1",
+    "quasar": "^2.8.2",
+    "vant": "^4.0.0-rc.3",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
-    "@quasar/app-vite": "^1.0.0",
+    "@quasar/app-vite": "^1.1.0",
     "autoprefixer": "^10.4.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
@@ -36,6 +36,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "mockjs": "^1.1.0",
+    "postcss": "^8.4.16",
     "prettier": "^2.5.1",
     "unplugin-vue-components": "^0.22.4",
     "vite-plugin-mock": "^2.9.6",
