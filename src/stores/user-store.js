@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
 import Router, { resetRouter } from '@/router'
-import { getStorage } from '@/utils/global'
 
 const storageType = 'cookies';
 
@@ -70,7 +69,7 @@ export const useUserStore = defineStore('user', {
   },
   persist: {
     token: {
-      storage: getStorage(storageType)
+      storage: storageType
     }
   }
 });

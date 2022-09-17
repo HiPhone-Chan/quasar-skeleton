@@ -40,7 +40,6 @@ module.exports = configure(function (/* ctx */) {
       'i18n',
       'axios',
       'error-log',
-      'storage',
       { path: 'element-ui', server: false },
       'svg-icon'
     ],
