@@ -1,9 +1,8 @@
 import { boot } from 'quasar/wrappers'
-import getPageTitle from '@/utils/get-page-title'
+import { getPageTitle, setTitle } from '@/utils/page-title'
 import { useEventStore } from '@/stores/event-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore } from '@/stores/permission-store'
-import { setTitle } from '@/utils/global'
 
 export default boot(async ({ app, router, store }) => {
   const eventStore = process.env.SERVER ? useEventStore(store) : useEventStore();

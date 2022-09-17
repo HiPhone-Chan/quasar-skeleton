@@ -1,6 +1,5 @@
 import enUS from './en-US'
 import zhCN from './zh-CN'
-import { getLocalLanguage } from '@/utils/global'
 
 const messages = {
   'en-US': {
@@ -9,6 +8,16 @@ const messages = {
   'zh-CN': {
     ...zhCN
   }
+}
+
+export function getLocalLanguage() {
+  if (process.env.CLIENT) {
+    if (navigator) {
+      return (navigator.language || navigator.browserLanguage);
+    }
+  }
+
+  return 'zh-CN'
 }
 
 export function getLanguage() {
