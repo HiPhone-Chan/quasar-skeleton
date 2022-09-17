@@ -11,10 +11,10 @@ import { persistPlugin } from './plugins/plugin-persist'
  * with the Store instance.
  */
 
-export default store((/* { ssrContext } */) => {
+export default store(({ ssrContext }) => {
   const pinia = createPinia()
   // You can add Pinia plugins here
-  pinia.use(persistPlugin)
+  pinia.use(persistPlugin(ssrContext))
 
   return pinia
 })
