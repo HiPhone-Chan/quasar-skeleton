@@ -1,4 +1,3 @@
-import { boot } from 'quasar/wrappers'
 import { LocalStorage, SessionStorage, Cookies } from 'quasar'
 
 const defaultStorage = {
@@ -49,16 +48,14 @@ class MyWebStorage {
 
 }
 
-let localSsrContext;
-
-export function getStorage(name) {
+export function getStorage(name, ssrContext) {
   switch (name) {
     case 'localStorage': return new MyWebStorage(LocalStorage);
     case 'sessionStorage': return new MyWebStorage(SessionStorage)
     case 'cookies':
       if (process.env.SERVER) {
-        if (localSsrContext) {
-          return new MyCookies(Cookies.parseSSR(localSsrContext))
+        if (ssrContext) {
+          return new MyCookies(Cookies.parseSSR(ssrContext))
         }
       } else {
         return new MyCookies(Cookies)
@@ -67,11 +64,3 @@ export function getStorage(name) {
   }
   return defaultStorage;
 }
-
-// "async" is optional;
-// more info on params: https://v2.quasar.dev/quasar-cli/boot-files
-export default boot(({ ssrContext }) => {
-  if (process.env.SERVER) {
-    localSsrContext = ssrContext
-  }
-})
