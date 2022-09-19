@@ -22,3 +22,5 @@ export default {
     }
   ]
 }
+
+export const priority = 0
