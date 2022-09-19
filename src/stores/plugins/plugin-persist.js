@@ -15,10 +15,7 @@ export function persistPlugin(ssrContext) {
       Object.keys(persistOj).forEach((key) => {
         const storeKey = `${storeId}-${key}`
         const storage = getStorage(persistOj[key]?.storage, ssrContext);
-        let value = storage?.getItem(storeKey);
-        if (undefined !== value) {
-          state[key] = value;
-        }
+        state[key] = storage?.getItem(storeKey) ?? state[key];
       })
     })
 
