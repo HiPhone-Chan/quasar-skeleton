@@ -44,6 +44,10 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 
 set true to hide in the bar(side bar / bottom bar / ...)
 
+## priority
+
+set to sort the router asc order
+
 ## mete.roles
 
 - set non-empty array means to require authorization and you have the role to access page
