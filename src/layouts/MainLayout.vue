@@ -17,10 +17,11 @@
 
 
 <script>
+import { defineComponent } from 'vue'
 import Tabbar from './components/Tabbar/index.vue';
 
-export default {
-  name: 'LayoutIndex',
+export default defineComponent({
+  name: 'MainLayout',
   components: { Tabbar }
-}
+})
 </script>
