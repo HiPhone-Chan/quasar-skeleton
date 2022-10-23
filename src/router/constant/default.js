@@ -35,7 +35,7 @@ export default [
       {
         path: 'index',
         component: () => import('pages/profile/index.vue'),
-        name: 'Profile',
+        name: 'profile',
         meta: { title: 'profile', icon: 'user', roles: [], noCache: true }
       }
     ]
