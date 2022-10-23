@@ -47,7 +47,7 @@ export default boot(async ({ app, router, store }) => {
             console.error('Get roles', error)
             await userStore.resetToken()
             eventStore.setNotification({
-              text: error || 'Has Error',
+              message: error || 'Has Error',
               type: 'error'
             })
             next(`/login?redirect=${to.path}`)
