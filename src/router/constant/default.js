@@ -15,7 +15,7 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'home', roles: [] }
+        meta: { title: 'home', icon: 'home-o', roles: [] }
       }
     ]
   },
@@ -28,7 +28,7 @@ export default [
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'profile',
-        meta: { title: 'profile', icon: 'user', roles: [], noCache: true }
+        meta: { title: 'profile', icon: 'user-o', roles: [], noCache: true }
       }
     ]
   },

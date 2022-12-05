@@ -6,7 +6,7 @@ export default {
   children: [
     {
       path: 'https://github.com/HiPhone-Chan/quasar-skeleton',
-      meta: { title: 'External Link', icon: 'link' }
+      meta: { title: 'External Link', icon: 'link-o' }
     }
   ]
 }

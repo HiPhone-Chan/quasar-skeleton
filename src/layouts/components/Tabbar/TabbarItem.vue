@@ -6,7 +6,7 @@
       </tabbar-item>
     </template>
     <template v-else>
-      <van-tabbar-item :icon="item.meta?.icon" :to="basePath">
+      <van-tabbar-item :icon="item.meta?.icon" :url="basePath">
         {{ generateTitle(item.meta?.title) || basePath }}
       </van-tabbar-item>
     </template>
@@ -50,4 +50,5 @@ export default {
 </script>
 
 <style>
+
 </style>

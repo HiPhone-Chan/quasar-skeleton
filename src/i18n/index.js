@@ -16,7 +16,6 @@ export function getLocalLanguage() {
       return (navigator.language || navigator.browserLanguage);
     }
   }
-
   return 'zh-CN'
 }
 
@@ -29,7 +28,7 @@ export function getLanguage() {
       return locale
     }
   }
-  return 'zh-CN'
+  return language
 }
 
 export default messages;
