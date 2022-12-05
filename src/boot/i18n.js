@@ -5,10 +5,10 @@ import { useAppStore } from '@/stores/app-store';
 
 let i18nGlobal;
 
-export default boot(({ app }) => {
+export default boot(({ app, store }) => {
+  const appStore = process.env.SERVER ? useAppStore(store) : useAppStore();
   const i18n = createI18n({
-    locale: useAppStore().language,
-    fallbackLocale: 'zh-CN',
+    locale: appStore.language,
     globalInjection: true,
     messages
   })
