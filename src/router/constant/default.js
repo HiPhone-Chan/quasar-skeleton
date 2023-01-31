@@ -1,4 +1,6 @@
 import Layout from '@/layouts/MainLayout.vue'
+import { h } from 'vue';
+import { Home, My } from '@nutui/icons-vue'
 
 export default [
   {
@@ -15,7 +17,7 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'home', roles: [] }
+        meta: { title: 'home', icon: h(Home), roles: [] }
       }
     ]
   },
@@ -28,7 +30,7 @@ export default [
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'profile',
-        meta: { title: 'profile', icon: 'my', roles: [], noCache: true }
+        meta: { title: 'profile', icon: h(My), roles: [], noCache: true }
       }
     ]
   },
