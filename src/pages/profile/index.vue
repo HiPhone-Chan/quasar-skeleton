@@ -6,6 +6,7 @@
 
 <script>
 import { useUserStore } from '@/stores/user-store';
+import { useEventStore } from '@/stores/event-store'
 
 export default {
   name: 'ProfileIndex',
@@ -13,6 +14,7 @@ export default {
     async logout() {
       await useUserStore().logout();
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      useEventStore().setNotification({ message: "logout successfully." })
     }
   }
 }

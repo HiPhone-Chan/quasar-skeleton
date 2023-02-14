@@ -35,6 +35,7 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
+      'ui',
       'error-log'
     ],
 
