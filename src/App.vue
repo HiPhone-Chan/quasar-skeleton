@@ -11,8 +11,6 @@ import 'default-passive-events' // 消除浏览器passive-events警告
 import { mapState } from 'pinia'
 import { useEventStore } from '@/stores/event-store'
 import { useAppStore } from '@/stores/app-store'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
 
 export default defineComponent({
   name: 'App',
@@ -27,10 +25,10 @@ export default defineComponent({
     loading(loading) {
       if (loading) {
         // start global loading
-        NProgress.start()
+        this.$loading.show()
       } else {
         // finish global loading
-        NProgress.done()
+        this.$loading.hide()
       }
     },
     notification: {

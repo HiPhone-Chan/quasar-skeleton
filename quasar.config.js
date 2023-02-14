@@ -39,9 +39,9 @@ module.exports = configure(function (/* ctx */) {
       'router',
       'i18n',
       'axios',
-      'error-log',
-      { path: 'element-ui', server: false },
-      'svg-icon'
+      'svg-icon',
+      'ui',
+      'error-log'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
