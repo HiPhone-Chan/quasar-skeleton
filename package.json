@@ -20,7 +20,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@nutui/nutui": "^4.0.0",
+    "@nutui/nutui": "^4.0.1",
     "@quasar/extras": "^1.15.10",
     "axios": "^0.21.1",
     "default-passive-events": "^2.0.0",

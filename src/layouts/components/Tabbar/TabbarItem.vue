@@ -16,6 +16,7 @@
 import path from 'path-browserify'
 import { generateTitle } from '@/utils/i18n'
 import { isExternal } from '@/utils/validate'
+
 export default {
   name: 'TabbarItem',
   props: {
@@ -47,4 +48,5 @@ export default {
 }
 </script>
 <style>
+
 </style>

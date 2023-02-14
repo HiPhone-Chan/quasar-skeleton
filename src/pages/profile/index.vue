@@ -16,7 +16,7 @@
     </nut-cell-group>
     <nut-divider />
 
-    <nut-button round block type="danger" @click="handleLogout">
+    <nut-button round block type="danger" @click="logout">
       退出
     </nut-button>
   </div>
@@ -24,16 +24,19 @@
 
 <script>
 import { useUserStore } from '@/stores/user-store'
+import { useEventStore } from '@/stores/event-store'
 import { mapState } from 'pinia'
+
 export default {
   name: "ProfileIndex",
   computed: {
     ...mapState(useUserStore, ['mobile', 'avatar'])
   },
   methods: {
-    async handleLogout() {
-      await useUserStore().logout()
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    async logout() {
+      await useUserStore().logout();
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      useEventStore().setNotification({ message: "logout successfully." })
     }
   }
 }
