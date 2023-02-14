@@ -29,16 +29,16 @@ export default defineComponent({
     loading(loading) {
       if (loading) {
         // start global loading
-        this.$q.loading.show()
+        this.$loading.show()
       } else {
         // finish global loading
-        this.$q.loading.hide()
+        this.$loading.hide()
       }
     },
     notification: {
       deep: true,
       handler: function (val, oldVal) {
-        // receive global message
+        // receive global notification message
         this.$notify(val)
       }
     }

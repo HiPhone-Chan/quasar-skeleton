@@ -16,7 +16,7 @@
     </van-cell-group>
     <van-divider />
 
-    <van-button round block type="danger" @click="handleLogout">
+    <van-button round block type="danger" @click="logout">
       退出
     </van-button>
   </div>
@@ -24,6 +24,7 @@
 
 <script>
 import { useUserStore } from '@/stores/user-store'
+import { useEventStore } from '@/stores/event-store'
 import { mapState } from 'pinia'
 
 export default {
@@ -32,9 +33,10 @@ export default {
     ...mapState(useUserStore, ['mobile', 'avatar'])
   },
   methods: {
-    async handleLogout() {
-      await useUserStore().logout()
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    async logout() {
+      await useUserStore().logout();
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      useEventStore().setNotification({ message: "logout successfully." })
     }
   }
 }
