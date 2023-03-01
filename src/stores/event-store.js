@@ -10,11 +10,8 @@ export const useEventStore = defineStore('event', {
     }
   }),
   actions: {
-    setLoading(loading) {
-      this.loading = loading
-    },
-    setNotification(notification) {
-      this.notification = notification
+    emit(event, data) { // event is state.prop name
+      this[event] = data
     }
   }
 })
