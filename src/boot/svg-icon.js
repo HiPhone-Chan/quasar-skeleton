@@ -5,5 +5,4 @@ import SvgIcon from 'src/components/SvgIcon/index.vue'// svg component
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(async ({ app }) => {
   app.component('svg-icon', SvgIcon);
-
 })
