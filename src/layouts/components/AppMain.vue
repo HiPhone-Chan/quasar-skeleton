@@ -1,9 +1,9 @@
 <template>
   <section class="app-main">
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component, route }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
-          <component :is="Component" :key="key" />
+          <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
     </router-view>
@@ -17,10 +17,7 @@ import { useTagsViewStore } from '@/stores/tags-view-store'
 export default {
   name: 'AppMain',
   computed: {
-    ...mapState(useTagsViewStore, ['cachedViews']),
-    key() {
-      return this.$route.path
-    }
+    ...mapState(useTagsViewStore, ['cachedViews'])
   }
 }
 </script>
