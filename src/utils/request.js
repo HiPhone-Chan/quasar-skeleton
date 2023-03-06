@@ -37,7 +37,7 @@ api.interceptors.response.use(
   },
   error => {
     console.warn('resp err :' + JSON.stringify(error)) // for debug
-    useEventStore().setNotification({
+    eventStore.emit('notification', {
       message: error.message,
       type: 'error'
     })
