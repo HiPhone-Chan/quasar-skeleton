@@ -11,7 +11,7 @@ export default boot(async ({ app, router, store }) => {
     const userStore = process.env.SERVER ? useUserStore(store) : useUserStore();
     const permissionStore = process.env.SERVER ? usePermissionStore(store) : usePermissionStore();
     // start progress bar
-    useEventStore().setLoading(true)
+    eventStore.emit('loading', true)
     // set page title
     setTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in
@@ -21,7 +21,7 @@ export default boot(async ({ app, router, store }) => {
       if (to.path === '/login') {
         // if is logged in, redirect to the home page
         next({ path: '/' })
-        eventStore.setLoading(false)
+        eventStore.emit('loading', false)
       } else {
         // determine whether the user has obtained his permission roles through getInfo
         const hasRoles = userStore.roles?.length > 0
@@ -46,12 +46,12 @@ export default boot(async ({ app, router, store }) => {
             // remove token and go to login page to re-login
             console.error('Get roles', error)
             await userStore.resetToken()
-            eventStore.setNotification({
+            eventStore.emit('notification', {
               message: error || 'Has Error',
               type: 'error'
             })
             next(`/login?redirect=${to.path}`)
-            eventStore.setLoading(false)
+            eventStore.emit('loading', false)
           }
         }
       }
@@ -63,13 +63,13 @@ export default boot(async ({ app, router, store }) => {
       } else {
         // other pages that do not have permission to access are redirected to the login page.
         next(`/login?redirect=${to.path}`)
-        eventStore.setLoading(false)
+        eventStore.emit('loading', false)
       }
     }
   })
 
   router.afterEach(() => {
     // finish progress bar
-    eventStore.setLoading(false)
+    eventStore.emit('loading', false)
   })
 })
