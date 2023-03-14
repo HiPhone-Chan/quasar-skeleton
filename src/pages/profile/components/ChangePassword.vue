@@ -8,8 +8,7 @@
         <el-input v-model="form.newPwd" type="password" auto-complete="off" />
       </el-form-item>
       <el-form-item label="确认新密码" prop="confirmPwd">
-        <el-input v-model="form.confirmPwd" type="password"
-          auto-complete="off" />
+        <el-input v-model="form.confirmPwd" type="password" auto-complete="off" />
       </el-form-item>
 
       <el-form-item>
@@ -23,7 +22,7 @@
 
 <script>
 import { changePassword } from '@/api/account'
-import { LOGIN_VALID_CHARACTER } from '@/utils/validate'
+import { LOGIN_VALID_CHARACTER } from '@/utils/user'
 
 export default {
   data() {

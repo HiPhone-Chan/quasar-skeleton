@@ -3,8 +3,8 @@
     <el-scrollbar ref="scrollPane" class="tags-view-wrapper"
       @scroll="handleScroll">
       <router-link v-for="tag in visitedViews" ref="tag" :key="tag.path"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        custom v-slot="{ isActive, navigate }">
+        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }" custom
+        v-slot="{ isActive, navigate }">
         <span class="tags-view-item" :class="isActive ? 'active' : ''"
           @click="navigate" @contextmenu.prevent="openMenu(tag, $event)">
           {{ tag.title }}
@@ -29,13 +29,11 @@
 <script>
 import path from 'path-browserify'
 import { mapState } from 'pinia'
-import { Close } from "@element-plus/icons-vue";
 import { useTagsViewStore } from '@/stores/tags-view-store'
 import { usePermissionStore } from '@/stores/permission-store'
 
 export default {
   name: "TagsView",
-  components: { Close },
   data() {
     return {
       visible: false,

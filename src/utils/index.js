@@ -45,7 +45,7 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -254,7 +254,7 @@ export function getTime(type) {
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
-  const later = function() {
+  const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
 
@@ -271,7 +271,7 @@ export function debounce(func, wait, immediate) {
     }
   }
 
-  return function(...args) {
+  return function (...args) {
     context = this
     timestamp = +new Date()
     const callNow = immediate && !timeout
@@ -354,4 +354,30 @@ export function removeClass(ele, cls) {
     const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
     ele.className = ele.className.replace(reg, ' ')
   }
+}
+
+/**
+ * for option like
+ * {
+ *    label: "label name",
+ *    value: ---,
+ * }
+ * @param {*} options
+ * @param {*} val
+ * @returns
+ */
+
+export function formatOption(options, val) {
+  for (const option of options) {
+    if (option.value === val) {
+      return option.label
+    }
+  }
+  return val
+}
+
+export function formatArrayOption(options, arr) {
+  return arr.map(item => {
+    return formatOption(options, item)
+  }).join(',')
 }

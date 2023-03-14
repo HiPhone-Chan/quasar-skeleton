@@ -21,11 +21,9 @@
 import { addClass, removeClass } from '@/utils'
 import { mapState } from 'pinia'
 import { useSettingsStore } from '@/stores/settings-store'
-import { Close, Setting } from "@element-plus/icons-vue";
 
 export default {
   name: 'RightPanel',
-  components: { Close, Setting },
   props: {
     clickNotClose: {
       default: false,

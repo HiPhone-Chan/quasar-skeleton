@@ -5,17 +5,19 @@
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }">
+          <svg-icon
+            :icon-class="onlyOneChild.meta.icon || (item?.meta?.icon)"></svg-icon>
           <template #title>
-            <item :icon="onlyOneChild.meta.icon || (item?.meta?.icon)"
-              :title="generateTitle(onlyOneChild.meta.title)" />
+            <span>{{ generateTitle(onlyOneChild.meta.title) }}</span>
           </template>
         </el-menu-item>
       </app-link>
     </template>
 
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)">
-      <template #title v-if="item.meta">
-        <item :icon="item.meta.icon" :title="generateTitle(item.meta.title)" />
+      <svg-icon v-if="item.meta" :icon-class="item.meta.icon"></svg-icon>
+      <template #title>
+        <span v-if="item.meta">{{ generateTitle(item.meta.title) }}</span>
       </template>
       <sidebar-item v-for="child in item.children" :key="child.path"
         :is-nest="true" :item="child" :base-path="resolvePath(child.path)"
@@ -25,18 +27,15 @@
 </template>
 
 <script>
-// import path from 'path'
 import path from 'path-browserify'
 import { generateTitle } from '@/utils/i18n'
-import { isExternal } from '@/utils/validate'
-import Item from './Item.vue'
+import { isExternal } from '@/utils/url'
 import AppLink from './Link.vue'
 import FixiOSBug from './FixiOSBug'
 
 export default {
   name: 'SidebarItem',
-  // components: { AppLink },
-  components: { Item, AppLink },
+  components: { AppLink },
   mixins: [FixiOSBug],
   props: {
     // route object

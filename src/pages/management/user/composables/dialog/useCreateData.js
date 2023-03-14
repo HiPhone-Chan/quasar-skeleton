@@ -1,12 +1,11 @@
 import { getCurrentInstance, nextTick } from 'vue';
-import { createRoleOptions } from '@/utils/app-option'
+import { createRoleOptions } from '@/utils/user'
 import { createUser } from '@/api/user'
 
 export default function (temp, dialog, getData) {
   const instance = getCurrentInstance();
 
   const handleCreate = () => {
-    console.log(instance)
     dialog.status = 'create'
     dialog.visible = true
     temp.value = {

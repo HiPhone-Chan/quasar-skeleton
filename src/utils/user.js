@@ -1,3 +1,12 @@
+import { formatArrayOption } from "./index"
+/**
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export function validUsername(str) {
+  return true
+}
+
 // roles to be create user
 export const createRoleOptions = [
   {
@@ -27,21 +36,11 @@ export const roleOptions = [
   ...createRoleOptions
 ]
 
+export const LOGIN_VALID_CHARACTER = {
+  pattern: /^[a-zA-Z0-9_'.@]{4,50}$/,
+  message: `英文大小写,数字,以及 _'.@,长度4-50`
+}
+
 export function formatAuthorities(arr) {
   return formatArrayOption(roleOptions, arr)
-}
-
-export function formatOption(options, val) {
-  for (const option of options) {
-    if (option.value === val) {
-      return option.label
-    }
-  }
-  return val
-}
-
-export function formatArrayOption(options, arr) {
-  return arr.map(item => {
-    return formatOption(options, item)
-  }).join(',')
 }

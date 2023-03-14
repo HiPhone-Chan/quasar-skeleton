@@ -22,20 +22,15 @@ export default defineComponent({
     }
   },
   watch: {
-    loading(loading) {
+    loading(loading) { // global loading
       if (loading) {
-        // start global loading
         this.$loading.show()
       } else {
-        // finish global loading
         this.$loading.hide()
       }
     },
-    notification: {
-      deep: true,
-      handler: function (val, oldVal) {
-        this.$message(val)
-      }
+    notification(msg) { // receive global notification message
+      this.$message(val)
     }
   }
 })

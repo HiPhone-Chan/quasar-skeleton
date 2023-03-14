@@ -1,5 +1,5 @@
 import { getCurrentInstance, ref, reactive } from 'vue';
-import { LOGIN_VALID_CHARACTER } from '@/utils/validate'
+import { LOGIN_VALID_CHARACTER } from '@/utils/user'
 import { checkUserLogin } from '@/api/user'
 
 export default function () {

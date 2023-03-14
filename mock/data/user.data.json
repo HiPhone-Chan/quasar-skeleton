@@ -17,7 +17,7 @@
   {
     "token": { "id_token": "mock_manager_token" },
     "info": {
-      "id": 1,
+      "id": 2,
       "login": "manager",
       "nickName": null,
       "firstName": null,

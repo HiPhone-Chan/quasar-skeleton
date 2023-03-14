@@ -1,4 +1,5 @@
 import { boot } from 'quasar/wrappers'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import NProgress from 'nprogress' // progress bar
 // 导入样式
@@ -12,6 +13,10 @@ import 'nprogress/nprogress.css' // progress bar style
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(async ({ app }) => {
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
+
   app.config.globalProperties.$loading = {
     show() {
       NProgress.start()

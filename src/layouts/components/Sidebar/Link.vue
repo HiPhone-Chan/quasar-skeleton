@@ -1,11 +1,11 @@
 <template>
   <component :is="type" v-bind="linkProps(to)">
-    <slot />
+    <slot></slot>
   </component>
 </template>
 
 <script>
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '@/utils/url'
 
 export default {
   name: "LinkIndex",

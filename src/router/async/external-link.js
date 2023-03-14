@@ -11,4 +11,4 @@ export default {
   ]
 }
 
-export const priority = 1
+export const priority = 999;

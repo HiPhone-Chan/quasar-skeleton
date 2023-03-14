@@ -40,7 +40,7 @@
 
 <script>
 import PanThumb from '@/components/PanThumb/index.vue'
-import { formatAuthorities } from '@/utils/app-option'
+import { formatAuthorities } from '@/utils/user'
 
 export default {
   components: { PanThumb },

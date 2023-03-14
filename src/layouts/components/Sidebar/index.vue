@@ -17,7 +17,7 @@
 import { mapState } from 'pinia'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-import variables from '@/css/app/variables.module.scss'
+import variables from '@/css/variables.module.scss'
 import { useAppStore } from '@/stores/app-store'
 import { usePermissionStore } from '@/stores/permission-store'
 import { useSettingsStore } from '@/stores/settings-store'

@@ -28,14 +28,12 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column width="110px" align="center"
-        :label="$t('user.username')">
+      <el-table-column width="110px" align="center" :label="$t('user.username')">
         <template v-slot="scope">
           <span>{{ scope.row.login }}</span>
         </template>
       </el-table-column>
-      <el-table-column width="110px" align="center"
-        :label="$t('user.nickname')">
+      <el-table-column width="110px" align="center" :label="$t('user.nickname')">
         <template v-slot="scope">
           <span>{{ scope.row.nickName }}</span>
         </template>
@@ -136,14 +134,15 @@
 </template>
 
 <script setup>
+import { getCurrentInstance } from 'vue';
 import Pagination from '@/components/Pagination/index.vue'
-import { Search, Edit } from '@element-plus/icons-vue'
-import { formatAuthorities, roleOptions, updateRoleOptions } from '@/utils/app-option'
+import { formatAuthorities, roleOptions, updateRoleOptions } from '@/utils/user'
 import useUserData from './composables/useUserData'
 import useDialog from './composables/dialog'
 import useCreateData from './composables/dialog/useCreateData'
 import useUpdateData from './composables/dialog/useUpdateData'
 import usePassword from './composables/dialog/usePassword'
+import { deleteUser } from '@/api/user'
 
 const { list, total, listLoading, listQuery,
   getData, handleFilter } = useUserData()
@@ -153,31 +152,29 @@ const { handleCreate, createData } = useCreateData(temp, dialog, getData)
 const { handleUpdate, updateData } = useUpdateData(temp, dialog, getData)
 const { handlePassword, changePwd } = usePassword(temp, dialog)
 
+const app = getCurrentInstance().appContext.config.globalProperties;
+const handleDelete = async (row, getData) => {
+  try {
+    await app.$confirm('该操作比较危险', '确认删除吗？', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+    listLoading.value = true
+    await deleteUser(row.login)
+    getData()
+    listLoading.value = false
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 </script>
 
 <script>
-import { deleteUser } from '@/api/user'
-
 export default {
-  name: 'UserManagement',
-  methods: {
-    async handleDelete(row, getData) {
-      try {
-        await this.$confirm('该操作比较危险', '确认删除吗？', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-
-        await deleteUser(row.login)
-        getData()
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
+  name: 'UserManagement'
 }
 </script>
 
-<style>
-</style>
+<style></style>
