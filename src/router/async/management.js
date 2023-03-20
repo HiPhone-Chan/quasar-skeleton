@@ -1,26 +1,26 @@
-import Layout from '@/layouts/MainLayout.vue'
+import Layout from "@/layouts/MainLayout.vue";
 
 export default {
-  path: '/management',
+  path: "/management",
   component: Layout,
   // redirect: 'noredirect',
   meta: {
-    title: 'management',
-    icon: 'user',
-    roles: ['ROLE_ADMIN']
+    title: "management",
+    icon: "user",
+    roles: ["ROLE_ADMIN"],
   },
   children: [
     {
-      path: 'user',
-      component: () => import('pages/management/user/index.vue'),
-      name: 'user',
+      path: "user",
+      component: () => import("pages/management/user/index.vue"),
+      name: "user",
       meta: {
-        title: 'user-management',
-        icon: 'people',
-        noCache: true
-      }
-    }
-  ]
-}
+        title: "user-management",
+        icon: "people",
+        noCache: true,
+      },
+    },
+  ],
+};
 
-export const priority = 0
+export const priority = 10;

@@ -4,8 +4,6 @@ A Quasar Project
 
 # Install the dependencies
 
-if you dont't need desk mode, remove electron dependencies
-
 ```bash
 npm install
 ```
