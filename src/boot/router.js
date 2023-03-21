@@ -11,7 +11,7 @@ export default boot(async ({ app, router, store }) => {
     const userStore = process.env.SERVER ? useUserStore(store) : useUserStore();
     const permissionStore = process.env.SERVER ? usePermissionStore(store) : usePermissionStore();
     // start progress bar
-    eventStore.emit('loading', true)
+    eventStore.emit('loading', true);
     // set page title
     setTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in

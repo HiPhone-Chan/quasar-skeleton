@@ -1,8 +1,6 @@
 <template>
-  <nut-tabbar v-model:visible="$route.name" :bottom="true"
-    :safeAreaInsetBottom="true">
-    <tabbar-item ref="tabbarItems" v-for="route in permission_routes"
-      :key="route.path" :item="route" :base-path="route.path">
+  <nut-tabbar v-model="$route.name" bottom safe-area-inset-bottom>
+    <tabbar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path">
     </tabbar-item>
   </nut-tabbar>
 </template>
@@ -21,6 +19,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

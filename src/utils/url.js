@@ -1,16 +1,33 @@
+/**
+ * get file name without suffix from path
+ * @param url like ../getFileName.suffix
+ * @returns
+ */
+export function getFileName(url) {
+  let slashIndex = url.lastIndexOf('/')
+  slashIndex = slashIndex < 0 ? 0 : slashIndex + 1
 
-
-export function getFileName(file) {
-  let slashIndex = file.lastIndexOf('/')
-  if (slashIndex < 0) {
-    slashIndex = 0
-  } else {
-    slashIndex++
-  }
-  let dotIndex = file.lastIndexOf('.')
+  let dotIndex = url.lastIndexOf('.')
   if (dotIndex < 0) {
-    dotIndex = file.length - 1
+    dotIndex = url.length - 1
   }
-  let result = file.substring(slashIndex, dotIndex)
+  let result = url.substring(slashIndex, dotIndex)
   return result;
+}
+
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export function isExternal(path) {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
+
+/**
+ * @param {string} url
+ * @returns {Boolean}
+ */
+export function validURL(url) {
+  const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
+  return reg.test(url)
 }
