@@ -29,7 +29,7 @@ export default defineComponent({
         this.$loading.hide()
       }
     },
-    notification(msg) { // receive global notification message
+    notification(val) { // receive global notification message
       this.$message(val)
     }
   }

@@ -1,34 +1,35 @@
 import { getCurrentInstance, nextTick } from 'vue';
-import { createRoleOptions } from '@/utils/user'
-import { createUser } from '@/api/user'
+import { createRoleOptions } from '@/utils/user';
+import { createUser } from '@/api/user';
 
-export default function (temp, dialog, getData) {
+export default function (temp, dialog, formName, getData) {
   const instance = getCurrentInstance();
+  const STATUS_CREATE = 'create';
 
   const handleCreate = () => {
-    dialog.status = 'create'
-    dialog.visible = true
+    dialog.status = STATUS_CREATE;
+    dialog.visible = true;
     temp.value = {
-      login: "",
-      nickName: "",
-      mobile: "",
+      login: '',
+      nickName: '',
+      mobile: '',
       authorities: [createRoleOptions[0].value]
-    }
+    };
 
     nextTick(() => {
-      instance.refs['dataForm'].clearValidate()
-    })
-  }
+      instance.refs[formName].clearValidate();
+    });
+  };
 
   const createData = () => {
-    instance.refs['dataForm'].validate(async valid => {
+    instance.refs[formName].validate(async (valid) => {
       if (valid) {
-        await createUser(temp.value)
-        getData()
-        dialog.visible = false
+        await createUser(temp.value);
+        getData();
+        dialog.visible = false;
       }
-    })
-  }
+    });
+  };
 
-  return { handleCreate, createData }
+  return { handleCreate, createData, STATUS_CREATE };
 }

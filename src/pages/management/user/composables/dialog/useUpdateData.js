@@ -1,28 +1,29 @@
 import { getCurrentInstance, nextTick } from 'vue';
-import { updateUser } from '@/api/user'
+import { updateUser } from '@/api/user';
 
-export default function (temp, dialog, getData) {
+export default function (temp, dialog, formName, getData) {
   const instance = getCurrentInstance();
+  const STATUS_UPDATE = 'update';
 
   const handleUpdate = (row) => {
-    dialog.status = 'update'
-    dialog.visible = true
-    temp.value = Object.assign({}, row)
+    dialog.status = STATUS_UPDATE;
+    dialog.visible = true;
+    temp.value = Object.assign({}, row);
 
     nextTick(() => {
-      instance.refs['dataForm'].clearValidate()
-    })
-  }
+      instance.refs[formName].clearValidate();
+    });
+  };
 
   const updateData = () => {
-    instance.refs['dataForm'].validate(async valid => {
+    instance.refs[formName].validate(async (valid) => {
       if (valid) {
-        await updateUser(temp.value)
-        getData()
-        dialog.visible = false
+        await updateUser(temp.value);
+        getData();
+        dialog.visible = false;
       }
-    })
-  }
+    });
+  };
 
-  return { handleUpdate, updateData }
+  return { handleUpdate, updateData, STATUS_UPDATE };
 }
