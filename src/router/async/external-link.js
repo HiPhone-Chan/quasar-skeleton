@@ -10,3 +10,5 @@ export default {
     }
   ]
 }
+
+export const priority = 999;

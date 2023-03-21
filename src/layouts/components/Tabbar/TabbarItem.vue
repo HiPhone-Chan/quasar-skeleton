@@ -1,13 +1,13 @@
 <template>
   <template v-if="!item.hidden">
     <template v-if="hasChildren(item.children)">
-      <tabbar-item v-for="child in item.children" :key="child.path"
-        :item="child" :base-path="resolvePath(child.path)">
+      <tabbar-item v-for="child in item.children" :key="child.path" :item="child" :base-path="resolvePath(child.path)">
       </tabbar-item>
     </template>
     <template v-else>
-      <van-tabbar-item :icon="item.meta?.icon" :url="basePath">
-        {{ generateTitle(item.meta?.title) || basePath }}
+      <van-tabbar-item replace :icon="item.meta?.icon" :to="isExternal(basePath) ? '' : basePath"
+        :url="isExternal(basePath) ? basePath : ''">
+        {{ generateTitle(this.item.meta?.title) || this.basePath }}
       </van-tabbar-item>
     </template>
   </template>
@@ -16,7 +16,7 @@
 <script>
 import path from 'path-browserify'
 import { generateTitle } from '@/utils/i18n'
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '@/utils/url'
 
 export default {
   name: 'TabbarItem',
@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     generateTitle,
+    isExternal,
     hasChildren(children) {
       return children && children.length;
     },
@@ -49,6 +50,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

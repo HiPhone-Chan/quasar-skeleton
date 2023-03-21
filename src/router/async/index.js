@@ -10,5 +10,5 @@ Object.keys(routerModules).forEach(key => {
 // modules entry
 /** when your routing map is too long, you can split it into small modules **/
 export default routers.sort((ra, rb) => {
-  return ra.priority - rb.priority // 升序
+  return ra.priority - rb.priority // order asc
 }).map(item => item.router)
