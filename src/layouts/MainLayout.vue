@@ -1,17 +1,21 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="text-white" height-hint="98">
+    <q-header class="text-white" height-hint="98">
+      <!-- 开启顶部安全区适配 -->
+      <van-nav-bar safe-area-inset-top />
     </q-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="text-white">
+    <q-footer class="text-white">
       <tabbar></tabbar>
     </q-footer>
 
+    <!-- 开启底部安全区适配 -->
+    <van-number-keyboard safe-area-inset-bottom />
   </q-layout>
 </template>
 
