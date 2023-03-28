@@ -1,14 +1,14 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="text-white" height-hint="98">
+    <q-header class="text-white" height-hint="98">
     </q-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="text-white">
+    <q-footer class="text-white">
       <tabbar></tabbar>
     </q-footer>
 

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
-import { getLanguage } from '@/i18n/index'
+import { getLanguage } from '@/i18n/index';
+import { Locale } from '@nutui/nutui';
 
 const storageType = 'cookies';
 
@@ -10,10 +11,11 @@ export const useAppStore = defineStore('app', {
   }),
   actions: {
     setLanguage(language) {
-      this.language = language
+      this.language = language;
+      Locale.use(language);
     },
     setSize(size) {
-      this.size = size
+      this.size = size;
     }
   },
   persist: {
@@ -24,4 +26,4 @@ export const useAppStore = defineStore('app', {
       storage: storageType
     }
   }
-})
+});

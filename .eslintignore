@@ -1,4 +1,5 @@
 /dist
+/src-ssr
 /src-capacitor
 /src-cordova
 /.quasar
