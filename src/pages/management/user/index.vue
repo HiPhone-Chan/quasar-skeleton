@@ -102,11 +102,11 @@
         <div class="dialog-footer">
           <el-button @click="dialog.visible = false">{{ $t('table.cancel') }}
           </el-button>
-          <el-button v-if="dialog.status == STATUS_CREATE" type="primary" @click="createData()">{{ $t('table.confirm') }}
+          <el-button v-if="dialog.status == STATUS_CREATE" type="primary" @click="createData">{{ $t('table.confirm') }}
           </el-button>
-          <el-button v-if="dialog.status == STATUS_UPDATE" type="primary" @click="updateData()">{{ $t('table.confirm') }}
+          <el-button v-if="dialog.status == STATUS_UPDATE" type="primary" @click="updateData">{{ $t('table.confirm') }}
           </el-button>
-          <el-button v-if="dialog.status == STATUS_PASSWORD" type="primary" @click="changePwd()">{{ $t('table.confirm') }}
+          <el-button v-if="dialog.status == STATUS_PASSWORD" type="primary" @click="changePwd">{{ $t('table.confirm') }}
           </el-button>
         </div>
       </template>

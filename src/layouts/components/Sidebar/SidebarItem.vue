@@ -14,7 +14,9 @@
 
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)">
       <template #title>
-        <svg-icon v-if="item.meta" :icon-class="item.meta.icon ?? ''"></svg-icon>
+        <el-icon class="sub-icon">
+          <svg-icon v-if="item.meta" :icon-class="item.meta.icon ?? ''"></svg-icon>
+        </el-icon>
         <span v-if="item.meta">{{ generateTitle(item.meta.title) }}</span>
       </template>
       <sidebar-item v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"
@@ -94,3 +96,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.sub-icon {
+  width: 1.6em;
+  height: 1.6em;
+  margin: 0;
+}
+</style>
