@@ -91,7 +91,6 @@ export default {
       }
       return path.resolve(this.basePath, routePath)
     },
-
     generateTitle
   }
 }
@@ -100,7 +99,6 @@ export default {
 <style scoped>
 .sub-icon {
   width: 1.6em;
-  height: 1.6em;
   margin: 0;
 }
 </style>
