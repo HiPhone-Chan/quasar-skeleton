@@ -2,10 +2,12 @@ import { boot } from 'quasar/wrappers'
 import { getPageTitle, setTitle } from '@/utils/page-title'
 import { useEventStore } from '@/stores/event-store'
 import { useUserStore } from '@/stores/user-store'
-import { usePermissionStore } from '@/stores/permission-store'
+import { usePermissionStore, hasPermission } from '@/stores/permission-store'
+import { useTagsViewStore } from '@/stores/tags-view-store'
 
 export default boot(async ({ app, router, store }) => {
   const eventStore = process.env.SERVER ? useEventStore(store) : useEventStore();
+  const tagsViewStore = process.env.SERVER ? useTagsViewStore(store) : useTagsViewStore();
 
   router.beforeEach(async (to, from, next) => {
     const userStore = process.env.SERVER ? useUserStore(store) : useUserStore();
@@ -26,7 +28,13 @@ export default boot(async ({ app, router, store }) => {
         // determine whether the user has obtained his permission roles through getInfo
         const hasRoles = userStore.roles?.length > 0
         if (hasRoles) {
-          next()
+          if (hasPermission(userStore.roles, to?.meta?.roles)) {
+            next()
+          } else {
+            tagsViewStore.delAllVisitedViews();
+            tagsViewStore.delAllCachedViews();
+            next({ path: '/' })
+          }
         } else {
           try {
             // get user info

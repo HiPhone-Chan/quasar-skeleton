@@ -20,7 +20,7 @@ export function getLocalLanguage() {
       return (navigator.language || navigator.browserLanguage);
     }
   }
-  return 'zh-CN'
+  return 'zh'
 }
 
 export function getLanguage() {
@@ -28,7 +28,7 @@ export function getLanguage() {
 
   const locales = Object.keys(messages)
   for (const locale of locales) {
-    if (language.indexOf(locale) > -1) {
+    if (locale.indexOf(language) > -1) {
       return locale
     }
   }
