@@ -6,7 +6,7 @@ import { asyncRoutes, constantRoutes } from '@/router/routes';
  * @param roles
  * @param route
  */
-function hasPermission(roles, route) {
+export function hasPermission(roles, route) {
   const routeRoles = route?.meta?.roles
   if (routeRoles && routeRoles.length) {
     return roles.some(role => routeRoles.includes(role))

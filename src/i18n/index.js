@@ -22,7 +22,11 @@ export function getLocalLanguage() {
       return navigator.language || navigator.browserLanguage;
     }
   }
+<<<<<<< HEAD
   return 'zh-CN';
+=======
+  return 'zh'
+>>>>>>> master
 }
 
 export function getLanguage() {
@@ -30,8 +34,13 @@ export function getLanguage() {
 
   const locales = Object.keys(messages);
   for (const locale of locales) {
+<<<<<<< HEAD
     if (language.indexOf(locale) > -1) {
       return locale;
+=======
+    if (locale.indexOf(language) > -1) {
+      return locale
+>>>>>>> master
     }
   }
   return language;
