@@ -13,7 +13,7 @@ import { useAppStore } from '@/stores/app-store'
 export default defineComponent({
   name: 'App',
   computed: {
-    ...mapState(useEventStore, ['loading', 'notification']),
+    ...mapState(useEventStore, ['loading', 'error']),
     ...mapState(useAppStore, ['language']),
     locale() {
       return messages[this.language]
@@ -27,8 +27,18 @@ export default defineComponent({
         this.$loading.hide()
       }
     },
-    notification(msg) { // receive global notification message
-      this.$notify(msg)
+    error(info) { // global error handle
+      console.warn("resp err :" + JSON.stringify(error)); // for debug
+      const error = info.error;
+      switch (info.type) {
+        case 'request':
+          break;
+        default:
+          this.$notify({
+            type: 'error',
+            message: error.info
+          })
+      }
     }
   }
 })

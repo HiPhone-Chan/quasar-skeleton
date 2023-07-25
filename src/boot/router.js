@@ -50,9 +50,8 @@ export default boot(async ({ app, router, store }) => {
             // remove token and go to login page to re-login
             console.error('Get roles', error)
             await userStore.resetToken()
-            eventStore.emit('notification', {
-              message: error || 'Has Error',
-              type: 'error'
+            eventStore.emit('error', {
+              info: error || 'Has Error'
             })
             next(`/login?redirect=${to.path}`)
             eventStore.emit('loading', false)
