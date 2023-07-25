@@ -36,7 +36,6 @@ export default {
     async logout() {
       await useUserStore().logout();
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
-      useEventStore().emit('notification', { message: "logout successfully." })
     }
   }
 }
