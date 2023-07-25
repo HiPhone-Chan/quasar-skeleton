@@ -7,13 +7,16 @@ api.interceptors.request.use(
   (config) => {
     const token = useUserStore().token;
     if (token) {
-      config.headers["Authorization"] = "Bearer " + useUserStore().token;
+      config.headers["Authorization"] = "Bearer " + token;
     }
     return config;
   },
   (error) => {
     // do something with request error
-    console.warn("request err :" + JSON.stringify(error)); // for debug
+    useEventStore().emit("error", {
+      type: "request",
+      error
+    });
     return Promise.reject(error);
   }
 );
@@ -36,10 +39,9 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.warn("resp err :" + JSON.stringify(error)); // for debug
-    useEventStore().emit("notification", {
-      message: error.message,
-      type: "error",
+    useEventStore().emit("error", {
+      type: "request",
+      error
     });
     return Promise.reject(error);
   }

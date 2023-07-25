@@ -4,9 +4,9 @@ import { defineStore } from 'pinia';
 export const useEventStore = defineStore('event', {
   state: () => ({
     loading: false,
-    notification: { // message notification
-      message: "",
-      type: "" // notification type
+    error: {
+      type: "", // request
+      info: null // error info
     }
   }),
   actions: {
