@@ -1,7 +1,7 @@
 <template>
-  <div v-if="isExternal" :style="styleExternalIcon"
-    class="svg-external-icon svg-icon"></div>
-  <svg v-else :class="svgClass" aria-hidden="true">
+  <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-bind="$attrs"></div>
+  <component v-else-if="isElIcon" :class="svgClass" :is="iconClass" v-bind="$attrs" />
+  <svg v-else :class="svgClass" aria-hidden="true" v-bind="$attrs">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -25,6 +25,9 @@ export default {
   computed: {
     isExternal() {
       return isExternal(this.iconClass)
+    },
+    isElIcon() {
+      return this.iconClass.startsWith("el-icon-")
     },
     iconName() {
       return `#icon-${this.iconClass}`

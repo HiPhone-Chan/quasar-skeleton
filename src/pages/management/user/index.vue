@@ -9,12 +9,12 @@
         @keyup.enter="handleFilter" />
       <el-button class="filter-item" type="primary" @click="handleFilter">
         <el-icon style="margin-right: 10px;">
-          <Search />
+          <el-icon-search />
         </el-icon>{{ $t('table.search') }}
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" @click="handleCreate">
         <el-icon style="margin-right: 10px;">
-          <Edit />
+          <el-icon-edit />
         </el-icon>{{ $t('table.add') }}
       </el-button>
     </div>

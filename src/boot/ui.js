@@ -14,7 +14,7 @@ import 'nprogress/nprogress.css' // progress bar style
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(async ({ app }) => {
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component)
+    app.component("el-icon-" + key.toLowerCase(), component)
   }
 
   app.config.globalProperties.$loading = {
