@@ -57,7 +57,7 @@ set to sort the router asc order
 
 - set non-empty array means to require authorization and you have the role to access page
 - set empty array [] means to require authorization to access page
-- set null or net set means to you can access directly without authorization
+- set false means to you can access directly without authorization
 
 ## reference
 

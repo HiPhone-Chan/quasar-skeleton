@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
 import Router, { resetRouter } from '@/router'
+import defaultAvatar from '@/assets/avatar.gif'
 
 const storageType = 'cookies';
 
@@ -48,7 +49,7 @@ export const useUserStore = defineStore('user', {
       this.name = name
       this.nickname = nickName
       this.mobile = mobile
-      this.avatar = avatar || 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+      this.avatar = avatar || defaultAvatar
       this.introduction = introduction
       return data
     },
