@@ -24,7 +24,6 @@ export default [
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
-    hidden: true,
     children: [
       {
         path: 'index',
