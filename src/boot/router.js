@@ -28,7 +28,7 @@ export default boot(async ({ app, router, store }) => {
         // determine whether the user has obtained his permission roles through getInfo
         const hasRoles = userStore.roles?.length > 0
         if (hasRoles) {
-          if (hasPermission(userStore.roles, to?.meta?.roles)) {
+          if (hasPermission(userStore.roles, to)) {
             next()
           } else {
             tagsViewStore.delAllVisitedViews();
@@ -64,7 +64,7 @@ export default boot(async ({ app, router, store }) => {
       }
     } else {
       /* has no token*/
-      if (to?.meta?.roles == false) {
+      if (to?.meta?.roles === false) {
         // not need roles, go directly
         next()
       } else {
