@@ -4,6 +4,7 @@ export default [
   {
     path: '/login',
     component: () => import('pages/login/index.vue'),
+    meta: { roles: false },
     hidden: true
   },
   {
@@ -23,6 +24,7 @@ export default [
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
+    hidden: true,
     children: [
       {
         path: 'index',
