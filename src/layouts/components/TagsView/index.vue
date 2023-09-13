@@ -1,22 +1,18 @@
 <template>
   <div id="tags-view-container" class="tags-view-container">
-    <el-scrollbar ref="scrollPane" class="tags-view-wrapper"
-      @scroll="handleScroll">
+    <el-scrollbar ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link v-for="tag in visitedViews" ref="tag" :key="tag.path"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }" custom
-        v-slot="{ isActive, navigate }">
-        <span class="tags-view-item" :class="isActive ? 'active' : ''"
-          @click="navigate" @contextmenu.prevent="openMenu(tag, $event)">
+        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }" custom v-slot="{ isActive, navigate }">
+        <span class="tags-view-item" :class="isActive ? 'active' : ''" @click="navigate"
+          @contextmenu.prevent="openMenu(tag, $event)">
           {{ tag.title }}
-          <el-icon v-if="!isAffix(tag)" :size="10"
-            @click.prevent.stop="closeSelectedTag(tag)">
-            <Close />
+          <el-icon v-if="!isAffix(tag)" :size="10" @click.prevent.stop="closeSelectedTag(tag)">
+            <el-icon-close />
           </el-icon>
         </span>
       </router-link>
     </el-scrollbar>
-    <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }"
-      class="contextmenu">
+    <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
         Close</li>

@@ -64,7 +64,7 @@ export default boot(async ({ app, router, store }) => {
       }
     } else {
       /* has no token*/
-      if (!to?.meta?.roles) {
+      if (to?.meta?.roles == false) {
         // not need roles, go directly
         next()
       } else {

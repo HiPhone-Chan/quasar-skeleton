@@ -2,12 +2,10 @@
   <div ref="rightPanel" :class="{ show: show }" class="rightPanel-container">
     <div class="rightPanel-background"></div>
     <div class="rightPanel">
-      <div class="handle-button"
-        :style="{ 'top': buttonTop + 'px', 'background-color': theme }"
-        @click="show = !show">
+      <div class="handle-button" :style="{ 'top': buttonTop + 'px', 'background-color': theme }" @click="show = !show">
         <el-icon :size="20" @click.stop="show = !show">
-          <Close v-if="show" />
-          <Setting v-else />
+          <el-icon-close v-if="show" />
+          <el-icon-setting v-else />
         </el-icon>
       </div>
       <div class="rightPanel-items">
