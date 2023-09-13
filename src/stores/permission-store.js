@@ -8,12 +8,12 @@ import { asyncRoutes, constantRoutes } from '@/router/routes';
  */
 export function hasPermission(roles, route) {
   const routeRoles = route?.meta?.roles
-  if (routeRoles ==  false) {
+  if (routeRoles === false) {
     return true;
-  } else if (routeRoles && routeRoles.length) {
+  } else if (routeRoles?.length) {
     return roles.some(role => routeRoles.includes(role))
   }
-  return false;
+  return true;
 }
 
 /**
