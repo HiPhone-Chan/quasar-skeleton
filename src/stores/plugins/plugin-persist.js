@@ -12,11 +12,13 @@ export function persistPlugin(ssrContext) {
 
     const storeId = store.$id
     store.$patch((state) => {
-      Object.keys(persistOj).forEach((key) => {
-        const storeKey = `${storeId}-${key}`
-        const storage = getStorage(persistOj[key]?.storage, ssrContext);
-        state[key] = storage?.getItem(storeKey) ?? state[key];
-      })
+      if (state) {
+        Object.keys(persistOj).forEach((key) => {
+          const storeKey = `${storeId}-${key}`
+          const storage = getStorage(persistOj[key]?.storage, ssrContext);
+          state[key] = storage?.getItem(storeKey) ?? state[key];
+        })
+      }
     })
 
     // events id DEV ONLY!

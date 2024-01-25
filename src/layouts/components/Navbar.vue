@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
-    <hamburger id="hamburger-container" :is-active="sidebar.opened"
-      class="hamburger-container" @toggleClick="toggleSideBar" />
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container"
+      @toggleClick="toggleSideBar" />
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
@@ -19,8 +19,7 @@
 
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect"
-        trigger="click">
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
@@ -33,8 +32,7 @@
             <router-link to="/">
               <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
             </router-link>
-            <a target="_blank"
-              href="https://github.com/HiPhone-Chan/vue3-admin">
+            <a target="_blank" href="https://github.com/HiPhone-Chan/vue3-admin">
               <el-dropdown-item>{{ $t('navbar.github') }}</el-dropdown-item>
             </a>
             <!-- <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
@@ -62,6 +60,7 @@ import SizeSelect from '@/components/SizeSelect/index.vue'
 import Search from '@/components/HeaderSearch/index.vue'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
+import { logout } from '@/utils/permission'
 
 export default {
   name: "NavbarIndex",
@@ -82,7 +81,7 @@ export default {
       useAppStore().toggleSideBar()
     },
     async logout() {
-      await useUserStore().logout()
+      await logout()
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }

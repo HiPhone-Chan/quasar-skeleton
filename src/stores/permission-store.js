@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { asyncRoutes, constantRoutes } from '@/router/routes';
 
 /**
@@ -56,3 +56,7 @@ export const usePermissionStore = defineStore('permission', {
     }
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(usePermissionStore, import.meta.hot))
+}

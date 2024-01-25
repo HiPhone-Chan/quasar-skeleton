@@ -1,4 +1,7 @@
+
+import Router, { resetRouter } from '@/router'
 import { useUserStore } from '@/stores/user-store'
+import { logout as apiLogout } from '@/api/login';
 
 /**
  * @param {Array} value
@@ -18,4 +21,11 @@ export default function checkPermission(value) {
     console.error(`need roles! Like v-permission="['admin','editor']"`)
     return false
   }
+}
+
+export async function logout() {
+  const userStore = useUserStore();
+  await apiLogout(userStore.token)
+  await userStore.resetToken()
+  resetRouter(Router)
 }

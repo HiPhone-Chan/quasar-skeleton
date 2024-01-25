@@ -1,6 +1,5 @@
-import { defineStore } from 'pinia';
-import { login, logout, getInfo } from '@/api/login'
-import Router, { resetRouter } from '@/router'
+import { defineStore, acceptHMRUpdate } from 'pinia';
+import { login, getInfo } from '@/api/login'
 import defaultAvatar from '@/assets/avatar.gif'
 
 const storageType = 'cookies';
@@ -54,13 +53,6 @@ export const useUserStore = defineStore('user', {
       return data
     },
 
-    // user logout
-    async logout() {
-      await logout(this.token)
-      await this.resetToken()
-      resetRouter(Router)
-    },
-
     // remove token
     async resetToken() {
       this.token = undefined
@@ -74,3 +66,8 @@ export const useUserStore = defineStore('user', {
     }
   }
 });
+
+// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+}
