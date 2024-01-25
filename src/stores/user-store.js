@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
 import Router, { resetRouter } from '@/router'
 import defaultAvatar from '@/assets/avatar.gif'

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { getLanguage } from '@/i18n/index'
 
 const storageType = 'cookies';

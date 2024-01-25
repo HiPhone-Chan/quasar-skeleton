@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { asyncRoutes, constantRoutes } from '@/router/routes';
 
 /**
