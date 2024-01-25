@@ -5,11 +5,11 @@
       <nut-form class="login-form" :model-value="formData" ref="ruleForm">
         <nut-form-item prop="username" label="用户名" :rules="[{ required: true, message: '请填写用户名' }]">
           <nut-input class="nut-input-text" @blur="customBlurValidate('username')" v-model="formData.username"
-            placeholder="请输入姓名" type="text" autocomplete="username" />
+            placeholder="请输入姓名" type="text" autocomplete />
         </nut-form-item>
         <nut-form-item prop="password" label="密码" :rules="[{ required: true, message: '请填写密码' }]">
           <nut-input class="nut-input-text" @blur="customBlurValidate('password')" v-model="formData.password"
-            placeholder="请输入姓名" type="password" autocomplete="password" />
+            placeholder="请输入密码" type="password" autocomplete />
         </nut-form-item>
 
         <nut-cell>
@@ -24,7 +24,7 @@
 
 <script>
 import { ref, reactive } from 'vue';
-import { useUserStore } from '@/stores/user-store'
+import { login } from '@/utils/auth'
 
 export default {
   name: 'LoginIndex',
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     handleLogin() {
-      useUserStore().login(this.formData).then(() => {
+      login(this.formData).then(() => {
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
       })
     },
