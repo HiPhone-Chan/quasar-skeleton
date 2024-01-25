@@ -5,14 +5,13 @@
 </template>
 
 <script>
-import { useUserStore } from '@/stores/user-store';
-import { useEventStore } from '@/stores/event-store'
+import { logout } from '@/utils/auth';
 
 export default {
   name: 'ProfileIndex',
   methods: {
     async logout() {
-      await useUserStore().logout();
+      await logout();
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     }
   }
