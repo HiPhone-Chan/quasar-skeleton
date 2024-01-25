@@ -32,6 +32,7 @@ import UserCard from './components/UserCard.vue'
 import Account from './components/Account.vue'
 import ChangePassword from './components/ChangePassword.vue'
 import { updateAccount } from '@/api/account'
+import { logout } from '@/utils/auth';
 
 export default {
   name: 'ProfileIndex',
@@ -78,6 +79,10 @@ export default {
         type: 'success',
         duration: 5 * 1000
       })
+    },
+    async logout() {
+      await logout();
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     }
   }
 }

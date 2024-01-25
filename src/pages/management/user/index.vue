@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-select v-model="listQuery.authority" class="filter-item" :placeholder="$t('user.role')" clearable
-        @change="handleFilter">
+      <el-select v-model="listQuery.authority" style="width: 200px;" class="filter-item" :placeholder="$t('user.role')"
+        clearable @change="handleFilter">
         <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
-      <el-input v-model="listQuery.search" :placeholder="$t('table.search')" style="width: 200px;" class="filter-item"
-        @keyup.enter="handleFilter" />
+      <el-input v-model="listQuery.search" :placeholder="$t('table.search')" style="width: 200px;margin-left: 10px;"
+        class="filter-item" @keyup.enter="handleFilter" />
       <el-button class="filter-item" type="primary" @click="handleFilter">
         <el-icon style="margin-right: 10px;">
           <el-icon-search />

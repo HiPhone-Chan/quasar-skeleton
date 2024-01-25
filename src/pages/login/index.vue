@@ -42,7 +42,7 @@
 <script>
 import { validUsername } from '@/utils/user'
 import LangSelect from '@/components/LangSelect/index.vue'
-import { useUserStore } from '@/stores/user-store'
+import { login } from '@/utils/auth'
 
 export default {
   name: 'LoginIndex',
@@ -123,7 +123,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          useUserStore().login(this.loginForm).then(() => {
+          login(this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
           }).catch((err) => {

@@ -60,7 +60,7 @@ import SizeSelect from '@/components/SizeSelect/index.vue'
 import Search from '@/components/HeaderSearch/index.vue'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
-import { logout } from '@/utils/permission'
+import { logout } from '@/utils/auth'
 
 export default {
   name: "NavbarIndex",

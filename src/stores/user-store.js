@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { login, getInfo } from '@/api/login'
+import { getInfo } from '@/api/login'
 import defaultAvatar from '@/assets/avatar.gif'
 
 const storageType = 'cookies';
@@ -17,13 +17,6 @@ export const useUserStore = defineStore('user', {
   getters: {
   },
   actions: {
-    // user login
-    async login(userInfo) {
-      const { username, password } = userInfo
-      const response = await login({ username: username, password: password })
-      const { data } = response
-      this.token = data.id_token
-    },
 
     // get user info
     async getInfo() {
