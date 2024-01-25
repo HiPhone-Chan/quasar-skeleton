@@ -6,8 +6,7 @@
         <van-cell-group inset>
           <van-field v-model="username" name="用户名" label="用户名" placeholder="用户名"
             :rules="[{ required: true, message: '请填写用户名' }]" />
-          <van-field v-model="password" type="password" name="密码" label="密码"
-            autocomplete placeholder="密码"
+          <van-field v-model="password" type="password" name="密码" label="密码" autocomplete placeholder="密码"
             :rules="[{ required: true, message: '请填写密码' }]" />
         </van-cell-group>
         <div style="margin: 16px;">
@@ -22,7 +21,7 @@
 
 <script>
 import { ref } from 'vue';
-import { useUserStore } from '@/stores/user-store'
+import { login } from '@/utils/auth'
 
 export default {
   name: 'LoginIndex',
@@ -37,7 +36,7 @@ export default {
   },
   methods: {
     handleLogin() {
-      useUserStore().login({}).then(() => {
+      login({}).then(() => {
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
       })
     }
