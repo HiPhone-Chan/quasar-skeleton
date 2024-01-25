@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { login, logout, getInfo } from '@/api/login'
 import Router, { resetRouter } from '@/router'
 import defaultAvatar from '@/assets/avatar.gif'
@@ -74,3 +74,8 @@ export const useUserStore = defineStore('user', {
     }
   }
 });
+
+// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+}
