@@ -56,3 +56,7 @@ export const usePermissionStore = defineStore('permission', {
     }
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(usePermissionStore, import.meta.hot))
+}
