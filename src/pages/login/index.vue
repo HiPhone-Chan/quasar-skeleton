@@ -16,10 +16,9 @@ import { login } from '@/utils/auth'
 export default {
   name: 'LoginIndex',
   methods: {
-    handleLogin() {
-      login({}).then(() => {
-        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-      })
+    async handleLogin() {
+      await login({});
+      this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
     }
   }
 }
