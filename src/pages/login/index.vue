@@ -10,7 +10,7 @@
             :rules="[{ required: true, message: '请填写密码' }]" />
         </van-cell-group>
         <div style="margin: 16px;">
-          <van-button round block type="primary" @click="handleLogin">
+          <van-button block type="primary" @click="handleLogin">
             {{ $t('login.logIn') }}
           </van-button>
         </div>
@@ -35,10 +35,9 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
-      login({}).then(() => {
-        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-      })
+    async handleLogin() {
+      await login({});
+      this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
     }
   }
 }

@@ -16,7 +16,7 @@
     </van-cell-group>
     <van-divider />
 
-    <van-button round block type="danger" @click="logout">
+    <van-button block type="danger" @click="logout">
       退出
     </van-button>
   </div>
