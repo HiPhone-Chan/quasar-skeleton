@@ -119,23 +119,14 @@ export default {
         this.passwordType = 'password'
       }
     },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          login(this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-            this.loading = false
-          }).catch((err) => {
-            console.log('login fail', err)
-            this.loading = false
-          })
-        } else {
-          console.log('login error submit!!')
-          this.loading = false
-          return false
-        }
-      })
+    async handleLogin() {
+      const valid = await this.$refs.loginForm.validate();
+      if (valid) {
+        this.loading = true;
+        await login(this.loginForm);
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+      }
+      this.loading = false;
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
@@ -145,6 +136,15 @@ export default {
         return acc
       }, {})
     }
+  },
+  errorCaptured(err) {
+    console.log('login failed', err)
+    this.loading = false;
+    this.$message({
+      type: 'error',
+      message: 'login failed.'
+    })
+    return false;
   }
 }
 </script>
@@ -180,7 +180,7 @@ $cursor: #fff;
     input {
       background: transparent;
       border: 0px;
-      -webkit-appearance: none;
+      appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 10px;
       color: $light_gray;

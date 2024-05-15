@@ -15,14 +15,21 @@ export default function (temp, dialog, formName, getData) {
     });
   };
 
-  const updateData = () => {
-    instance.refs[formName].validate(async (valid) => {
-      if (valid) {
-        await updateUser(temp.value);
-        getData();
-        dialog.visible = false;
+  const updateData = async () => {
+    try {
+      if(!await instance.refs[formName].validate()) {
+        return;
       }
-    });
+      await updateUser(temp.value);
+      getData();
+      dialog.visible = false;
+    } catch (error) {
+      console.log('updateData failed', error)
+      const errType = Object.prototype.toString.call(error)
+      switch (errType) {
+        case '[object Object]': break; // 校验失败
+      }
+    }
   };
 
   return { handleUpdate, updateData, STATUS_UPDATE };

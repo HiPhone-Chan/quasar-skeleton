@@ -13,10 +13,6 @@ api.interceptors.request.use(
   },
   (error) => {
     // do something with request error
-    useEventStore().emit("error", {
-      type: "request",
-      error
-    });
     return Promise.reject(error);
   }
 );
@@ -39,10 +35,6 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    useEventStore().emit("error", {
-      type: "request",
-      error
-    });
     return Promise.reject(error);
   }
 );

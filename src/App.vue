@@ -28,20 +28,33 @@ export default defineComponent({
       } else {
         this.$loading.hide()
       }
-    },
-    error(info) { // global error handle
-      console.warn("resp err :" + JSON.stringify(error)); // for debug
-      const error = info.error;
-      switch (info.type) {
+    }
+  },
+  errorCaptured(err) {
+    // 自定义的err结构 {
+    //   type: "",
+    //   info: null
+    // }
+    console.warn("handleError :", err); // for debug
+    const type = err?.type
+    let msgType = 'error'
+    let message = 'Error not handled!'
+
+    if (type !== undefined) {
+      msgType = type;
+      switch (type) {
         case 'request':
           break;
         default:
-          this.$message({
-            type: 'error',
-            message: error.info
-          })
       }
+      message = err.info
     }
+    this.$message({
+      type: msgType,
+      message
+    })
+
+    return false
   }
 })
 </script>

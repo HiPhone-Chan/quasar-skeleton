@@ -20,30 +20,35 @@ export default function (temp, dialog, formName) {
     });
   };
 
-  const changePwd = () => {
-    instance.refs[formName].validate(async (valid) => {
-      if (valid) {
-        const val = temp.value;
-        const changePwdVM = {
-          currentPassword: val.currentPassword,
-          newPassword: val.newPassword
-        };
-
-        try {
-          await changePassword(val.login, changePwdVM);
-          app.$notify({
-            title: '修改成功',
-            type: 'success'
-          });
-        } catch (err) {
-          app.$notify({
-            title: '修改失败',
-            type: 'warning'
-          });
-        }
-        dialog.visible = false;
+  const changePwd = async () => {
+    try {
+      if (!await instance.refs[formName].validate()) {
+        return;
       }
-    });
+
+      const val = temp.value;
+      const changePwdVM = {
+        currentPassword: val.currentPassword,
+        newPassword: val.newPassword
+      };
+      await changePassword(val.login, changePwdVM);
+      app.$notify({
+        type: 'success',
+        title: '修改成功'
+      });
+      dialog.visible = false;
+    } catch (error) {
+      console.log('changePwd failed', error)
+      const errType = Object.prototype.toString.call(error)
+      switch (errType) {
+        case '[object Object]': break; // 校验失败
+        default:
+          app.$notify({
+            type: 'warning',
+            title: '修改失败'
+          });
+      }
+    }
   };
 
   return { handlePassword, changePwd, STATUS_PASSWORD };

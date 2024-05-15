@@ -21,14 +21,21 @@ export default function (temp, dialog, formName, getData) {
     });
   };
 
-  const createData = () => {
-    instance.refs[formName].validate(async (valid) => {
-      if (valid) {
-        await createUser(temp.value);
-        getData();
-        dialog.visible = false;
+  const createData = async () => {
+    try {
+      if (!await instance.refs[formName].validate()) {
+        return;
       }
-    });
+      await createUser(temp.value);
+      getData();
+      dialog.visible = false;
+    } catch (error) {
+      console.log('createData failed', error)
+      const errType = Object.prototype.toString.call(error)
+      switch (errType) {
+        case '[object Object]': break; // 校验失败
+      }
+    }
   };
 
   return { handleCreate, createData, STATUS_CREATE };
