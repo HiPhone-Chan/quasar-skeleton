@@ -13,7 +13,7 @@
         </nut-form-item>
 
         <nut-cell>
-          <nut-button block type="info" @click="handleLogin">
+          <nut-button block type="info" shape="square" @click="handleLogin">
             {{ $t('login.logIn') }}
           </nut-button>
         </nut-cell>
@@ -45,17 +45,16 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
-      login(this.formData).then(() => {
-        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-      })
-    },
     customBlurValidate(prop) {
       this.ruleForm.validate(prop).then(({ valid, errors }) => {
         if (!valid) {
           console.log('error submit!!', errors);
         }
       });
+    },
+    async handleLogin() {
+      await login(this.formData);
+      this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
     }
   }
 }

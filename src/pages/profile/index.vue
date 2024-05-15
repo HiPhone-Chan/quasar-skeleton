@@ -16,7 +16,7 @@
     </nut-cell-group>
     <nut-divider />
 
-    <nut-button round block type="danger" @click="logout">
+    <nut-button block type="danger" shape="square" @click="logout">
       退出
     </nut-button>
   </div>
