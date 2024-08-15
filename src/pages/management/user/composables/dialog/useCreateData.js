@@ -1,42 +1,33 @@
-import { getCurrentInstance, nextTick } from 'vue';
 import { createRoleOptions } from '@/utils/user';
 import { createUser } from '@/api/user';
 
-export default function (temp, dialog, formName, getData) {
-  const instance = getCurrentInstance();
-  const STATUS_CREATE = 'create';
-
+export const STATUS_CREATE = 'create';
+export default function (openDialog, closeDialog, dialogForm, getData, formName) {
   const handleCreate = () => {
-    dialog.status = STATUS_CREATE;
-    dialog.visible = true;
-    temp.value = {
+    dialogForm.value = {
       login: '',
       nickName: '',
       mobile: '',
       authorities: [createRoleOptions[0].value]
     };
-
-    nextTick(() => {
-      instance.refs[formName].clearValidate();
-    });
+    openDialog(STATUS_CREATE, formName);
   };
 
   const createData = async () => {
     try {
-      if (!await instance.refs[formName].validate()) {
-        return;
-      }
-      await createUser(temp.value);
+      await closeDialog(async () => {
+        await createUser(dialogForm.value);
+      }, formName);
       getData();
-      dialog.visible = false;
     } catch (error) {
-      console.log('createData failed', error)
-      const errType = Object.prototype.toString.call(error)
+      console.log('createData failed', error);
+      const errType = Object.prototype.toString.call(error);
       switch (errType) {
-        case '[object Object]': break; // 校验失败
+        case '[object Object]':
+          break; // 校验失败
       }
     }
   };
 
-  return { handleCreate, createData, STATUS_CREATE };
+  return { handleCreate, createData };
 }

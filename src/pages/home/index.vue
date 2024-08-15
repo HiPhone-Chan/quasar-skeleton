@@ -1,5 +1,5 @@
 <template>
-  <div>home</div>
+  <div class="m-2">home</div>
 </template>
 
 <script>
@@ -11,5 +11,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

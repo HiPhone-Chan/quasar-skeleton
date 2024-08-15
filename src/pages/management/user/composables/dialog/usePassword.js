@@ -1,47 +1,42 @@
-import { getCurrentInstance, nextTick } from 'vue';
+import { getCurrentInstance } from 'vue';
 import { changePassword } from '@/api/user';
 
-export default function (temp, dialog, formName) {
+export const STATUS_PASSWORD = 'password';
+export default function (openDialog, closeDialog, dialogForm, formName) {
   const instance = getCurrentInstance();
   const app = instance.appContext.config.globalProperties;
-  const STATUS_PASSWORD = 'password';
 
   const handlePassword = (row) => {
-    dialog.status = STATUS_PASSWORD;
-    dialog.visible = true;
-    temp.value = {
+    dialogForm.value = {
       login: row.login,
       currentPassword: '',
       newPassword: ''
     };
-
-    nextTick(() => {
-      instance.refs[formName].clearValidate();
-    });
+    openDialog(STATUS_PASSWORD, formName);
   };
 
   const changePwd = async () => {
     try {
-      if (!await instance.refs[formName].validate()) {
-        return;
-      }
-
-      const val = temp.value;
+      const val = dialogForm.value;
       const changePwdVM = {
         currentPassword: val.currentPassword,
         newPassword: val.newPassword
       };
-      await changePassword(val.login, changePwdVM);
+
+      await closeDialog(async () => {
+        await changePassword(val.login, changePwdVM);
+      }, formName);
+
       app.$notify({
         type: 'success',
         title: '修改成功'
       });
-      dialog.visible = false;
     } catch (error) {
-      console.log('changePwd failed', error)
-      const errType = Object.prototype.toString.call(error)
+      console.log('changePwd failed', error);
+      const errType = Object.prototype.toString.call(error);
       switch (errType) {
-        case '[object Object]': break; // 校验失败
+        case '[object Object]':
+          break; // 校验失败
         default:
           app.$notify({
             type: 'warning',
@@ -51,5 +46,5 @@ export default function (temp, dialog, formName) {
     }
   };
 
-  return { handlePassword, changePwd, STATUS_PASSWORD };
+  return { handlePassword, changePwd };
 }

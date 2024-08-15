@@ -64,36 +64,37 @@
       @pagination="getData" />
 
     <el-dialog v-model="dialog.visible">
-      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px"
+      <el-form ref="dataForm" :rules="rules" :model="dialogForm" label-position="left" label-width="70px"
         style="width: 400px; margin-left:50px;">
         <!-- 编辑 -->
         <template v-if="dialog.status == STATUS_UPDATE || dialog.status == STATUS_CREATE">
           <el-form-item v-if="dialog.status !== STATUS_CREATE" :label="$t('table.id')">
-            <el-input v-model="temp.id" type="text" placeholder="id" disabled />
+            <el-input v-model="dialogForm.id" type="text" placeholder="id" disabled />
           </el-form-item>
           <el-form-item :label="$t('user.username')" prop="login" label-width="100px">
-            <el-input v-model="temp.login" type="text" placeholder="登录名" :disabled="dialog.status !== STATUS_CREATE" />
+            <el-input v-model="dialogForm.login" type="text" placeholder="登录名"
+              :disabled="dialog.status !== STATUS_CREATE" />
           </el-form-item>
           <el-form-item :label="$t('user.role')" prop="authorities" label-width="100px">
-            <el-select v-model="temp.authorities" :placeholder="$t('user.role')" clearable multiple>
+            <el-select v-model="dialogForm.authorities" :placeholder="$t('user.role')" clearable multiple>
               <el-option v-for="item in updateRoleOptions" :key="item.value" :label="item.label" :value="item.value"
                 :disabled="item.disabled" />
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('user.nickname')" label-width="100px">
-            <el-input v-model="temp.nickName" type="text" placeholder="昵称" />
+            <el-input v-model="dialogForm.nickName" type="text" placeholder="昵称" />
           </el-form-item>
           <el-form-item :label="$t('user.mobile')" prop="mobile" label-width="100px">
-            <el-input v-model="temp.mobile" type="text" placeholder="电话号码" />
+            <el-input v-model="dialogForm.mobile" type="text" placeholder="电话号码" />
           </el-form-item>
         </template>
 
         <template v-if="dialog.status == STATUS_PASSWORD">
           <el-form-item :label="$t('user.adminPassword')" prop="currentPassword" label-width="130px">
-            <el-input v-model="temp.currentPassword" type="password" placeholder="当前管理员密码" />
+            <el-input v-model="dialogForm.currentPassword" type="password" placeholder="当前管理员密码" />
           </el-form-item>
           <el-form-item :label="$t('user.password')" prop="newPassword" label-width="130px">
-            <el-input v-model="temp.newPassword" type="password" placeholder="需要改的密码" />
+            <el-input v-model="dialogForm.newPassword" type="password" placeholder="需要改的密码" />
           </el-form-item>
         </template>
       </el-form>
@@ -120,9 +121,9 @@ import Pagination from '@/components/Pagination/index.vue'
 import { formatAuthorities, roleOptions, updateRoleOptions } from '@/utils/user'
 import useUserData from './composables/useUserData'
 import useDialog from './composables/dialog'
-import useCreateData from './composables/dialog/useCreateData'
-import useUpdateData from './composables/dialog/useUpdateData'
-import usePassword from './composables/dialog/usePassword'
+import useCreateData, { STATUS_CREATE } from './composables/dialog/useCreateData'
+import useUpdateData, { STATUS_UPDATE } from './composables/dialog/useUpdateData'
+import usePassword, { STATUS_PASSWORD } from './composables/dialog/usePassword'
 import { deleteUser } from '@/api/user'
 
 const instance = getCurrentInstance();
@@ -131,10 +132,10 @@ const app = instance.appContext.config.globalProperties;
 const { list, total, listLoading, listQuery,
   getData, handleFilter } = useUserData()
 
-const { temp, dialog, rules } = useDialog()
-const { handleCreate, createData, STATUS_CREATE } = useCreateData(temp, dialog, 'dataForm', getData)
-const { handleUpdate, updateData, STATUS_UPDATE } = useUpdateData(temp, dialog, 'dataForm', getData)
-const { handlePassword, changePwd, STATUS_PASSWORD } = usePassword(temp, dialog, 'dataForm')
+const { dialog, dialogForm, rules, openDialog, closeDialog } = useDialog()
+const { handleCreate, createData } = useCreateData(openDialog, closeDialog, dialogForm, getData, 'dataForm')
+const { handleUpdate, updateData } = useUpdateData(openDialog, closeDialog, dialogForm, getData, 'dataForm')
+const { handlePassword, changePwd } = usePassword(openDialog, closeDialog, dialogForm, 'dataForm')
 
 const handleDelete = async (row, getData) => {
   try {

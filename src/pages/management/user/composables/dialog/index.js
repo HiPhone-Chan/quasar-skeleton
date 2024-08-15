@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue';
+import { ref, reactive, getCurrentInstance, nextTick } from 'vue';
 import { LOGIN_VALID_CHARACTER } from '@/utils/user';
 import { checkUserLogin } from '@/api/user';
 
@@ -30,22 +30,41 @@ export default function () {
       }
     ],
     mobile: [{ pattern: /^[0-9]{7,16}$/, message: '请输入正确的电话号码' }],
-    currentPassword: [
-      { required: true, message: 'Current password is required' }
-    ],
+    currentPassword: [{ required: true, message: 'Current password is required' }],
     newPassword: [{ required: true, message: 'New password is required' }]
   });
 
-  let temp = ref({});
+  const dialogForm = ref({});
 
   const dialog = reactive({
     visible: false,
     status: ''
   });
 
+  const instance = getCurrentInstance();
+
+  const openDialog = (status, refName) => {
+    dialog.status = status;
+    dialog.visible = true;
+
+    nextTick(() => {
+      instance.refs[refName].clearValidate();
+    });
+  };
+
+  const closeDialog = async (invokeFunc, refName) => {
+    if (!(await instance.refs[refName].validate())) {
+      return;
+    }
+    await invokeFunc();
+    dialog.visible = false;
+  };
+
   return {
-    temp,
     dialog,
+    dialogForm,
+    openDialog,
+    closeDialog,
     rules
   };
 }

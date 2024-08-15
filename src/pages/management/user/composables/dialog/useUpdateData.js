@@ -1,36 +1,27 @@
-import { getCurrentInstance, nextTick } from 'vue';
 import { updateUser } from '@/api/user';
 
-export default function (temp, dialog, formName, getData) {
-  const instance = getCurrentInstance();
-  const STATUS_UPDATE = 'update';
-
+export const STATUS_UPDATE = 'update';
+export default function (openDialog, closeDialog, dialogForm, getData, formName) {
   const handleUpdate = (row) => {
-    dialog.status = STATUS_UPDATE;
-    dialog.visible = true;
-    temp.value = Object.assign({}, row);
-
-    nextTick(() => {
-      instance.refs[formName].clearValidate();
-    });
+    dialogForm.value = Object.assign({}, row);
+    openDialog(STATUS_UPDATE, formName);
   };
 
   const updateData = async () => {
     try {
-      if(!await instance.refs[formName].validate()) {
-        return;
-      }
-      await updateUser(temp.value);
+      await closeDialog(async () => {
+        await updateUser(dialogForm.value);
+      }, formName);
       getData();
-      dialog.visible = false;
     } catch (error) {
-      console.log('updateData failed', error)
-      const errType = Object.prototype.toString.call(error)
+      console.log('updateData failed', error);
+      const errType = Object.prototype.toString.call(error);
       switch (errType) {
-        case '[object Object]': break; // 校验失败
+        case '[object Object]':
+          break; // 校验失败
       }
     }
   };
 
-  return { handleUpdate, updateData, STATUS_UPDATE };
+  return { handleUpdate, updateData };
 }
