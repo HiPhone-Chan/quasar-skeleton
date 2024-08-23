@@ -1,8 +1,38 @@
 import { createRoleOptions } from '@/utils/user';
-import { createUser } from '@/api/user';
+import { checkUserLogin, createUser } from '@/api/user';
+import { LOGIN_VALID_CHARACTER } from '@/utils/user';
 
 export const STATUS_CREATE = 'create';
-export default function (openDialog, closeDialog, dialogForm, getData, formName) {
+export default function (openDialog, confirmDialog, dialog, dialogForm, getData, formName) {
+  const validateLogin = async (rule, value, callback) => {
+    if (dialog.status === STATUS_CREATE) {
+      if (value) {
+        if (LOGIN_VALID_CHARACTER.pattern.test(value)) {
+          const resp = await checkUserLogin(value);
+          const data = resp.data;
+          if (data) {
+            callback(new Error('Login exists'));
+          }
+        } else {
+          callback(new Error(LOGIN_VALID_CHARACTER.message));
+        }
+      } else {
+        callback(new Error('Please enter login'));
+      }
+    }
+  };
+
+  const createRules = {
+    login: [{ required: true, trigger: 'blur', validator: validateLogin }],
+    authorities: [
+      {
+        required: true,
+        message: '请选择权限'
+      }
+    ],
+    mobile: [{ pattern: /^[0-9]{7,16}$/, message: '请输入正确的电话号码' }]
+  };
+
   const handleCreate = () => {
     dialogForm.value = {
       login: '',
@@ -10,24 +40,15 @@ export default function (openDialog, closeDialog, dialogForm, getData, formName)
       mobile: '',
       authorities: [createRoleOptions[0].value]
     };
-    openDialog(STATUS_CREATE, formName);
+    openDialog(formName, STATUS_CREATE);
   };
 
   const createData = async () => {
-    try {
-      await closeDialog(async () => {
-        await createUser(dialogForm.value);
-      }, formName);
-      getData();
-    } catch (error) {
-      console.log('createData failed', error);
-      const errType = Object.prototype.toString.call(error);
-      switch (errType) {
-        case '[object Object]':
-          break; // 校验失败
-      }
-    }
+    await confirmDialog(formName, async () => {
+      await createUser(dialogForm.value);
+    });
+    getData();
   };
 
-  return { handleCreate, createData };
+  return { handleCreate, createData, createRules };
 }

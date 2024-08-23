@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue';
+import { getCurrentInstance, onErrorCaptured } from 'vue';
 import Pagination from '@/components/Pagination/index.vue'
 import { formatAuthorities, roleOptions, updateRoleOptions } from '@/utils/user'
 import useUserData from './composables/useUserData'
@@ -132,10 +132,12 @@ const app = instance.appContext.config.globalProperties;
 const { list, total, listLoading, listQuery,
   getData, handleFilter } = useUserData()
 
-const { dialog, dialogForm, rules, openDialog, closeDialog } = useDialog()
-const { handleCreate, createData } = useCreateData(openDialog, closeDialog, dialogForm, getData, 'dataForm')
-const { handleUpdate, updateData } = useUpdateData(openDialog, closeDialog, dialogForm, getData, 'dataForm')
-const { handlePassword, changePwd } = usePassword(openDialog, closeDialog, dialogForm, 'dataForm')
+const { dialog, dialogForm, openDialog, confirmDialog } = useDialog()
+const { handleCreate, createData, createRules } = useCreateData(openDialog, confirmDialog, dialog, dialogForm, getData, 'dataForm')
+const { handleUpdate, updateData } = useUpdateData(openDialog, confirmDialog, dialogForm, getData, 'dataForm')
+const { handlePassword, changePwd, passwordRules } = usePassword(openDialog, confirmDialog, dialogForm, 'dataForm')
+
+const rules = { ...createRules, ...passwordRules }
 
 const handleDelete = async (row, getData) => {
   try {
@@ -152,6 +154,24 @@ const handleDelete = async (row, getData) => {
     console.log(err)
   }
 }
+
+onErrorCaptured((error) => {
+  const errType =  typeof error
+  if ('object' === errType) {
+    const className = error.constructor.name
+    switch(className) {
+      case 'AxisError':
+        app.$message({
+          type: 'error',
+          message: '请求失败'
+        })
+        break;
+      default:
+        console.error(error)
+    }
+  }
+  return false
+})
 
 </script>
 

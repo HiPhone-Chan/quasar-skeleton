@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
-    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container"
+    <hamburger :is-active="sidebar.opened" class="hamburger-container"
       @toggleClick="toggleSideBar" />
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
@@ -22,7 +22,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+          <svg-icon icon-class='el-icon-caret-bottom' />
         </div>
         <template #dropdown>
           <el-dropdown-menu>

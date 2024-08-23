@@ -1,11 +1,4 @@
-import {
-  getCurrentInstance,
-  ref,
-  reactive,
-  onBeforeMount,
-  onMounted,
-  watch
-} from 'vue';
+import { getCurrentInstance, ref, reactive, onBeforeMount, onMounted, watch } from 'vue';
 import { getUsers } from '@/api/user';
 
 export default function () {

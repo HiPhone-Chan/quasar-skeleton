@@ -5,29 +5,30 @@
   </div>
 </template>
 
-<script>
-import screenfull from 'screenfull'
+<script setup>
+import { getCurrentInstance } from 'vue';
+import { useFullscreen } from '@vueuse/core'
 
-export default {
-  name: 'ScreenfullIndex',
-  data() {
-    return {
-      isFullscreen: false
-    }
-  },
-  methods: {
-    async click() {
-      if (!screenfull.isEnabled) {
-        this.$message({
-          message: 'you browser can not work',
-          type: 'warning'
-        })
-        return false
-      }
-      await screenfull.toggle()
-      this.isFullscreen = screenfull.isFullscreen
-    }
+const instance = getCurrentInstance();
+const app = instance.appContext.config.globalProperties;
+const { isFullscreen, isSupported, toggle } = useFullscreen()
+
+const click = () => {
+  if (!isSupported) {
+    app.$message({
+      message: 'you browser can not work',
+      type: 'warning'
+    })
+    return false
   }
+  toggle()
+}
+</script>
+
+
+<script>
+export default {
+  name: 'ScreenfullIndex'
 }
 </script>
 
@@ -36,7 +37,6 @@ export default {
   display: inline-block;
   cursor: pointer;
   fill: #5a5e66;
-  ;
   width: 20px;
   height: 20px;
   vertical-align: 10px;
