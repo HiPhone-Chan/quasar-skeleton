@@ -1,8 +1,8 @@
 import { getFileName } from '@/utils/url'
-const localeModules = import.meta.globEager('./**.json')
+const localeModules = import.meta.glob('./**.json', { eager: true })
 const data = {}
 
-Object.keys(localeModules).forEach(key => {
+Object.keys(localeModules).forEach((key) => {
   data[getFileName(key)] = localeModules[key].default
 })
 // modules entry

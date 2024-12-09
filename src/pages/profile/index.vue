@@ -65,7 +65,7 @@ export default {
         avatar: this.avatar
       }
     },
-    async updateAccount(data) {
+    async updateAccount() {
       await updateAccount({
         login: 'unused',
         nickName: this.user.nickname,

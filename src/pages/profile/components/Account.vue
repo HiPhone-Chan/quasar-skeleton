@@ -34,7 +34,7 @@ export default {
   },
   watch: {
     user: {
-      handler(val, oldVal) {
+      handler(val) {
         this.$emit("update:modelValue", val)
       },
       deep: true
