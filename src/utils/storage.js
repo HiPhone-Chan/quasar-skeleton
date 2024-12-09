@@ -11,9 +11,8 @@ const defaultStorage = {
   },
   removeItem(key) {
     delete this.cache[key]
-  }
+  },
 }
-
 
 class MyCookies {
   constructor(cookies) {
@@ -45,13 +44,14 @@ class MyWebStorage {
   removeItem(key) {
     this.webStorage.remove(key)
   }
-
 }
 
 export function getStorage(name, ssrContext) {
   switch (name) {
-    case 'localStorage': return new MyWebStorage(LocalStorage);
-    case 'sessionStorage': return new MyWebStorage(SessionStorage)
+    case 'localStorage':
+      return new MyWebStorage(LocalStorage)
+    case 'sessionStorage':
+      return new MyWebStorage(SessionStorage)
     case 'cookies':
       if (process.env.SERVER) {
         if (ssrContext) {
@@ -60,7 +60,8 @@ export function getStorage(name, ssrContext) {
       } else {
         return new MyCookies(Cookies)
       }
+      break
     default:
   }
-  return defaultStorage;
+  return defaultStorage
 }

@@ -1,5 +1,5 @@
 import Layout from '@/layouts/MainLayout.vue'
-import { h } from 'vue';
+import { h } from 'vue'
 import { Home, My } from '@nutui/icons-vue'
 
 export default [
@@ -7,7 +7,7 @@ export default [
     path: '/login',
     component: () => import('pages/login/index.vue'),
     meta: { roles: false },
-    hidden: true
+    hidden: true,
   },
   {
     path: '/',
@@ -18,9 +18,9 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: h(Home), roles: [] }
-      }
-    ]
+        meta: { title: 'home', icon: h(Home), roles: [] },
+      },
+    ],
   },
   {
     path: '/profile',
@@ -31,15 +31,15 @@ export default [
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'profile',
-        meta: { title: 'profile', icon: h(My), roles: [], noCache: true }
-      }
-    ]
+        meta: { title: 'profile', icon: h(My), roles: [], noCache: true },
+      },
+    ],
   },
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     hidden: true,
-    component: () => import('pages/error-page/404.vue')
-  }
+    component: () => import('pages/error-page/404.vue'),
+  },
 ]

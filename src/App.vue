@@ -7,20 +7,18 @@ import { defineComponent } from 'vue'
 import messages from '@/i18n/index'
 import 'default-passive-events' // 消除浏览器passive-events警告
 import { mapState } from 'pinia'
-import { useEventStore } from '@/stores/event-store'
 import { useAppStore } from '@/stores/app-store'
 
 export default defineComponent({
   name: 'App',
   computed: {
-    ...mapState(useEventStore, ['loading', 'error']),
-    ...mapState(useAppStore, ['language']),
+    ...mapState(useAppStore, ['language', 'isLoading']),
     locale() {
       return messages[this.language]
     }
   },
   watch: {
-    loading(loading) { // global loading
+    isLoading(loading) { // global loading
       if (loading) {
         this.$loading.show()
       } else {

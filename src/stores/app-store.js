@@ -1,32 +1,36 @@
-import { defineStore, acceptHMRUpdate } from 'pinia';
-import { getLanguage } from '@/i18n/index';
-import { Locale } from '@nutui/nutui';
+import { defineStore, acceptHMRUpdate } from 'pinia'
+import { getLanguage } from '@/i18n/index'
+import { Locale } from '@nutui/nutui'
 
-const storageType = 'cookies';
+const storageType = 'cookies'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
     language: getLanguage(),
-    size: 'medium'
+    size: 'medium',
+    isLoading: false,
   }),
   actions: {
     setLanguage(language) {
-      this.language = language;
-      Locale.use(language);
+      this.language = language
+      Locale.use(language)
     },
     setSize(size) {
-      this.size = size;
-    }
+      this.size = size
+    },
+    loading(isLoading = true) {
+      this.isLoading = isLoading
+    },
   },
   persist: {
     language: {
-      storage: storageType
+      storage: storageType,
     },
     size: {
-      storage: storageType
-    }
-  }
-});
+      storage: storageType,
+    },
+  },
+})
 
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))

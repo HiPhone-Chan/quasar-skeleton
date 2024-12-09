@@ -1,11 +1,11 @@
-const data = require('./data/account.data.json')
+import data from './data/account.data.json'
 
-module.exports = [
+export default [
   {
     url: `${process.env.VUE_APP_API_BASE}/api/authenticate`,
     method: 'POST',
     response: () => {
       return data.token
-    }
-  }
+    },
+  },
 ]
