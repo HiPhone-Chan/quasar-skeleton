@@ -1,15 +1,15 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 import defaultSettings from '@/settings'
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
-    ...defaultSettings
+    ...defaultSettings,
   }),
   actions: {
     changeSetting({ key, value }) {
-      if (this.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(this, key)) {
         this[key] = value
       }
-    }
-  }
+    },
+  },
 })

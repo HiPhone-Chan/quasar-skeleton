@@ -5,7 +5,7 @@ export default [
     path: '/login',
     component: () => import('pages/login/index.vue'),
     meta: { roles: false },
-    hidden: true
+    hidden: true,
   },
   {
     path: '/',
@@ -16,9 +16,9 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'home-o', roles: [] }
-      }
-    ]
+        meta: { title: 'home', icon: 'home-o', roles: [] },
+      },
+    ],
   },
   {
     path: '/profile',
@@ -29,15 +29,15 @@ export default [
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'profile',
-        meta: { title: 'profile', icon: 'user-o', roles: [], noCache: true }
-      }
-    ]
+        meta: { title: 'profile', icon: 'user-o', roles: [], noCache: true },
+      },
+    ],
   },
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     hidden: true,
-    component: () => import('pages/error-page/404.vue')
-  }
+    component: () => import('pages/error-page/404.vue'),
+  },
 ]
