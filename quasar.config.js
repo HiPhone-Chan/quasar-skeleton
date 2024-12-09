@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { viteMockServe } from 'vite-plugin-mock'
 import config from './config/index'
 
-import { VantResolver } from 'unplugin-vue-components/resolvers'
+import { VantResolver } from '@vant/auto-import-resolver'
 
 export default defineConfig((ctx) => {
   return {
@@ -109,6 +109,12 @@ export default defineConfig((ctx) => {
           { server: false },
         ],
 
+        [
+          'unplugin-auto-import/vite',
+          {
+            resolvers: [VantResolver()],
+          },
+        ],
         [
           'unplugin-vue-components/vite',
           {
