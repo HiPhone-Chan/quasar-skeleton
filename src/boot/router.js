@@ -1,11 +1,11 @@
-import { boot } from 'quasar/wrappers'
+import { defineBoot } from '#q-app/wrappers'
 import { getPageTitle, setTitle } from '@/utils/page-title'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
 import { useTagsViewStore } from '@/stores/tags-view-store'
 
-export default boot(async ({ router, store }) => {
+export default defineBoot(async ({ router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
   const tagsViewStore = process.env.SERVER ? useTagsViewStore(store) : useTagsViewStore()
 
@@ -18,7 +18,6 @@ export default boot(async ({ router, store }) => {
     setTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in
     const hasToken = userStore.token
-    console.log(to)
 
     if (hasToken) {
       if (to.path === '/login') {

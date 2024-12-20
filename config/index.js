@@ -1,11 +1,14 @@
-const dev = {
-  publicPath: '/',
-  mock: true,
+const projectConfig = {
+  development: {
+    publicPath: '/',
+    mock: true,
+  },
+  production: {
+    publicPath: '/app/admin',
+    mock: false,
+  },
 }
 
-const prod = {
-  publicPath: '/app/admin',
-  mock: false,
-}
+const appEnv = process.env.APP_ENV ?? 'development'
 
-export default process.env.APP_ENV == 'development' ? dev : prod
+export default projectConfig[appEnv]

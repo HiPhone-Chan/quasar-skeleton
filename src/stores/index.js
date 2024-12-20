@@ -1,4 +1,4 @@
-import { store } from 'quasar/wrappers'
+import { defineStore } from '#q-app/wrappers'
 import { createPinia } from 'pinia'
 import { persistPlugin } from './plugins/plugin-persist'
 
@@ -11,8 +11,9 @@ import { persistPlugin } from './plugins/plugin-persist'
  * with the Store instance.
  */
 
-export default store(({ ssrContext }) => {
+export default defineStore(({ ssrContext }) => {
   const pinia = createPinia()
+
   // You can add Pinia plugins here
   pinia.use(persistPlugin(ssrContext))
 
