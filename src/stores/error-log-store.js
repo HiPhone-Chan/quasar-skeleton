@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia'
 
 export const useErrorLogStore = defineStore('errorLog', {
   state: () => ({
-    logs: []
+    logs: [],
   }),
   actions: {
     addErrorLog(log) {
@@ -10,6 +10,10 @@ export const useErrorLogStore = defineStore('errorLog', {
     },
     clearErrorLog() {
       this.logs.splice(0)
-    }
-  }
-});
+    },
+  },
+})
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useErrorLogStore, import.meta.hot))
+}
