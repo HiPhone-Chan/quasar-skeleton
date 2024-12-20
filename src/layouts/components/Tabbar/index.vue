@@ -1,5 +1,5 @@
 <template>
-  <q-tabs v-model="current" class="text-teal">
+  <q-tabs v-model="current" outside-arrows mobile-arrows align="justify" class="text-teal">
     <tabbar-item v-for="route in permission_routes" :key="route.path" :item="route"
       :base-path="route.path"></tabbar-item>
   </q-tabs>
