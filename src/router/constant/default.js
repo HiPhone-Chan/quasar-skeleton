@@ -16,7 +16,6 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        hidden: true,
         meta: { title: 'home', icon: 'home', roles: [], affix: false },
       },
     ],
@@ -25,13 +24,12 @@ export default [
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
-    hidden: true,
     children: [
       {
         path: 'index',
         component: () => import('pages/profile/index.vue'),
         name: 'profile',
-        meta: { title: 'profile', icon: 'user', roles: [], noCache: true },
+        meta: { title: 'profile', icon: 'perm_identity', roles: [], noCache: true },
       },
     ],
   },
