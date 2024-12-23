@@ -1,4 +1,4 @@
-import { route } from 'quasar/wrappers'
+import { defineRouter } from '#q-app/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 
@@ -40,7 +40,7 @@ export function resetRouter(Router) {
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
-export default route(function (/* { store, ssrContext } */) {
+export default defineRouter(function (/* { store, ssrContext } */) {
   const Router = createMyRouter()
   return Router
 })

@@ -1,6 +1,7 @@
 <template>
   <van-tabbar route placeholder>
-    <tabbar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path"></tabbar-item>
+    <tabbar-item v-for="route in permission_routes" :key="route.path" :item="route"
+      :base-path="route.path"></tabbar-item>
   </van-tabbar>
 </template>
 

@@ -1,8 +1,8 @@
-import { defineStore, acceptHMRUpdate } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia'
 import { getInfo } from '@/api/login'
 import defaultAvatar from '@/assets/avatar.gif'
 
-const storageType = 'cookies';
+const storageType = 'cookies'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -12,12 +12,10 @@ export const useUserStore = defineStore('user', {
     mobile: '',
     avatar: '',
     introduction: '',
-    roles: []
+    roles: [],
   }),
-  getters: {
-  },
+  getters: {},
   actions: {
-
     // get user info
     async getInfo() {
       const response = await getInfo(this.token)
@@ -50,17 +48,15 @@ export const useUserStore = defineStore('user', {
     async resetToken() {
       this.token = undefined
       this.roles = []
-    }
-
+    },
   },
   persist: {
     token: {
-      storage: storageType
-    }
-  }
-});
+      storage: storageType,
+    },
+  },
+})
 
-// https://pinia.vuejs.org/cookbook/hot-module-replacement.html
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
 }

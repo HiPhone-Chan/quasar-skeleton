@@ -1,4 +1,8 @@
 // app global css in SCSS form
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -23,7 +27,3 @@ html {
 #q-app {
   height: 100%;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
