@@ -1,5 +1,5 @@
 <template>
-  <van-col class="login-container column">
+  <van-col class="page-container login-container column">
     <van-row class="col-4"></van-row>
     <van-row class="col" justify="center">
       <van-form class="login-form">
@@ -45,9 +45,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-container {
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   background-color: #fbf9f9;
 

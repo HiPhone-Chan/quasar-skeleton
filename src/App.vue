@@ -1,6 +1,10 @@
 <template>
   <van-config-provider style="height: 100%">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition :name="navigateTransitionName">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </van-config-provider>
 </template>
 
@@ -14,7 +18,7 @@ import { useAppStore } from '@/stores/app-store'
 export default defineComponent({
   name: 'App',
   computed: {
-    ...mapState(useAppStore, ['language', 'isLoading']),
+    ...mapState(useAppStore, ['language', 'isLoading', 'navigateTransitionName']),
     locale() {
       return messages[this.language]
     }
@@ -56,3 +60,28 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+/* TODO 定义页面切换的动画 */
+.slide-enter-from {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+.slide-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 1s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.slide-leave-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-leave-active {
+  transform: translateX(-100%);
+  opacity: 1;
+  transition: transform 1s ease-in-out, opacity 0.3s ease-in-out;
+}
+</style>

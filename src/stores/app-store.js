@@ -8,6 +8,7 @@ export const useAppStore = defineStore('app', {
     language: getLanguage(),
     size: 'medium',
     isLoading: false,
+    navigateTransitionName: '', // 页面切换过度动画名称
   }),
   actions: {
     setLanguage(language) {
