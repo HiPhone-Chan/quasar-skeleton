@@ -33,6 +33,13 @@ export default [
       },
     ],
   },
+  {
+    path: '/profile/setting',
+    hidden: true,
+    component: () => import('pages/profile/setting.vue'),
+    name: 'setting',
+    meta: { title: 'setting', roles: [], noCache: true },
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

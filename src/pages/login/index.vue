@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container column">
+  <div class="page-container login-container column">
     <div class="col"></div>
     <div class="col">
       <q-form class="login-form">
@@ -52,9 +52,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-container {
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   background-color: #fbf9f9;
 
