@@ -7,6 +7,12 @@ import { viteMockServe } from 'vite-plugin-mock'
 import config, { envFilter, envFiles } from './config/index'
 
 export default defineConfig((ctx) => {
+  const alias = {}
+  if (!ctx.mode.capacitor) {
+    alias['@capacitor/core'] = fileURLToPath(new URL('./mock/plugin/core.js', import.meta.url))
+    alias['@capacitor/app'] = fileURLToPath(new URL('./mock/plugin/app.js', import.meta.url))
+  }
+
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -48,6 +54,7 @@ export default defineConfig((ctx) => {
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        ...alias,
       },
       envFolder: './config',
       envFiles,

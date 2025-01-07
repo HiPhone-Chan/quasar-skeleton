@@ -4,6 +4,12 @@
 
     <q-separator class="q-mt-sm" />
 
+    <q-list>
+      <q-item v-ripple>
+        <q-item-section>版本: {{ version }}</q-item-section>
+      </q-item>
+    </q-list>
+
     <q-btn-group spread>
       <q-btn color="red" @click="logout">退出</q-btn>
     </q-btn-group>
@@ -12,11 +18,21 @@
 
 <script>
 import NavigateBack from '@/components/NavigateBack/index.vue';
+import { App } from '@/api/app-plugin'
 import { logout } from '@/utils/auth';
 
 export default {
   name: 'ProfileIndex',
   components: { NavigateBack },
+  data() {
+    return {
+      version: ""
+    }
+  },
+  async mounted() {
+    const appInfo = await App.getInfo()
+    this.version = appInfo.version
+  },
   methods: {
     async logout() {
       await logout();
