@@ -4,7 +4,7 @@
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
 import { viteMockServe } from 'vite-plugin-mock'
-import config from './config/index'
+import config, { envFilter, envFiles } from './config/index'
 
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
@@ -55,6 +55,8 @@ export default defineConfig((ctx) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
       envFolder: './config',
+      envFiles,
+      envFilter,
       publicPath: config.publicPath,
       // analyze: true,
       // env: {},
