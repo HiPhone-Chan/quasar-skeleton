@@ -4,7 +4,7 @@
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
 import { viteMockServe } from 'vite-plugin-mock'
-import config from './config/index'
+import config, { envFilter, envFiles } from './config/index'
 
 import { VantResolver } from '@vant/auto-import-resolver'
 
@@ -52,6 +52,8 @@ export default defineConfig((ctx) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
       envFolder: './config',
+      envFiles,
+      envFilter,
       publicPath: config.publicPath,
       // analyze: true,
       // env: {},
