@@ -26,7 +26,6 @@ for %%I in ("%~dp0\../dist/capacitor/android/apk/release") do set BUILD_DIST_PAT
 
 REM Build the Quasar project for production (optional: use a specific environment)
 echo Building Quasar project...
-@REM call npm run build:android
 call npx cross-env APP_ENV=production quasar build -m capacitor -T android
 
 call %ZIPALIGN% -v 4 %BUILD_DIST_PATH%/app-release-unsigned.apk %BUILD_DIST_PATH%/app-release.apk

@@ -15,7 +15,6 @@
     "dev:ios": "cross-env APP_ENV=development quasar dev -m capacitor -T ios",
     "build": "cross-env APP_ENV=production quasar build",
     "build:debug": "cross-env APP_ENV=production quasar build --debug",
-    "build:android": "cross-env APP_ENV=production quasar build -m capacitor -T android",
     "build:ios": "cross-env APP_ENV=production quasar build -m capacitor -T ios",
     "postinstall": "quasar prepare"
   },
