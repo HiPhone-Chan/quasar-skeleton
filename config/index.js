@@ -1,11 +1,18 @@
+import dotenv from 'dotenv'
+import path from 'path'
+
+const appEnv = process.env.APP_ENV ?? 'development'
+
 const defaultConfig = {
   publicPath: '/',
   mock: true,
 }
 
+const envConfig = dotenv.config({ path: path.join(__dirname, getEnvFile(appEnv)) }).parsed
+
 const projectConfig = {}
 for (const key in defaultConfig) {
-  projectConfig[key] = transfer(process.env[key]) ?? defaultConfig[key]
+  projectConfig[key] = transfer(envConfig[key]) ?? defaultConfig[key]
 }
 
 export default projectConfig
@@ -21,12 +28,16 @@ function envFilter(originalEnv) {
   return newEnv
 }
 
-const envFiles = []
-const appEnv = process.env.APP_ENV ?? 'development'
-if (appEnv !== 'development' && appEnv !== 'production') {
-  envFiles.push(`./config/.env.${appEnv}`)
+export { envFilter }
+
+function getEnvFile(appEnv) {
+  if (appEnv === 'development') {
+    return `.env.dev`
+  } else if (appEnv === 'production') {
+    return `.env.prod`
+  }
+  return `.env.${appEnv}`
 }
-export { envFilter, envFiles }
 
 function isNumber(value) {
   return !isNaN(parseFloat(value)) && isFinite(value)
