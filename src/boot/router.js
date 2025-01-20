@@ -1,8 +1,12 @@
 import { defineBoot } from '#q-app/wrappers'
-import { getPageTitle, setTitle } from '@/utils/page-title'
+import defaultSettings from '@/settings'
+import { useTitle } from '@vueuse/core'
+import { generateTitle } from '@/utils/i18n'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
+
+const title = defaultSettings.title || 'Admin'
 
 export default defineBoot(async ({ router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
@@ -73,3 +77,16 @@ export default defineBoot(async ({ router, store }) => {
     appStore.loading(false)
   })
 })
+
+function getPageTitle(pageTitle) {
+  if (pageTitle) {
+    return `${generateTitle(pageTitle)} - ${title}`
+  }
+  return `${title}`
+}
+
+function setTitle(title) {
+  if (process.env.CLIENT) {
+    useTitle(title)
+  }
+}

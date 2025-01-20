@@ -23,7 +23,7 @@
     "path-browserify": "^1.0.1",
     "pinia": "^2.1.6",
     "quasar": "^2.16.2",
-    "vant": "^4.9.15",
+    "vant": "^4.9.16",
     "vue": "^3.5.13",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.5"
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@intlify/unplugin-vue-i18n": "^2.0.0",
-    "@quasar/app-vite": "^2.0.6",
+    "@quasar/app-vite": "^2.0.8",
     "@vant/auto-import-resolver": "^1.2.1",
     "@vue/eslint-config-prettier": "^10.1.0",
     "autoprefixer": "^10.4.2",
