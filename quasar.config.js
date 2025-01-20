@@ -4,7 +4,7 @@
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
 import { viteMockServe } from 'vite-plugin-mock'
-import config, { envFilter, envFiles } from './config/index'
+import config, { envFilter } from './config/index'
 
 export default defineConfig((ctx) => {
   const alias = {}
@@ -57,7 +57,7 @@ export default defineConfig((ctx) => {
         ...alias,
       },
       envFolder: './config',
-      envFiles,
+      // envFiles,
       envFilter,
       publicPath: config.publicPath,
       // analyze: true,
