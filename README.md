@@ -59,6 +59,20 @@ set to sort the router asc order
 - set empty array [] means to require authorization to access page
 - set false means to you can access directly without authorization
 
+# develop plugins
+
+```sh
+cd capacitor-module/$plugin
+npm i
+npm run build
+npm link
+cd ../../src-capacitor
+npm link @your-scope/$plugin
+```
+
+add depency to src-capacitor/package.json
+
 ## reference
 
-[quasar](https://quasar.dev/)
+- [quasar](https://quasar.dev/)
+- [capacitor](https://capacitorjs.com/)
