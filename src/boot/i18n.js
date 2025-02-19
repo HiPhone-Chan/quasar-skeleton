@@ -4,13 +4,12 @@ import messages from 'src/i18n'
 import { useAppStore } from '@/stores/app-store'
 
 const _i18n = createI18n({
+  locale: useAppStore().language,
   globalInjection: true,
   messages,
 })
 
-export default defineBoot(({ app, store }) => {
-  const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
-  _i18n.locale = appStore.language
+export default defineBoot(({ app }) => {
   // Set i18n instance on app
   app.use(_i18n)
 })
