@@ -4,7 +4,7 @@ export default [
   {
     path: '/login',
     component: () => import('pages/login/index.vue'),
-    meta: { roles: false },
+    meta: { title: 'login', roles: false },
     hidden: true,
   },
   {

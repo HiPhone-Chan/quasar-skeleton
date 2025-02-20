@@ -1,14 +1,14 @@
 import { defineBoot } from '#q-app/wrappers'
 import defaultSettings from '@/settings'
 import { useTitle } from '@vueuse/core'
-import { generateTitle } from '@/utils/i18n'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
+import { getI18n } from '@/i18n'
 
 const title = defaultSettings.title || 'Admin'
 
-export default defineBoot(async ({ router, store }) => {
+export default defineBoot(async ({ app, router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
 
   router.beforeEach(async (to, from, next) => {
@@ -17,7 +17,7 @@ export default defineBoot(async ({ router, store }) => {
     // start progress bar
     appStore.loading(true)
     // set page title
-    setTitle(getPageTitle(to?.meta?.title))
+    setTitle(getPageTitle(getI18n(app), to?.meta?.title))
     // determine whether the user has logged in
     const hasToken = userStore.token
 
@@ -78,9 +78,16 @@ export default defineBoot(async ({ router, store }) => {
   })
 })
 
-function getPageTitle(pageTitle) {
+function getPageTitle(i18n, pageTitle) {
   if (pageTitle) {
-    return `${generateTitle(pageTitle)} - ${title}`
+    const titleKey = 'route.' + pageTitle
+
+    if (i18n.te(titleKey)) {
+      // translate router.meta.title
+      const translatedTitle = i18n.t(titleKey)
+      return `${translatedTitle} - ${title}`
+    }
+    return `${pageTitle} - ${title}`
   }
   return `${title}`
 }
