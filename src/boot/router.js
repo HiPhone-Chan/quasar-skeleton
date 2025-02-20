@@ -1,10 +1,10 @@
 import { defineBoot } from '#q-app/wrappers'
 import defaultSettings from '@/settings'
 import { useTitle } from '@vueuse/core'
-import { generateTitle } from '@/utils/i18n'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
+import { generateTitle } from '@/utils/i18n'
 
 const title = defaultSettings.title || 'Admin'
 

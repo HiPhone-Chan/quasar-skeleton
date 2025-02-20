@@ -1,20 +1,20 @@
-import { api } from '@/boot/axios';
-import { useUserStore } from '@/stores/user-store';
+import { api } from 'boot/axios'
+import { useUserStore } from '@/stores/user-store'
 
 // request interceptor
 api.interceptors.request.use(
   (config) => {
-    const token = useUserStore().token;
+    const token = useUserStore().token
     if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token;
+      config.headers['Authorization'] = 'Bearer ' + token
     }
-    return config;
+    return config
   },
   (error) => {
     // do something with request error
-    return Promise.reject(error);
-  }
-);
+    return Promise.reject(error)
+  },
+)
 
 // response interceptor
 api.interceptors.response.use(
@@ -27,14 +27,14 @@ api.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   (response) => {
-    const status = response.status;
+    const status = response.status
     if (status / 100 === 5) {
-      console.warn('server err :' + response.data);
+      console.warn('server err :' + response.data)
     }
-    return response;
+    return response
   },
   (error) => {
-    return Promise.reject(error);
-  }
-);
-export default api;
+    return Promise.reject(error)
+  },
+)
+export default api
