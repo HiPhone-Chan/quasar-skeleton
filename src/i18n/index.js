@@ -31,13 +31,4 @@ export function getLanguage() {
   return language
 }
 
-export function getI18n(app) {
-  const globalProperties = app.config.globalProperties
-  return {
-    te: globalProperties.$te,
-    tm: globalProperties.$tm,
-    t: globalProperties.$t,
-  }
-}
-
 export default messages

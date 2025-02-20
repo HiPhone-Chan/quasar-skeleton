@@ -4,11 +4,11 @@ import { useTitle } from '@vueuse/core'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
-import { getI18n } from '@/i18n'
+import { generateTitle } from '@/utils/i18n'
 
 const title = defaultSettings.title || 'Admin'
 
-export default defineBoot(async ({ app, router, store }) => {
+export default defineBoot(async ({ router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
 
   router.beforeEach(async (to, from, next) => {
@@ -17,7 +17,7 @@ export default defineBoot(async ({ app, router, store }) => {
     // start progress bar
     appStore.loading(true)
     // set page title
-    setTitle(getPageTitle(getI18n(app), to?.meta?.title))
+    setTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in
     const hasToken = userStore.token
 
@@ -78,16 +78,9 @@ export default defineBoot(async ({ app, router, store }) => {
   })
 })
 
-function getPageTitle(i18n, pageTitle) {
+function getPageTitle(pageTitle) {
   if (pageTitle) {
-    const titleKey = 'route.' + pageTitle
-
-    if (i18n.te(titleKey)) {
-      // translate router.meta.title
-      const translatedTitle = i18n.t(titleKey)
-      return `${translatedTitle} - ${title}`
-    }
-    return `${pageTitle} - ${title}`
+    return `${generateTitle(pageTitle)} - ${title}`
   }
   return `${title}`
 }
