@@ -6,21 +6,19 @@ import elementZhLocale from 'element-plus/es/locale/lang/zh-cn'
 const messages = {
   'en-US': {
     ...enUS,
-    ...elementEnLocale
   },
   'zh-CN': {
     ...zhCN,
-    ...elementZhLocale
-  }
+  },
 }
 
 export function getLocalLanguage() {
   if (process.env.CLIENT) {
     if (navigator) {
-      return (navigator.language || navigator.browserLanguage);
+      return navigator.language || navigator.browserLanguage
     }
   }
-  return 'zh'
+  return 'zh-CN'
 }
 
 export function getLanguage() {
@@ -35,4 +33,9 @@ export function getLanguage() {
   return language
 }
 
-export default messages;
+export default messages
+
+export const elLocale = {
+  'en-US': elementEnLocale,
+  'zh-CN': elementZhLocale,
+}
