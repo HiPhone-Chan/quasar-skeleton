@@ -23,8 +23,10 @@ export default {
         }, {
           title: "串口",
           path: "/plugins/serial-port"
+        }, {
+          title: "应用",
+          path: "/plugins/app"
         }
-
       ]
     }
   },

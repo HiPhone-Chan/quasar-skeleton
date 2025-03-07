@@ -14,6 +14,11 @@ npx cap sync
 <docgen-index>
 
 * [`install(...)`](#install)
+* [`enterFullscreen()`](#enterfullscreen)
+* [`exitFullscreen()`](#exitfullscreen)
+* [`isAdminActive()`](#isadminactive)
+* [`requestAdmin()`](#requestadmin)
+* [`enableKioskMode()`](#enablekioskmode)
 
 </docgen-index>
 
@@ -29,6 +34,51 @@ install(downloadFilePath: string) => void
 | Param                  | Type                |
 | ---------------------- | ------------------- |
 | **`downloadFilePath`** | <code>string</code> |
+
+--------------------
+
+
+### enterFullscreen()
+
+```typescript
+enterFullscreen() => void
+```
+
+--------------------
+
+
+### exitFullscreen()
+
+```typescript
+exitFullscreen() => void
+```
+
+--------------------
+
+
+### isAdminActive()
+
+```typescript
+isAdminActive() => void
+```
+
+--------------------
+
+
+### requestAdmin()
+
+```typescript
+requestAdmin() => void
+```
+
+--------------------
+
+
+### enableKioskMode()
+
+```typescript
+enableKioskMode() => void
+```
 
 --------------------
 

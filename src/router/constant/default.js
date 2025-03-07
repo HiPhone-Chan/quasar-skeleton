@@ -16,7 +16,7 @@ export default [
         path: 'home',
         component: () => import('pages/home/index.vue'),
         name: 'home',
-        meta: { title: 'home', icon: 'home', affix: false },
+        meta: { title: 'home', icon: 'home', roles: false, affix: false },
       },
     ],
   },

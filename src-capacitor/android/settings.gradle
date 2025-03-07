@@ -3,12 +3,3 @@ include ':capacitor-cordova-android-plugins'
 project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
 
 apply from: 'capacitor.settings.gradle'
-
-include ':serial-port'
-project(':serial-port').projectDir = new File('../../capacitor-module/serial-port/android')
-
-include ':myapp'
-project(':myapp').projectDir = new File('../../capacitor-module/app/android')
-
-include ':file-system'
-project(':file-system').projectDir = new File('../../capacitor-module/file-system/android')

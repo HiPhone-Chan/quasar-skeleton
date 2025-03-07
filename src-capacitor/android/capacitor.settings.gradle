@@ -5,11 +5,11 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
 
-include ':mycapacitor-plugin-serial-port'
-project(':mycapacitor-plugin-serial-port').projectDir = new File('../../capacitor-module/serial-port/android')
-
 include ':mycapacitor-plugin-app'
-project(':mycapacitor-plugin-app').projectDir = new File('../node_modules/@mycapacitor-plugin/app/android')
+project(':mycapacitor-plugin-app').projectDir = new File('../../capacitor-module/app/android')
 
 include ':mycapacitor-plugin-file-system'
 project(':mycapacitor-plugin-file-system').projectDir = new File('../node_modules/@mycapacitor-plugin/file-system/android')
+
+include ':mycapacitor-plugin-serial-port'
+project(':mycapacitor-plugin-serial-port').projectDir = new File('../node_modules/@mycapacitor-plugin/serial-port/android')

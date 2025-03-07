@@ -1,6 +1,6 @@
 {
   "name": "@mycapacitor-plugin/app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "App function",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

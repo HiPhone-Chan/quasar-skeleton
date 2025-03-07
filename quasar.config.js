@@ -11,6 +11,9 @@ export default defineConfig((ctx) => {
   if (!ctx.mode.capacitor) {
     alias['@capacitor/core'] = fileURLToPath(new URL('./mock/plugin/core.js', import.meta.url))
     alias['@capacitor/app'] = fileURLToPath(new URL('./mock/plugin/app.js', import.meta.url))
+    alias['@mycapacitor-plugin/app'] = fileURLToPath(new URL('./mock/plugin/myapp.js', import.meta.url))
+    alias['@mycapacitor-plugin/file-system'] = fileURLToPath(new URL('./mock/plugin/file-system.js', import.meta.url))
+    alias['@mycapacitor-plugin/serial-port'] = fileURLToPath(new URL('./mock/plugin/serial-port.js', import.meta.url))
   }
 
   return {
