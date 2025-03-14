@@ -25,7 +25,6 @@ export default defineBoot(async ({ router, store }) => {
       if (to.path === '/login') {
         // if is logged in, redirect to the home page
         next({ path: '/' })
-        appStore.loading(false)
       } else {
         // determine whether the user has obtained his permission roles through getInfo
         const hasRoles = userStore.roles?.length > 0
@@ -55,7 +54,6 @@ export default defineBoot(async ({ router, store }) => {
             console.error('Get roles', error)
             await userStore.resetToken()
             next(`/login?redirect=${to.path}`)
-            appStore.loading(false)
           }
         }
       }
@@ -67,7 +65,6 @@ export default defineBoot(async ({ router, store }) => {
       } else {
         // other pages that do not have permission to access are redirected to the login page.
         next(`/login?redirect=${to.path}`)
-        appStore.loading(false)
       }
     }
   })

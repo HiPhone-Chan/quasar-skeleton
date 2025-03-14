@@ -2,7 +2,7 @@
   <van-col class="page-container login-container column">
     <van-row class="col-4"></van-row>
     <van-row class="col" justify="center">
-      <van-form class="login-form">
+      <van-form class="login-form" ref="loginForm">
         <van-cell-group inset>
           <van-field v-model="username" name="用户名" label="用户名" placeholder="用户名"
             :rules="[{ required: true, message: '请填写用户名' }]" />
@@ -36,8 +36,13 @@ export default {
   },
   methods: {
     async handleLogin() {
-      await login({});
-      this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+      try {
+        await this.$refs["loginForm"].validate()
+        await login({});
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
