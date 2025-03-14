@@ -3,6 +3,7 @@
 
     <q-page-container>
       <router-view />
+      <log />
     </q-page-container>
 
     <q-footer style="background-color: transparent;">
@@ -13,12 +14,13 @@
 
 <script>
 import { defineComponent } from 'vue'
+import Log from '@/components/Log/index.vue'
 import Tabbar from './components/Tabbar/index.vue';
 
 export default defineComponent({
   name: 'MainLayout',
   components: {
-    Tabbar
+    Log, Tabbar
   }
 })
 </script>

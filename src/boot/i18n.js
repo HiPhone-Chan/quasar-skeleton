@@ -9,10 +9,10 @@ const _i18n = createI18n({
 })
 
 export default defineBoot(({ app, store }) => {
-  const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
-  _i18n.locale = appStore.language
   // Set i18n instance on app
   app.use(_i18n)
+  const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
+  app.config.globalProperties.$i18n.locale = appStore.language
 })
 
 export const i18n = _i18n.global
