@@ -43,16 +43,11 @@ export default {
   },
   methods: {
     async handleLogin() {
-      console.log(this.$refs)
-      this.$refs["loginForm"].validate().then(async (success) => {
+      const success = await this.$refs["loginForm"].validate()
       if (success) {
         await login({});
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
       }
-      else {
-        // oh no, user has filled in at least one invalid value
-      }
-    })
     }
   }
 }
