@@ -2,14 +2,14 @@
   <div class="page-container login-container column">
     <div class="col"></div>
     <div class="col">
-      <q-form class="login-form">
+      <q-form class="login-form" ref="loginForm">
         <q-input v-model="username" placeholder="用户名" bg-color="white" outlined dense lazy-rules
           :rules="[val => val && val.length > 0 || '请输入用户名']">
           <template #prepend>
             <span class="label">用户名</span>
           </template>
         </q-input>
-        <q-input type="number" v-model="password" placeholder="密码" bg-color="white" outlined dense lazy-rules :rules="[
+        <q-input v-model="password" placeholder="密码" bg-color="white" outlined dense lazy-rules :rules="[
           val => val !== null && val !== '' || '请输入密码',
         ]">
           <template #prepend>
@@ -43,8 +43,16 @@ export default {
   },
   methods: {
     async handleLogin() {
-      await login({});
-      this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+      console.log(this.$refs)
+      this.$refs["loginForm"].validate().then(async (success) => {
+      if (success) {
+        await login({});
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+      }
+      else {
+        // oh no, user has filled in at least one invalid value
+      }
+    })
     }
   }
 }
