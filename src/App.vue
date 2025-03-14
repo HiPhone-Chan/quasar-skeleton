@@ -46,7 +46,7 @@ export default defineComponent({
       message
     })
 
-    return false
+    // return false
   }
 })
 </script>
