@@ -7,9 +7,6 @@ import { useLogStore } from '@/stores/log-store'
 export default defineBoot(async ({ app }) => {
   app.config.errorHandler = async function (err, vm) {
     await nextTick()
-    useLogStore().error({
-      tag: vm.label,
-      msg: err.message,
-    })
+    useLogStore().error(vm.label, err.message)
   }
 })
