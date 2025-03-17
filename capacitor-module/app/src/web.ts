@@ -3,8 +3,8 @@ import { WebPlugin } from '@capacitor/core';
 import type { AppPlugin } from './definitions';
 
 export class AppWeb extends WebPlugin implements AppPlugin {
-  async install(downloadFilePath: string): Promise<void> {
-    console.log('install', downloadFilePath);
+  async install(downloadFilePath: string, authority: string): Promise<void> {
+    throw this.unimplemented(`Not implemented on web ${downloadFilePath} - ${authority}.`);
   }
 
   async enterFullscreen(): Promise<void> {
@@ -33,5 +33,11 @@ export class AppWeb extends WebPlugin implements AppPlugin {
 
   async enableKioskMode(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
+  }
+
+  async handleOnBackPresseded(enable: boolean): Promise<void> {
+    if (enable) {
+      throw this.unimplemented('Not implemented on web.');
+    }
   }
 }

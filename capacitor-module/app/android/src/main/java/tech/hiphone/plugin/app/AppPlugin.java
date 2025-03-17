@@ -23,6 +23,8 @@ public class AppPlugin extends Plugin {
     private App implementation;
     private ComponentName deviceAdminReceiver;
 
+    private OnBackPressedCallback lastOnBackPressedCallback;
+
     @Override
     protected void handleOnStart() {
         super.handleOnStart();
@@ -46,11 +48,15 @@ public class AppPlugin extends Plugin {
             call.reject("downloadFilePath is empty");
             return;
         }
-        String packageName = getContext().getPackageName();
-        File apk = new File(downloadFilePath);
-        Log.i(TAG, "packageName info: " + packageName);
 
-        implementation.install(packageName + ".file_provider", apk);
+        String authority = call.getString("authority");
+        if (authority == null || authority.isBlank()) {
+            call.reject("authority is empty");
+            return;
+        }
+
+        File apk = new File(downloadFilePath);
+        implementation.install(authority, apk);
     }
 
     @PluginMethod()
@@ -115,11 +121,26 @@ public class AppPlugin extends Plugin {
     @PluginMethod()
     public void handleOnBackPressed(PluginCall call) {
         AppCompatActivity activity = getActivity();
-        activity.getOnBackPressedDispatcher().addCallback(activity, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                notifyListeners("onBackPressed", new JSObject());
+
+        boolean enable = call.getBoolean("enable", true);
+
+        activity.runOnUiThread(() -> {
+            if (lastOnBackPressedCallback != null) {
+                lastOnBackPressedCallback.remove();
+            }
+
+            if (enable) {
+                lastOnBackPressedCallback = new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        notifyListeners("onBackPressed", new JSObject());
+                    }
+                };
+                activity.getOnBackPressedDispatcher().addCallback(activity, lastOnBackPressedCallback);
+            } else {
+                lastOnBackPressedCallback = null;
             }
         });
+
     }
 }
