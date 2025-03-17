@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores/user-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
 import { generateTitle } from '@/utils/i18n'
 
-const title = defaultSettings.title || 'Admin'
+const title = defaultSettings.title || 'App'
 
 export default defineBoot(async ({ router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
