@@ -1,3 +1,9 @@
 export const MyApp = {
-  isAdminActive() {},
+  async isAdminActive() {
+    return {
+      result: false,
+    }
+  },
+  async setDeviceAdminReceiver() {},
+  addListener() {},
 }

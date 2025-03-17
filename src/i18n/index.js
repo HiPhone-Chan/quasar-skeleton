@@ -3,20 +3,20 @@ import zhCN from './zh-CN'
 
 const messages = {
   'en-US': {
-    ...enUS
+    ...enUS,
   },
   'zh-CN': {
-    ...zhCN
-  }
+    ...zhCN,
+  },
 }
 
 export function getLocalLanguage() {
   if (process.env.CLIENT) {
     if (navigator) {
-      return (navigator.language || navigator.browserLanguage);
+      return navigator.language || navigator.browserLanguage
     }
   }
-  return 'zh'
+  return 'zh-CN'
 }
 
 export function getLanguage() {
@@ -31,4 +31,4 @@ export function getLanguage() {
   return language
 }
 
-export default messages;
+export default messages

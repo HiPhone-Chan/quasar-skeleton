@@ -1,1 +1,3 @@
-export const FileSystem = {}
+export const FileSystem = {
+  addListener() {},
+}
