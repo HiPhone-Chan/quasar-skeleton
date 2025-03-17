@@ -8,7 +8,7 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 let baseUrl = process.env.VUE_APP_API_BASE
-if (process.env.SERVER) {
+if (process.env.SERVER || (process.env.MODE === 'capacitor' && process.env.PROD)) {
   baseUrl = process.env.VUE_APP_API_SERVER + baseUrl
 }
 const api = axios.create({ baseURL: baseUrl, timeout: 5000 })
