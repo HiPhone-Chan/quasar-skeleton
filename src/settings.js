@@ -26,10 +26,8 @@ export default {
   sidebarLogo: false,
 
   /**
-   * @type {string | array} 'production' | ['production', 'development']
-   * @description Need show err logs component.
-   * The default is only used in the production env
-   * If you want to also use it in dev, you can pass ['production', 'development']
+   * @type {string} 'trace' 'debug' 'info' 'warn' 'error'
+   * @description Need show logs component.
    */
-  errorLog: 'production'
+  logLevel: 'info',
 }

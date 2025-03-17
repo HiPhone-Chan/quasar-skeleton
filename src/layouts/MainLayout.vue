@@ -1,8 +1,6 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg"
-      @click="handleClickOutside">
-    </div>
+    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
     <sidebar class="sidebar-container" />
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
@@ -33,34 +31,36 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView
+    TagsView,
   },
   mixins: [ResizeMixin],
   computed: {
     ...mapState(useAppStore, ['sidebar', 'device']),
     ...mapState(useSettingsStore, {
-      showSettings: 'showSettings', needTagsView: 'tagsView', fixedHeader: 'fixedHeader'
+      showSettings: 'showSettings',
+      needTagsView: 'tagsView',
+      fixedHeader: 'fixedHeader',
     }),
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile'
+        mobile: this.device === 'mobile',
       }
-    }
+    },
   },
   methods: {
     handleClickOutside() {
       useAppStore().closeSideBar({ withoutAnimation: false })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/css/mixin.scss";
-@import "@/css/variables.module.scss";
+@import '@/css/mixin.scss';
+@import '@/css/variables.module.scss';
 
 .app-wrapper {
   @include clearfix;
@@ -94,7 +94,7 @@ export default {
 }
 
 .hideSidebar .fixed-header {
-  width: calc(100% - 54px)
+  width: calc(100% - 54px);
 }
 
 .mobile .fixed-header {

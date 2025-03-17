@@ -19,7 +19,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios', 'router', 'ui', 'error-log', 'svg-icon'],
+    boot: ['i18n', 'axios', 'router', 'ui', 'log', 'svg-icon'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
@@ -75,7 +75,7 @@ export default defineConfig((ctx) => {
               prodEnabled: process.env.APP_ENV === 'production',
               logger: false,
               injectFile: [fileURLToPath(new URL('./src/boot/axios.js', import.meta.url))],
-            })
+            }),
           )
         }
 
@@ -83,7 +83,7 @@ export default defineConfig((ctx) => {
           createSvgIconsPlugin({
             iconDirs: [fileURLToPath(new URL('./src/icons/svg', import.meta.url))],
             symbolId: 'icon-[dir]-[name]',
-          })
+          }),
         )
 
         viteConf.plugins.push(Icons({ autoInstall: true }))
