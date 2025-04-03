@@ -3,9 +3,19 @@
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 文件下载 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 安装apk -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- 开机启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!--  用户确认窗口(开机启动会用到) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--     暂无用，开机启动
+                <service
+                    android:name=".boot.MyBootService"
+                    android:enabled="true"
+                    android:exported="true"
+                    android:foregroundServiceType="systemExempted" />
+         -->
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
@@ -22,12 +40,11 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBarLaunch">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <provider
@@ -41,17 +58,31 @@
         </provider>
 
         <receiver
-            android:name=".MyDeviceAdminReceiver"
+            android:name=".receiver.MyDeviceAdminReceiver"
             android:exported="false"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
+
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
-    </application>
+        <receiver
+            android:name=".boot.BootBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- 用于确保在设备重启后，接收器能在正确的时间接收到广播 -->
+            <meta-data
+                android:name="android.intent.action.MY_PACKAGE_REPLACED"
+                android:value="true" />
+        </receiver>
+    </application>
 
 </manifest>

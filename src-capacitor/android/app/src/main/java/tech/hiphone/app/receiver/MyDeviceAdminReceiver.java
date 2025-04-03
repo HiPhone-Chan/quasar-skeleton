@@ -1,4 +1,4 @@
-package tech.hiphone.app;
+package tech.hiphone.app.receiver;
 
 import android.app.admin.DeviceAdminReceiver;
 
