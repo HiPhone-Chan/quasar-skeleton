@@ -5,9 +5,7 @@
         <q-btn flat dense round icon="menu" @click="toggleLeftDrawer" />
         <log />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-toolbar-title> Quasar App </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -31,7 +29,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="q-ma-sm">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -45,7 +43,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    Log
+    Log,
   },
   setup() {
     const leftDrawerOpen = ref(false)
@@ -54,7 +52,7 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
     }
   },
 })
