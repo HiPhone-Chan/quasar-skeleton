@@ -4,12 +4,13 @@
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
 import { viteMockServe } from 'vite-plugin-mock'
-import config, { envFilter } from './config/index'
-
+import loadEnv, { envFilter, getAppEnvFiles, isTrue } from './config/index'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import Icons from 'unplugin-icons/vite'
+
+loadEnv(process.env.APP_ENV ?? 'development')
 
 export default defineConfig((ctx) => {
   return {
@@ -55,9 +56,9 @@ export default defineConfig((ctx) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
       envFolder: './config',
-      // envFiles,
+      envFiles: getAppEnvFiles(process.env.APP_ENV),
       envFilter,
-      publicPath: config.publicPath,
+      publicPath: process.env.publicPath,
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -67,12 +68,12 @@ export default defineConfig((ctx) => {
       // distDir
 
       extendViteConf(viteConf) {
-        if (config.mock) {
+        if (isTrue(process.env.mock)) {
           viteConf.plugins.push(
             viteMockServe({
               mockPath: 'mock',
-              localEnabled: process.env.APP_ENV === 'development',
-              prodEnabled: process.env.APP_ENV === 'production',
+              localEnabled: process.env.NODE_ENV === 'development',
+              prodEnabled: process.env.NODE_ENV === 'production',
               logger: false,
               injectFile: [fileURLToPath(new URL('./src/boot/axios.js', import.meta.url))],
             }),
@@ -141,7 +142,7 @@ export default defineConfig((ctx) => {
       open: true, // opens browser window automatically
       proxy: {
         [process.env.VUE_APP_API_BASE]: {
-          target: config.mock ? `/` : process.env.VUE_APP_API_SERVER,
+          target: isTrue(process.env.mock) ? `/` : process.env.VUE_APP_API_SERVER,
           changeOrigin: true,
           pathRewrite: {
             ['^']: process.env.VUE_APP_API_BASE,

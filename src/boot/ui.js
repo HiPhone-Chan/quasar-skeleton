@@ -1,6 +1,6 @@
 import { defineBoot } from '#q-app/wrappers'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
+import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import NProgress from 'nprogress' // progress bar
 // 导入样式
 import 'element-plus/theme-chalk/el-message.css'
@@ -17,19 +17,20 @@ export default defineBoot(async ({ app }) => {
     app.component(iconName(key), component)
   }
 
-  app.config.globalProperties.$loading = {
-    show() {
-      NProgress.start()
-    },
-    hide() {
-      NProgress.done()
-    },
-  }
   app.config.globalProperties.$message = ElMessage
   app.config.globalProperties.$alert = ElMessageBox.alert
   app.config.globalProperties.$confirm = ElMessageBox.confirm
   app.config.globalProperties.$prompt = ElMessageBox.prompt
   app.config.globalProperties.$notify = ElNotification
+  // add v-loading and registry $loading to globalProperties
+  app.use(ElLoading)
+  const loading = app.config.globalProperties.$loading
+  loading.show = function () {
+    NProgress.start()
+  }
+  loading.hide = function () {
+    NProgress.done()
+  }
 })
 
 function iconName(key) {
