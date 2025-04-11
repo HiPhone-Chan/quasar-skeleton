@@ -1,17 +1,11 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-
-    <q-header class="text-white" height-hint="98">
-      <!-- 开启顶部安全区适配 -->
-      <van-nav-bar safe-area-inset-top />
-    </q-header>
-
-    <q-page-container>
+  <q-layout view="lHh Lpr lFf">
+    <q-page-container class="q-ma-sm">
       <router-view />
       <log />
     </q-page-container>
 
-    <q-footer class="text-white">
+    <q-footer style="background-color: transparent">
       <tabbar></tabbar>
     </q-footer>
 
@@ -24,12 +18,13 @@
 <script>
 import { defineComponent } from 'vue'
 import Log from '@/components/Log/index.vue'
-import Tabbar from './components/Tabbar/index.vue';
+import Tabbar from './components/Tabbar/index.vue'
 
 export default defineComponent({
   name: 'MainLayout',
   components: {
-    Log, Tabbar
-  }
+    Log,
+    Tabbar,
+  },
 })
 </script>

@@ -20,61 +20,39 @@ export const useLogStore = defineStore('log', {
         msg = tag
         tag = null
       }
-      this.$log({
-        level: 'info',
-        tag,
-        msg,
-      })
+      this.$log('info', tag, msg)
     },
-    debug(tag, msg) {
+    debug(...params) {
+      const [tag, msg] = params
       console.debug('[%s]\t%s', tag, msg)
-      if (this.loggable('debug')) {
-        this.$log({
-          level: 'debug',
-          tag,
-          msg,
-        })
-      }
+      this.$log('debug', ...params)
     },
-    info(tag, msg) {
+    info(...params) {
+      const [tag, msg] = params
       console.info('[%s]\t%s', tag, msg)
-      if (this.loggable('info')) {
-        this.$log({
-          level: 'info',
-          tag,
-          msg,
-        })
-      }
+      this.$log('info', ...params)
     },
-    warn(tag, msg) {
+    warn(...params) {
+      const [tag, msg] = params
       console.warn('[%s]\t%s', tag, msg)
-      if (this.loggable('warn')) {
-        this.$log({
-          level: 'info',
-          tag,
-          msg,
-        })
-      }
+      this.$log('warn', ...params)
     },
-    error(tag, msg) {
+    error(...params) {
+      const [tag, msg] = params
       console.error('[%s]\t%s', tag, msg)
-      if (this.loggable('error')) {
-        this.$log({
-          level: 'error',
-          tag,
-          msg,
-        })
-      }
+      this.$log('error', ...params)
     },
     clear() {
       const clearLogs = this.logs.splice(0)
       this.clearCallbackFunc(clearLogs)
     },
-    $log({ level, tag, msg, stack }) {
-      const time = new Date().getTime()
-      this.logs.push({ level, tag, msg, stack, time })
-      if (this.logs.length > MAX_LENGTH) {
-        this.clear()
+    $log(level, tag, msg, stack) {
+      if (this.loggable(level)) {
+        const time = new Date().getTime()
+        this.logs.push({ level, tag, msg, stack, time })
+        if (this.logs.length > MAX_LENGTH) {
+          this.clear()
+        }
       }
     },
     loggable(logLevel) {
