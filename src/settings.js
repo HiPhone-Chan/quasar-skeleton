@@ -1,4 +1,5 @@
 export default {
   title: 'quasar skeleton',
-  errorLog: 'production'
+  // trace debug info warn error
+  logLevel: 'info',
 }

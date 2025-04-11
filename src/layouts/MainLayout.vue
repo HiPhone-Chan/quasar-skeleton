@@ -3,6 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-btn flat dense round icon="menu" @click="toggleLeftDrawer" />
+        <log />
 
         <q-toolbar-title>
           Quasar App
@@ -38,11 +39,13 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import Log from '@/components/Log/index.vue'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
+    Log
   },
   setup() {
     const leftDrawerOpen = ref(false)
