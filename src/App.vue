@@ -11,42 +11,46 @@ import { useAppStore } from '@/stores/app-store'
 export default defineComponent({
   name: 'App',
   computed: {
-    ...mapState(useAppStore, ['isLoading']),
+    ...mapState(useAppStore, ['language', 'isLoading']),
   },
   watch: {
-    isLoading(loading) { // global loading
+    language(lang) {
+      this.$i18n.locale = lang
+    },
+    isLoading(loading) {
+      // global loading
       if (loading) {
         this.$loading.show()
       } else {
         this.$loading.hide()
       }
-    }
+    },
   },
   errorCaptured(err) {
     // 自定义的err结构 {
     //   type: "",
     //   info: null
     // }
-    console.warn("handleError :", err); // for debug
+    console.warn('handleError :', err) // for debug
     const type = err?.type
     let msgType = 'error'
     let message = 'Error not handled!'
 
     if (type !== undefined) {
-      msgType = type;
+      msgType = type
       switch (type) {
         case 'request':
-          break;
+          break
         default:
           message = err.info
       }
     }
     this.$notify({
       type: msgType,
-      message
+      message,
     })
 
     // return false
-  }
+  },
 })
 </script>
