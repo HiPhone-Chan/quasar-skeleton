@@ -17,13 +17,10 @@ export default defineBoot(async ({ app }) => {
     app.component(iconName(key), component)
   }
 
-  app.config.globalProperties.$message = ElMessage
-  app.config.globalProperties.$alert = ElMessageBox.alert
-  app.config.globalProperties.$confirm = ElMessageBox.confirm
-  app.config.globalProperties.$prompt = ElMessageBox.prompt
-  app.config.globalProperties.$notify = ElNotification
-  // add v-loading and registry $loading to globalProperties
-  app.use(ElLoading)
+  app.use(ElMessage) // $message
+  app.use(ElMessageBox) // $msgbox $alert $confirm $prompt
+  app.use(ElNotification) // $notify
+  app.use(ElLoading) // $loading and add v-loading
   const loading = app.config.globalProperties.$loading
   loading.show = function () {
     NProgress.start()
@@ -34,8 +31,7 @@ export default defineBoot(async ({ app }) => {
 })
 
 function iconName(key) {
-  let temp = key.replace(/[A-Z]/g, function (i) {
-    return '-' + i.toLowerCase()
+  return key.replace(/[A-Z]/g, function (i) {
+    return 'el-icon-' + i.toLowerCase()
   })
-  return `el-icon${temp}`
 }
