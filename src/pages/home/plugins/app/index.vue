@@ -10,38 +10,33 @@
     <q-btn @click="enableKioskMode">启用Kiosk模式</q-btn>
     <q-btn @click="handleOnBackPressed">监听后退键</q-btn>
     <q-btn @click="cancelOnBackPressed">取消监听后退键</q-btn>
+    <q-btn @click="exitApp">退出App</q-btn>
   </div>
 </template>
 
 <script>
-import { MyApp } from '@/api/app-plugin';
+import { App, MyApp } from '@/api/app-plugin'
 
 export default {
   name: 'AppFunctionIndex',
   data() {
     return {
       isAdmin: false,
-      info: "",
+      info: '',
       onPermissionResponseListener: null,
-      onBackPressedListener: null
+      onBackPressedListener: null,
     }
   },
   mounted() {
-    this.init()
+    App.removeAllListeners()
     this.isAdminActive()
     this.onPermissionResponseListener = MyApp.addListener('onPermissionResponse', this.onPermissionResponse)
-    this.onBackPressedListener = MyApp.addListener('onBackPressed', this.onBackPressed)
   },
   methods: {
-    async init() {
-      await MyApp.setDeviceAdminReceiver({
-        deviceAdminReceiverClassName: "tech.hiphone.app.MyDeviceAdminReceiver"
-      })
-    },
     async installApp() {
       await MyApp.install({
-        downloadFilePath: "",
-        authority: "tech.hiphone.app.file_provider"
+        downloadFilePath: '',
+        authority: 'tech.hiphone.app.file_provider',
       })
     },
     async fullscreen(cancel = false) {
@@ -52,6 +47,9 @@ export default {
       }
     },
     async isAdminActive() {
+      await MyApp.setDeviceAdminReceiver({
+        deviceAdminReceiverClassName: 'tech.hiphone.app.receiver.MyDeviceAdminReceiver',
+      })
       const { result } = await MyApp.isAdminActive()
       this.isAdmin = result
     },
@@ -64,24 +62,35 @@ export default {
     enableKioskMode() {
       MyApp.enableKioskMode()
     },
-    handleOnBackPressed() {
-      MyApp.handleOnBackPressed()
+    async handleOnBackPressed() {
+      if (this.onBackPressedListener) {
+        return
+      }
+      this.onBackPressedListener = await App.addListener('backButton', ({ canGoBack }) => {
+        this.info = 'onBackPressed canGoBack: ' + canGoBack
+      })
     },
     cancelOnBackPressed() {
-      MyApp.handleOnBackPressed({ enable: false })
+      if (this.onBackPressedListener) {
+        this.onBackPressedListener.remove()
+        this.onBackPressedListener = null
+      }
     },
     onPermissionResponse(resp) {
       this.info = resp
     },
-    onBackPressed() {
-      this.info = "onBackPressed"
-    }
+    exitApp() {
+      App.exitApp()
+    },
   },
   errorCaptured(err) {
     this.info = err
 
     return false
-  }
+  },
+  unmounted() {
+    App.removeAllListeners()
+  },
 }
 </script>
 
