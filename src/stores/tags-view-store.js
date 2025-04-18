@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
-import { generateTitle } from '@/utils/i18n';
+import { defineStore, acceptHMRUpdate } from 'pinia'
+import { generateTitle } from '@/utils/i18n'
 
 export const useTagsViewStore = defineStore('tagsView', {
   state: () => ({
     visitedViews: [],
-    cachedViews: []
+    cachedViews: [],
   }),
   actions: {
     addView(view) {
@@ -12,17 +12,25 @@ export const useTagsViewStore = defineStore('tagsView', {
       this.addCachedView(view)
     },
     addVisitedView(view) {
-      if (this.visitedViews.some(v => v.path === view.path)) { return }
-      if (view?.meta?.affix == false) { return } // 只有设置了false才不显示，默认显示
+      if (this.visitedViews.some((v) => v.path === view.path)) {
+        return
+      }
+      if (view?.meta?.affix == false) {
+        return
+      } // 只有设置了false才不显示，默认显示
       this.visitedViews.push(
         Object.assign({}, view, {
-          title: generateTitle(view?.meta?.title) || 'no-name'
-        })
+          title: generateTitle(view?.meta?.title) || 'no-name',
+        }),
       )
     },
     addCachedView(view) {
-      if (this.cachedViews.includes(view.name)) { return }
-      if (view?.meta?.affix == false) { return } // 只有设置了false才不显示，默认显示
+      if (this.cachedViews.includes(view.name)) {
+        return
+      }
+      if (view?.meta?.affix == false) {
+        return
+      } // 只有设置了false才不显示，默认显示
       if (!view.meta.noCache) {
         this.cachedViews.push(view.name)
       }
@@ -33,7 +41,7 @@ export const useTagsViewStore = defineStore('tagsView', {
       await this.delCachedView(view)
       return {
         visitedViews: [...this.visitedViews],
-        cachedViews: [...this.cachedViews]
+        cachedViews: [...this.cachedViews],
       }
     },
     async delVisitedView(view) {
@@ -56,11 +64,11 @@ export const useTagsViewStore = defineStore('tagsView', {
       await this.delOthersCachedViews(view)
       return {
         visitedViews: [...this.visitedViews],
-        cachedViews: [...this.cachedViews]
+        cachedViews: [...this.cachedViews],
       }
     },
     async delOthersVisitedViews(view) {
-      this.visitedViews = this.visitedViews.filter(v => {
+      this.visitedViews = this.visitedViews.filter((v) => {
         return v.meta.affix || v.path === view.path
       })
       return [...this.visitedViews]
@@ -81,12 +89,12 @@ export const useTagsViewStore = defineStore('tagsView', {
       this.delAllCachedViews(view)
       return {
         visitedViews: [...this.visitedViews],
-        cachedViews: [...this.cachedViews]
+        cachedViews: [...this.cachedViews],
       }
     },
     async delAllVisitedViews() {
       // keep affix tags
-      const affixTags = this.visitedViews.filter(tag => tag.meta.affix)
+      const affixTags = this.visitedViews.filter((tag) => tag.meta.affix)
       this.visitedViews = affixTags
       return [...this.visitedViews]
     },
@@ -102,6 +110,10 @@ export const useTagsViewStore = defineStore('tagsView', {
           break
         }
       }
-    }
-  }
-});
+    },
+  },
+})
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useTagsViewStore, import.meta.hot))
+}

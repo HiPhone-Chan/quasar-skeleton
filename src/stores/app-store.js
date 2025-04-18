@@ -1,30 +1,28 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { getLanguage } from '@/i18n/index'
 
-const storageType = 'cookies'
-
 export const useAppStore = defineStore('app', {
   state: () => ({
     sidebar: {
       opened: true,
-      withoutAnimation: false
+      withoutAnimation: false,
     },
     device: 'desktop',
     language: getLanguage(),
-    size: 'medium',
+    size: 'default',
     isLoading: false,
   }),
   actions: {
     toggleSideBar() {
       this.sidebar = {
         opened: !this.sidebar.opened,
-        withoutAnimation: false
+        withoutAnimation: false,
       }
     },
     closeSideBar(withoutAnimation) {
       this.sidebar = {
         opened: false,
-        withoutAnimation: withoutAnimation
+        withoutAnimation: withoutAnimation,
       }
     },
     toggleDevice(device) {
@@ -42,13 +40,13 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     sidebar: {
-      storage: storageType
+      storage: 'cookies',
     },
     language: {
-      storage: storageType,
+      storage: 'cookies',
     },
     size: {
-      storage: storageType,
+      storage: 'cookies',
     },
   },
 })
