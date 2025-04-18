@@ -3,6 +3,12 @@
 - index.js defines variables only for quasar.config.js
 - .env.local\* ignored by git
 
+# app environment
+
+```
+  app env files defined in app folder like env.${app_env} or  env.local.${app_env}
+```
+
 # From Quasar support
 
 ```

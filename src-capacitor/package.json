@@ -5,9 +5,9 @@
   "author": "chf <hi.phone.chan@gmail.com>",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/app": "^6.0.2",
-    "@capacitor/cli": "^6.0.0",
-    "@capacitor/core": "^6.0.0"
+    "@capacitor/android": "^7.2.0",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
   }
 }

@@ -1,8 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { getLanguage } from '@/i18n/index'
 
-const storageType = 'cookies'
-
 export const useAppStore = defineStore('app', {
   state: () => ({
     language: getLanguage(),
@@ -23,10 +21,10 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     language: {
-      storage: storageType,
+      storage: 'cookies',
     },
     size: {
-      storage: storageType,
+      storage: 'cookies',
     },
   },
 })

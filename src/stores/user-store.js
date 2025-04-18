@@ -2,8 +2,6 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { getInfo } from '@/api/login'
 import defaultAvatar from '@/assets/avatar.gif'
 
-const storageType = 'cookies'
-
 export const useUserStore = defineStore('user', {
   state: () => ({
     token: '',
@@ -52,7 +50,7 @@ export const useUserStore = defineStore('user', {
   },
   persist: {
     token: {
-      storage: storageType,
+      storage: 'localStorage',
     },
   },
 })
