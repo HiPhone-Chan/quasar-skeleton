@@ -3,13 +3,14 @@ import defaultSettings from '@/settings'
 import { useTitle } from '@vueuse/core'
 import { useAppStore } from '@/stores/app-store'
 import { useUserStore } from '@/stores/user-store'
+import { useI18nStore } from '@/stores/i18n-store'
 import { usePermissionStore, hasPermission } from '@/stores/permission-store'
-import { generateTitle } from '@/utils/i18n'
 
 const title = defaultSettings.title || 'App'
 
 export default defineBoot(async ({ router, store }) => {
   const appStore = process.env.SERVER ? useAppStore(store) : useAppStore()
+  const i18nStore = process.env.SERVER ? useI18nStore(store) : useI18nStore()
 
   router.beforeEach(async (to, from, next) => {
     const userStore = process.env.SERVER ? useUserStore(store) : useUserStore()
@@ -17,7 +18,7 @@ export default defineBoot(async ({ router, store }) => {
     // start progress bar
     appStore.loading(true)
     // set page title
-    setTitle(getPageTitle(to?.meta?.title))
+    useTitle(getPageTitle(to?.meta?.title))
     // determine whether the user has logged in
     const hasToken = userStore.token
 
@@ -59,7 +60,7 @@ export default defineBoot(async ({ router, store }) => {
       }
     } else {
       /* has no token*/
-      if (to?.meta?.roles === false) {
+      if (process.env.SERVER || to?.meta?.roles === false) {
         // not need roles, go directly
         next()
       } else {
@@ -73,17 +74,11 @@ export default defineBoot(async ({ router, store }) => {
     // finish progress bar
     appStore.loading(false)
   })
+
+  function getPageTitle(pageTitle) {
+    if (pageTitle) {
+      return `${i18nStore.generateTitle(pageTitle)} - ${title}`
+    }
+    return `${title}`
+  }
 })
-
-function getPageTitle(pageTitle) {
-  if (pageTitle) {
-    return `${generateTitle(pageTitle)} - ${title}`
-  }
-  return `${title}`
-}
-
-function setTitle(title) {
-  if (process.env.CLIENT) {
-    useTitle(title)
-  }
-}
