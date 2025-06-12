@@ -1,5 +1,4 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { generateTitle } from '@/utils/i18n'
 
 export const useTagsViewStore = defineStore('tagsView', {
   state: () => ({
@@ -15,12 +14,14 @@ export const useTagsViewStore = defineStore('tagsView', {
       if (this.visitedViews.some((v) => v.path === view.path)) {
         return
       }
+      // 只有设置了false才不显示，默认显示
       if (view?.meta?.affix == false) {
         return
-      } // 只有设置了false才不显示，默认显示
+      }
+
       this.visitedViews.push(
         Object.assign({}, view, {
-          title: generateTitle(view?.meta?.title) || 'no-name',
+          title: view?.meta?.title || 'no-name',
         }),
       )
     },

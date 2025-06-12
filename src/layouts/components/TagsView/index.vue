@@ -5,7 +5,7 @@
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }" custom v-slot="{ isActive, navigate }">
         <span class="tags-view-item" :class="isActive ? 'active' : ''" @click="navigate"
           @contextmenu.prevent="openMenu(tag, $event)">
-          {{ tag.title }}
+          {{ generateTitle(tag.title) }}
           <el-icon v-if="!isAffix(tag)" :size="10" @click.prevent.stop="closeSelectedTag(tag)">
             <el-icon-close />
           </el-icon>
@@ -24,9 +24,10 @@
 
 <script>
 import path from 'path-browserify'
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useTagsViewStore } from '@/stores/tags-view-store'
 import { usePermissionStore } from '@/stores/permission-store'
+import { useI18nStore } from '@/stores/i18n-store'
 
 export default {
   name: "TagsView",
@@ -61,6 +62,7 @@ export default {
     this.addTags()
   },
   methods: {
+    ...mapActions(useI18nStore, ['generateTitle']),
     isActive(route) {
       return route.path === this.$route.path
     },
