@@ -11,6 +11,7 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "cross-env APP_ENV=development quasar dev",
+    "dev:ssr": "cross-env APP_ENV=development quasar dev -m ssr",
     "build": "cross-env APP_ENV=production quasar build",
     "build:debug": "cross-env APP_ENV=production quasar build --debug",
     "postinstall": "quasar prepare"
