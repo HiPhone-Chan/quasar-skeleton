@@ -5,8 +5,12 @@
       </tabbar-item>
     </template>
     <template v-else>
-      <q-tab :icon="item.meta?.icon" :label="generateTitle(this.item.meta?.title)" :name="basePath"
-        @click="toPage(basePath)">
+      <q-tab
+        :icon="item.meta?.icon"
+        :label="generateTitle(this.item.meta?.title)"
+        :name="basePath"
+        @click="toPage(basePath)"
+      >
       </q-tab>
     </template>
   </template>
@@ -14,8 +18,9 @@
 
 <script>
 import path from 'path-browserify'
-import { generateTitle } from '@/utils/i18n'
+import { mapActions } from 'pinia'
 import { isExternal } from '@/utils/url'
+import { useI18nStore } from '@/stores/i18n-store'
 
 export default {
   name: 'TabbarItem',
@@ -23,18 +28,18 @@ export default {
     // route object
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     basePath: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
-    generateTitle,
+    ...mapActions(useI18nStore, ['generateTitle']),
     isExternal,
     hasChildren(children) {
-      return children && children.length;
+      return children && children.length
     },
     resolvePath(routePath) {
       if (isExternal(routePath)) {
@@ -51,8 +56,8 @@ export default {
       } else {
         this.$router.replace({ path })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
